@@ -70,7 +70,7 @@ export default function Contact() {
     formDataObj.append("_replyto", formData.email); // Set reply-to as the submitter's email
 
     // Form submission to the formsubmit.co service using FormData instead of JSON
-    fetch("https://formsubmit.co/nidish2207@gmail.com", {
+    fetch("https://formsubmit.co/ab4aee57d9e4f164a2f5e530cac440ed", {
       method: "POST",
       body: formDataObj, // Send as FormData
       // Don't set Content-Type header - let the browser set it with the boundary parameter
