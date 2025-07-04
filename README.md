@@ -160,8 +160,8 @@ NEXT_PUBLIC_EMAILJS_KEY=your_public_key
 
 **Nidish**
 🌍 Portfolio: [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
-📫 Email: [nidish2207@gmail.com](mailto:nidish@example.com) 
-🔗 LinkedIn: https://www.linkedin.com/in/nidish-26929524b/
+📫 Email: [nidish2207@gmail.com](nidish2207@gmail.com) 
+🔗 LinkedIn: [Nidish](https://www.linkedin.com/in/nidish-26929524b/)
 
 ---
 
