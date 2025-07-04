@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 :root {
+  --foreground-rgb: 30, 30, 60;
+  --background-start-rgb: 255, 255, 255;
+  --background-mid-rgb: 248, 250, 252;
+  --background-end-rgb: 241, 245, 249;
+}
+
+.dark {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 15, 12, 41;
   --background-mid-rgb: 48, 43, 99;
@@ -19,6 +26,7 @@ body {
   );
   min-height: 100vh;
   overflow-x: hidden;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Custom scrollbar */
@@ -27,7 +35,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -44,57 +52,506 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Animation classes */
+/* Enhanced animations */
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%,
   100% {
     transform: translateY(0px);
   }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
-/* Gradient text */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(94, 31, 255, 0.5);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(46, 229, 255, 0.8);
+  }
+}
+
+/* Typography hierarchy */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* PERFECT CARD SYSTEM - CONSISTENT DARK MODE */
+.portfolio-card {
+  border-radius: 0.75rem;
+  backdrop-filter: blur(12px);
+  border: 1px solid;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LIGHT MODE - PERFECT AS IS */
+.portfolio-card-light {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(229, 231, 235, 0.8);
+  color: rgb(17, 24, 39);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* DARK MODE - CONSISTENT DARK BACKGROUNDS */
+.portfolio-card-dark {
+  background: rgba(30, 30, 60, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgb(255, 255, 255) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-8px);
+}
+
+.portfolio-card-light:hover {
+  box-shadow: 0 25px 50px -12px rgba(94, 31, 255, 0.25), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-card-dark:hover {
+  box-shadow: 0 25px 50px -12px rgba(94, 31, 255, 0.4), 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* FORCE DARK MODE ON ALL CARDS */
+.dark .portfolio-card,
+.dark .portfolio-card-light,
+.dark .portfolio-card-dark {
+  background: rgba(30, 30, 60, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+/* COMPREHENSIVE DARK MODE OVERRIDES */
+.dark .bg-white,
+.dark .bg-white\/90,
+.dark .bg-white\/95 {
+  background: rgba(30, 30, 60, 0.6) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .bg-gray-50 {
+  background: rgba(36, 36, 62, 0.4) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .bg-gray-100 {
+  background: rgba(40, 40, 75, 0.3) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+/* FORM ELEMENTS - ENSURE VISIBILITY */
+.dark input,
+.dark textarea {
+  background: rgba(30, 30, 60, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* PRESERVE ALL COLORFUL ELEMENTS */
+.dark .bg-gradient-to-r {
+  /* NEVER override gradients - they should stay colorful */
+}
+
+/* PRESERVE ALL BRAND AND ACCENT COLORS */
+.dark .text-purple-600,
+.dark .text-purple-500,
+.dark .text-purple-400 {
+  /* PRESERVE purple colors */
+}
+
+.dark .text-cyan-600,
+.dark .text-cyan-500,
+.dark .text-cyan-400 {
+  /* PRESERVE cyan colors */
+}
+
+.dark .text-blue-600,
+.dark .text-blue-500,
+.dark .text-blue-400 {
+  /* PRESERVE blue colors */
+}
+
+.dark .text-green-600,
+.dark .text-green-500,
+.dark .text-green-400 {
+  /* PRESERVE green colors */
+}
+
+.dark .text-yellow-600,
+.dark .text-yellow-500,
+.dark .text-yellow-400 {
+  /* PRESERVE yellow colors */
+}
+
+.dark .text-red-600,
+.dark .text-red-500,
+.dark .text-red-400 {
+  /* PRESERVE red colors */
+}
+
+.dark .text-orange-600,
+.dark .text-orange-500,
+.dark .text-orange-400 {
+  /* PRESERVE orange colors */
+}
+
+.dark .text-pink-600,
+.dark .text-pink-500,
+.dark .text-pink-400 {
+  /* PRESERVE pink colors */
+}
+
+/* ONLY CHANGE NEUTRAL GRAYS FOR READABILITY */
+.dark .text-gray-900 {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .text-gray-800 {
+  color: rgb(243, 244, 246) !important;
+}
+
+.dark .text-gray-700 {
+  color: rgb(229, 231, 235) !important;
+}
+
+.dark .text-gray-600 {
+  color: rgb(209, 213, 219) !important;
+}
+
+.dark .text-gray-500 {
+  color: rgb(156, 163, 175) !important;
+}
+
+/* PRESERVE SKILL BADGES AND TECH TAGS */
+.dark .bg-cyan-500\/20 {
+  background: rgba(6, 182, 212, 0.2) !important;
+}
+
+.dark .text-cyan-700 {
+  color: rgb(34, 211, 238) !important;
+}
+
+.dark .border-cyan-500\/30 {
+  border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+/* PRESERVE ACHIEVEMENT STYLING */
+.dark .bg-yellow-500\/10 {
+  background: rgba(245, 158, 11, 0.15) !important;
+}
+
+.dark .border-yellow-500\/30 {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+.dark .text-yellow-400 {
+  color: rgb(251, 191, 36) !important;
+}
+
+/* PRESERVE BORDER COLORS FOR VISUAL HIERARCHY */
+.dark .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .border-gray-300 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* CONTACT FORM SPECIFIC FIXES */
+.dark .bg-gray-50 {
+  background: rgba(45, 45, 80, 0.3) !important;
+}
+
+/* Enhanced gradient text */
 .gradient-text {
-  background: linear-gradient(to right, #5e1fff, #2ee5ff);
+  background: linear-gradient(135deg, #5e1fff, #2ee5ff, #ff6b6b);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-shift 3s ease infinite;
 }
 
-/* Glow effects */
-.glow {
-  box-shadow: 0 0 15px rgba(94, 31, 255, 0.5);
-}
-
-.glow-text {
-  text-shadow: 0 0 10px rgba(46, 229, 255, 0.7);
-}
-
-/* Particle animation */
-@keyframes particle-move {
-  0% {
-    transform: translateY(0) translateX(0);
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
   }
   50% {
-    transform: translateY(-10px) translateX(5px);
-  }
-  100% {
-    transform: translateY(0) translateX(0);
+    background-position: 100% 50%;
   }
 }
 
-.particle {
+/* Button enhancements */
+.btn-primary {
+  background: linear-gradient(135deg, #5e1fff, #2ee5ff);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
   position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(to right, #5e1fff, #2ee5ff);
-  opacity: 0.5;
-  animation: particle-move 3s infinite ease-in-out;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(94, 31, 255, 0.4);
+}
+
+/* TEXT COLORS - SMART APPROACH */
+.text-primary-light {
+  color: rgb(17, 24, 39);
+}
+.text-primary-dark {
+  color: rgb(255, 255, 255);
+}
+.text-secondary-light {
+  color: rgb(55, 65, 81);
+}
+.text-secondary-dark {
+  color: rgb(209, 213, 219);
+}
+.text-muted-light {
+  color: rgb(75, 85, 99);
+}
+.text-muted-dark {
+  color: rgb(156, 163, 175);
+}
+
+/* ACHIEVEMENT CARDS - SPECIAL STYLING */
+.achievement-card {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.dark .achievement-card {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.08)) !important;
+  border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+
+/* ENSURE ALL CARDS GET DARK STYLING */
+.dark .p-6,
+.dark .p-8,
+.dark .p-4 {
+  /* Don't override padding, but ensure parent containers apply dark mode */
+}
+
+/* SPECIFIC OVERRIDES FOR STUBBORN ELEMENTS */
+.dark [class*="bg-white"] {
+  background: rgba(30, 30, 60, 0.6) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark [class*="bg-gray-50"] {
+  background: rgba(45, 45, 80, 0.3) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark [class*="bg-gray-100"] {
+  background: rgba(40, 40, 75, 0.3) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+/* 🎯 FINAL TEXT VISIBILITY FIXES - PERFECT READABILITY */
+
+/* FORCE WHITE TEXT ON ALL DARK CARDS */
+.dark .portfolio-card h1,
+.dark .portfolio-card h2,
+.dark .portfolio-card h3,
+.dark .portfolio-card h4,
+.dark .portfolio-card h5,
+.dark .portfolio-card h6 {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card p,
+.dark .portfolio-card span,
+.dark .portfolio-card div {
+  color: rgb(229, 231, 235) !important;
+}
+
+/* SPECIFIC SECTION FIXES */
+
+/* ABOUT SECTION */
+.dark .about-section .text-primary-light {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .about-section .text-secondary-light {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* EXPERIENCE SECTION */
+.dark .experience-section .text-primary-light {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .experience-section .text-secondary-light {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* SKILLS SECTION - ENSURE ALL TEXT IS VISIBLE */
+.dark .portfolio-card .font-medium,
+.dark .portfolio-card .font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .text-muted-light,
+.dark .portfolio-card .text-muted-dark {
+  color: rgb(156, 163, 175) !important;
+}
+
+/* PROJECTS SECTION */
+.dark .portfolio-card .text-xl {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .text-sm {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* CERTIFICATES SECTION */
+.dark .portfolio-card .text-xl.font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .font-medium {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* HACKATHONS SECTION */
+.dark .portfolio-card .text-lg.font-semibold {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* ACHIEVEMENTS SECTION */
+.dark .portfolio-card .text-xl.font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .text-sm.font-medium {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* EXTRACURRICULAR SECTION */
+.dark .portfolio-card .text-2xl.font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .text-lg.font-medium {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* GOALS SECTION */
+.dark .portfolio-card .text-xl.font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* CONTACT SECTION */
+.dark .portfolio-card .text-2xl.font-bold {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card label {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* UNIVERSAL TEXT FIXES */
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .text-gray-600,
+.dark .text-gray-500 {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* ENSURE BULLET POINTS ARE VISIBLE */
+.dark .portfolio-card li {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* SKILL NAMES AND CATEGORIES */
+.dark .portfolio-card .font-medium {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* COMPANY NAMES AND JOB TITLES */
+.dark .portfolio-card .text-secondary-light {
+  color: rgb(209, 213, 219) !important;
+}
+
+/* PRESERVE COLORFUL HOVER EFFECTS */
+.dark .portfolio-card *:hover {
+  /* Hover effects will still work with color transitions */
 }

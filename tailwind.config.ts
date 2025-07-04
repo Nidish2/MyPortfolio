@@ -44,35 +44,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        brand: {
-          50: "#f0e7ff",
-          100: "#d1bfff",
-          200: "#b197ff",
-          300: "#916fff",
-          400: "#7247ff",
-          500: "#5e1fff",
-          600: "#5019cc",
-          700: "#3c1399",
-          800: "#280c66",
-          900: "#140633",
-        },
-        accent: {
-          50: "#e0fcff",
-          100: "#bef8ff",
-          200: "#9bf3ff",
-          300: "#76eeff",
-          400: "#52e9ff",
-          500: "#2ee5ff",
-          600: "#00b7cc",
-          700: "#008999",
-          800: "#005c66",
-          900: "#002e33",
-        },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -95,7 +66,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 }
 
 export default config

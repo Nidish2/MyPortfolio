@@ -68,9 +68,16 @@ export default function Projects() {
     <div className="container mx-auto max-w-6xl">
       <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
         <motion.div variants={itemVariants}>
-          <h2 className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500">
+          <motion.h2
+            className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
+            whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+          >
             Projects
-          </h2>
+          </motion.h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -80,58 +87,115 @@ export default function Projects() {
               variants={itemVariants}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+              whileHover={{
+                y: -15,
+                scale: 1.03,
+                transition: { duration: 0.3 },
+              }}
             >
-              <div className="p-6 h-full rounded-xl bg-[rgba(30,30,60,0.4)] backdrop-blur-md shadow-xl border border-white/20 transition-all duration-300 relative overflow-hidden hover:shadow-purple-500/30">
+              <motion.div className="p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                  <span className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+                  <motion.h3
+                    className="text-xl font-bold text-primary-light dark:text-primary-dark"
+                    whileHover={{
+                      x: 5,
+                      color: "#5e1fff",
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    {project.title}
+                  </motion.h3>
+                  <motion.span
+                    className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md text-xs font-medium"
+                    whileHover={{
+                      scale: 1.1,
+                      transition: { duration: 0.2 },
+                    }}
+                  >
                     {project.year}
-                  </span>
+                  </motion.span>
                 </div>
 
-                <p className="text-sm mb-4 text-gray-300">{project.description}</p>
+                <motion.p
+                  className="text-sm mb-4 text-secondary-light dark:text-secondary-dark leading-relaxed"
+                  whileHover={{
+                    color: "#2ee5ff",
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  {project.description}
+                </motion.p>
 
                 <div className="mb-6">
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="bg-cyan-500/10 text-cyan-300 text-xs px-2 py-1 rounded-md">
+                      <motion.span
+                        key={techIndex}
+                        className="bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 text-xs px-2 py-1 rounded-md border border-cyan-500/30"
+                        whileHover={{
+                          scale: 1.1,
+                          backgroundColor: "rgba(6, 182, 212, 0.3)",
+                          transition: { duration: 0.2 },
+                        }}
+                      >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
 
                 <div className="flex justify-between mt-auto">
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <a
+                    <motion.a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center px-3 py-1 text-sm border border-purple-500 text-purple-500 rounded-md hover:bg-purple-500 hover:text-white transition-all duration-300"
+                      className="flex items-center px-3 py-2 text-sm border border-purple-500 text-purple-700 dark:text-purple-400 rounded-md transition-all duration-300"
+                      whileHover={{
+                        backgroundColor: "#8b5cf6",
+                        color: "#ffffff",
+                        boxShadow: "0 8px 16px rgba(139, 92, 246, 0.3)",
+                      }}
                     >
-                      <Github size={16} className="mr-1" />
+                      <motion.div
+                        whileHover={{
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
+                      >
+                        <Github size={16} className="mr-1" />
+                      </motion.div>
                       GitHub
-                    </a>
+                    </motion.a>
                   </motion.div>
 
                   {project.live && (
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <a
+                      <motion.a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center px-3 py-1 text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-md hover:from-purple-600 hover:to-cyan-600 transition-all duration-300"
+                        className="flex items-center px-3 py-2 text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-md transition-all duration-300"
+                        whileHover={{
+                          boxShadow: "0 8px 16px rgba(94, 31, 255, 0.4)",
+                        }}
                       >
-                        <ExternalLink size={16} className="mr-1" />
+                        <motion.div
+                          whileHover={{
+                            rotate: 360,
+                            transition: { duration: 0.5 },
+                          }}
+                        >
+                          <ExternalLink size={16} className="mr-1" />
+                        </motion.div>
                         Live Demo
-                      </a>
+                      </motion.a>
                     </motion.div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

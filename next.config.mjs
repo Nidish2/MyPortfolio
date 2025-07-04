@@ -11,7 +11,6 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
-    // This helps with hydration issues in Next.js 15
     serverActions: {
       bodySizeLimit: '2mb',
     },
