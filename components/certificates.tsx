@@ -44,17 +44,17 @@ const certificates: Certificate[] = [
     description:
       "Java web development certification covering servlets, JSP, and Spring framework fundamentals.",
     image: "/Simplilearn.jpg?height=300&width=400",
-    link: "#",
+    link: "https://lms.simplilearn.com/dashboard/certificate",
     category: "programming",
   },
   {
-    title: "Java Programming Skill Certificate",
+    title: "Java Programming, SQL(Basic and Intermediate) and Problem Solving Skill Certificate",
     issuer: "HackerRank",
     date: "2024",
     description:
       "Verified Java programming skills through comprehensive coding assessments and challenges.",
     image: "/HK.jpg?height=300&width=400",
-    link: "#",
+    link: "https://www.hackerrank.com/certificates/d6f761d0ae01",
     category: "programming",
   },
   {
@@ -64,7 +64,7 @@ const certificates: Certificate[] = [
     description:
       "Advanced certification in AI prompt engineering techniques and best practices for generative AI.",
     image: "/udemy.jpg?height=300&width=400",
-    link: "#",
+    link: "https://www.udemy.com/certificate/UC-c7907ee5-8320-4fe2-9f40-de1e2c79bcca/",
     category: "ai",
   },
   {
@@ -75,7 +75,7 @@ const certificates: Certificate[] = [
     description:
       "Comprehensive AI and machine learning certification with hands-on Python implementation.",
     image: "/SB.jpg?height=300&width=400",
-    link: "#",
+    link: "https://infyspringboard.onwingspan.com/web/en/app/profile/competency/certificate",
     category: "ai",
   },
   {
