@@ -20,7 +20,14 @@ const projects: Project[] = [
     year: "2025",
     description:
       "Text-to-3D model generation is a tool that transforms user prompts into 3D objects instantly. Built with Python's FastAPI for the backend and React with Vite for the frontend, it leverages Point-E model to create single 3D assets from simple text commands.",
-    technologies: ["Python", "FastAPI", "React", "Vite", "Point-E", "3D Modeling"],
+    technologies: [
+      "Python",
+      "FastAPI",
+      "React",
+      "Vite",
+      "Point-E",
+      "3D Modeling",
+    ],
     github: "https://github.com/Nidish2/Text-to-3D",
   },
   {
@@ -28,7 +35,14 @@ const projects: Project[] = [
     year: "2025",
     description:
       "It is a data-driven analytics platform designed to identify employee challenges and predict actionable solutions. Built with Python using libraries like Pandas for data processing, Scikit-learn for machine learning, and XGBoost, RandomForest for model training and Streamlit for the interactive frontend dashboard.",
-    technologies: ["Python", "Pandas", "Scikit-learn", "XGBoost", "RandomForest", "Streamlit"],
+    technologies: [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "XGBoost",
+      "RandomForest",
+      "Streamlit",
+    ],
     github: "https://github.com/Nidish2/Employ-Data-Analytics",
   },
   {
@@ -37,10 +51,10 @@ const projects: Project[] = [
     description:
       "Chit-chat is a real-time web application where users can communicate with each other instantly. Built using the MERN stack for the web interface and Socket.IO for real-time communication, it enables seamless interaction.",
     technologies: ["MongoDB", "Express.js", "React", "Node.js", "Socket.IO"],
-    github: "https://github.com/NIDISH",
-    live: "https://chit-chat-rkjm.onrender.com",
+    github: "https://github.com/Nidish2/Chit-Chat",
+    live: "https://chit-chat-real-time-app.vercel.app/",
   },
-]
+];
 
 export default function Projects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)

@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Award, ExternalLink, Shield, Code, Trophy } from "lucide-react";
+import {
+  Award,
+  ExternalLink,
+  Shield,
+  Code,
+  Trophy,
+  FolderOpen,
+} from "lucide-react";
 
 interface Certificate {
   title: string;
@@ -23,7 +30,7 @@ const certificates: Certificate[] = [
     description:
       "Professional certification in OpenShift container platform administration and production cluster operations.",
     image: "/red_hat.jpg?height=300&width=400",
-    link: "#",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "redhat",
   },
   {
@@ -33,7 +40,7 @@ const certificates: Certificate[] = [
     description:
       "Comprehensive system administration certification covering Linux fundamentals and advanced administration.",
     image: "/red_hat.jpg?height=300&width=400",
-    link: "#",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "redhat",
   },
   {
@@ -44,11 +51,12 @@ const certificates: Certificate[] = [
     description:
       "Java web development certification covering servlets, JSP, and Spring framework fundamentals.",
     image: "/Simplilearn.jpg?height=300&width=400",
-    link: "https://lms.simplilearn.com/dashboard/certificate",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "programming",
   },
   {
-    title: "Java Programming, SQL(Basic and Intermediate) and Problem Solving Skill Certificate",
+    title:
+      "Java Programming, SQL(Basic and Intermediate) and Problem Solving Skill Certificate",
     issuer: "HackerRank",
     date: "2024",
     description:
@@ -75,7 +83,7 @@ const certificates: Certificate[] = [
     description:
       "Comprehensive AI and machine learning certification with hands-on Python implementation.",
     image: "/SB.jpg?height=300&width=400",
-    link: "https://infyspringboard.onwingspan.com/web/en/app/profile/competency/certificate",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "ai",
   },
   {
@@ -85,7 +93,7 @@ const certificates: Certificate[] = [
     description:
       "Multiple certifications covering Java programming, advanced SQL techniques, and frontend development.",
     image: "/GL.jpg?height=300&width=400",
-    link: "#",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "general",
   },
   {
@@ -95,7 +103,7 @@ const certificates: Certificate[] = [
     description:
       "Military training and leadership development certificates with gold medals in cultural activities.",
     image: "/NCC.jpg?height=300&width=400",
-    link: "#",
+    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
     category: "ncc",
   },
 ];
@@ -170,6 +178,29 @@ export default function Certificates() {
           >
             Certifications
           </motion.h2>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="text-center mb-12">
+
+          {/* Google Drive Archive Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="flex justify-center"
+          >
+            <motion.a
+              href="https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500/60 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.3)]"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FolderOpen className="mr-2" size={20} />
+              View Complete Certificate Archive
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         <div className="space-y-8">

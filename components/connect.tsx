@@ -4,7 +4,14 @@ import type React from "react";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Github, Linkedin, Code2, HardDrive, Instagram } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Braces,
+  BookOpen,
+  Hexagon,
+  Instagram,
+} from "lucide-react";
 
 interface SocialLink {
   name: string;
@@ -23,26 +30,32 @@ const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
     icon: Linkedin,
-    url: "https://www.linkedin.com/in/nidish-26929524b/",
+    url: "https://www.linkedin.com/in/nidishofficial/",
     color: "from-blue-500 to-blue-700",
   },
   {
     name: "LeetCode",
-    icon: HardDrive,
+    icon: Braces,
     url: "https://leetcode.com/u/nidish2207/",
     color: "from-yellow-500 to-orange-500",
   },
   {
+    name: "GeeksforGeeks",
+    icon: BookOpen,
+    url: "https://www.geeksforgeeks.org/profile/nidishpf3z",
+    color: "from-teal-600 to-emerald-800",
+  },
+  {
     name: "HackerRank",
-    icon: Code2,
+    icon: Hexagon,
     url: "https://www.hackerrank.com/profile/nidish2207",
-    color: "from-green-500 to-green-700",
+    color: "from-lime-400 to-green-600",
   },
   {
     name: "Instagram",
     icon: Instagram,
     url: "https://www.instagram.com/_1_am_nidish/",
-    color: "from-pink-500 to-purple-500",
+    color: "from-pink-500 to-purple-600",
   },
 ];
 

@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-import emailjs from "@emailjs/browser";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -12,7 +11,7 @@ import {
   Send,
   Github,
   Linkedin,
-  Twitter,
+  Instagram,
 } from "lucide-react";
 
 export default function Contact() {
@@ -34,55 +33,21 @@ export default function Contact() {
 
   useEffect(() => {
     setIsMounted(true);
-
-    // Initialize EmailJS with your public key
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-    if (publicKey) {
-      emailjs.init(publicKey);
-    } else {
-      console.warn("EmailJS public key not found in environment variables");
-    }
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Fixed handleSubmit function
-  // Modified handleSubmit function
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setIsSubmitting(true);
-
     setSubmitError("");
 
-    // Declare templateParams in the outer scope so it's accessible in catch
-
-    let templateParams:
-      | {
-          from_name: string;
-
-          from_email: string;
-
-          to_name: string;
-
-          subject: string;
-
-          message: string;
-
-          reply_to: string;
-
-          timestamp: string;
-        }
-      | undefined = undefined;
-
     try {
-      // Validate form data
-
       if (
         !formData.name.trim() ||
         !formData.email.trim() ||
@@ -91,172 +56,40 @@ export default function Contact() {
         throw new Error("Please fill in all required fields");
       }
 
-      // Email validation
-
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
       if (!emailRegex.test(formData.email.trim())) {
         throw new Error("Please enter a valid email address");
       }
 
-      // Check environment variables
-
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error(
-          "Email service configuration is missing. Please contact the developer."
-        );
-      }
-
-      // Clean and prepare template parameters
-
-      templateParams = {
-        from_name: formData.name.trim(),
-
-        from_email: formData.email.trim(),
-
-        to_name: "Nidish",
-
-        subject: formData.subject?.trim() || "Contact Form Submission",
-
-        message: formData.message.trim(),
-
-        reply_to: formData.email.trim(),
-
-        timestamp: new Date().toISOString(),
-      };
-
-      console.log("Sending email with EmailJS...");
-
-      // Send email with proper error handling
-
-      const response = await emailjs.send(
-        serviceId,
-
-        templateId,
-
-        templateParams,
-
-        {
-          publicKey: publicKey,
-
-          limitRate: {
-            throttle: 10000, // 10 seconds between requests
-          },
-        }
-      );
-
-      console.log("Email sent successfully:", response.status, response.text);
-
-      // Success state
-
-      setFormSubmitted(true);
-
-      setFormData({
-        name: "",
-
-        email: "",
-
-        subject: "",
-
-        message: "",
+      // Web3Forms direct API call
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || "New Message from Portfolio",
+          message: formData.message,
+          from_name: "Portfolio Notification",
+        }),
       });
 
-      // Reset success message after 5 seconds
+      const result = await response.json();
 
-      setTimeout(() => setFormSubmitted(false), 5000);
+      if (result.success) {
+        setFormSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setFormSubmitted(false), 5000);
+      } else {
+        throw new Error(result.message || "Failed to send message");
+      }
     } catch (error: any) {
-      console.error("Email submission error:", error);
-
-      let errorMessage =
-        "Failed to send message. Please try again or contact me directly.";
-
-      // Handle EmailJS specific errors
-
-      if (error && typeof error === "object") {
-        const errorStr = error.toString().toLowerCase();
-
-        const errorText = error.text?.toLowerCase() || "";
-
-        const errorStatus = error.status;
-
-        // Gmail API authentication error (main issue from your screenshots)
-
-        if (
-          errorStr.includes("authentication") ||
-          errorStr.includes("scopes") ||
-          errorText.includes("authentication") ||
-          errorText.includes("insufficient")
-        ) {
-          errorMessage =
-            "Email service authentication error. Please contact me directly at nidish2207@gmail.com";
-        }
-
-        // Rate limiting
-        else if (
-          errorStatus === 429 ||
-          errorStr.includes("rate limit") ||
-          errorStr.includes("too many")
-        ) {
-          errorMessage =
-            "Too many requests. Please wait a moment and try again.";
-        }
-
-        // Network errors
-        else if (
-          errorStr.includes("network") ||
-          errorStr.includes("fetch") ||
-          !navigator.onLine
-        ) {
-          errorMessage =
-            "Network error. Please check your internet connection and try again.";
-        }
-
-        // Service unavailable
-        else if (errorStatus === 500 || errorStatus === 503) {
-          errorMessage =
-            "Email service temporarily unavailable. Please try again later.";
-        }
-
-        // Bad request
-        else if (errorStatus === 400) {
-          errorMessage =
-            "Invalid request data. Please check your input and try again.";
-        }
-
-        // Forbidden
-        else if (errorStatus === 403) {
-          errorMessage =
-            "Email service access denied. Please contact me directly at nidish2207@gmail.com";
-        }
-
-        // Custom validation errors
-        else if (error.message && typeof error.message === "string") {
-          errorMessage = error.message;
-        }
-      }
-
-      // Handle string errors
-      else if (typeof error === "string") {
-        errorMessage = error;
-      }
-
-      setSubmitError(errorMessage);
-
-      // Optional: Send fallback notification or log to external service
-
-      console.error("Full error details:", {
-        error: error,
-
-        timestamp: new Date().toISOString(),
-
-        formData: templateParams,
-      });
+      console.error("Submission error:", error);
+      setSubmitError(error.message || "Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -268,10 +101,24 @@ export default function Contact() {
     { icon: MapPin, label: "Location", value: "Bangalore, India" },
   ];
 
+  // Upgraded Connect With Me Section
   const socialLinks = [
     { icon: Github, label: "GitHub", url: "https://github.com/Nidish2" },
-    { icon: Linkedin, label: "LinkedIn", url: "#" },
-    { icon: Twitter, label: "Twitter", url: "#" },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/nidishofficial/",
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      url: "https://www.instagram.com/_1_am_nidish/",
+    },
+    {
+      icon: Mail,
+      label: "Direct Email",
+      url: "mailto:nidish2207@gmail.com",
+    },
   ];
 
   const containerVariants = {
@@ -411,6 +258,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white inline-block transition-all duration-300"
+                        title={social.label}
                         whileHover={{
                           boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
                         }}
@@ -478,7 +326,7 @@ export default function Contact() {
                       >
                         <div className="flex items-center">
                           <svg
-                            className="w-5 h-5 mr-2"
+                            className="w-5 h-5 mr-2 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -488,7 +336,7 @@ export default function Contact() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          {submitError}
+                          <span>{submitError}</span>
                         </div>
                       </motion.div>
                     )}
