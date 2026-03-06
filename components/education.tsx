@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { GraduationCap, Calendar, Award } from "lucide-react"
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { GraduationCap, Calendar, Award } from "lucide-react";
 
 interface EducationItem {
-  degree: string
-  institution: string
-  period: string
-  details: string
-  score: string
-  type: "engineering" | "puc" | "sslc"
+  degree: string;
+  institution: string;
+  period: string;
+  details: string;
+  score: string;
+  type: "engineering" | "puc" | "sslc";
 }
 
 const educationItems: EducationItem[] = [
@@ -19,7 +19,7 @@ const educationItems: EducationItem[] = [
     institution: "B N M Institute Of Technology",
     period: "2022 - 2026",
     details: "Computer Science and Engineering",
-    score: "CGPA: 8.7 / 10",
+    score: "CGPA: 9.08 / 10",
     type: "engineering",
   },
   {
@@ -38,13 +38,13 @@ const educationItems: EducationItem[] = [
     score: "Percentage: 91.04%",
     type: "sslc",
   },
-]
+];
 
 export default function Education() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,34 +54,43 @@ export default function Education() {
         staggerChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
-  }
+  };
 
   const getIcon = (type: string) => {
     switch (type) {
       case "engineering":
-        return GraduationCap
+        return GraduationCap;
       case "puc":
-        return Award
+        return Award;
       case "sslc":
-        return Calendar
+        return Calendar;
       default:
-        return GraduationCap
+        return GraduationCap;
     }
-  }
+  };
 
   const getGradient = (index: number) => {
-    const gradients = ["from-purple-500 to-cyan-500", "from-cyan-500 to-blue-500", "from-blue-500 to-purple-500"]
-    return gradients[index % gradients.length]
-  }
+    const gradients = [
+      "from-purple-500 to-cyan-500",
+      "from-cyan-500 to-blue-500",
+      "from-blue-500 to-purple-500",
+    ];
+    return gradients[index % gradients.length];
+  };
 
   return (
     <div className="container mx-auto max-w-6xl">
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        ref={ref}
+      >
         <motion.div variants={itemVariants}>
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
@@ -97,7 +106,7 @@ export default function Education() {
 
         <div className="space-y-10">
           {educationItems.map((edu, index) => {
-            const IconComponent = getIcon(edu.type)
+            const IconComponent = getIcon(edu.type);
             return (
               <motion.div
                 key={index}
@@ -109,7 +118,9 @@ export default function Education() {
                 }}
               >
                 <motion.div className="p-8 portfolio-card portfolio-card-light dark:portfolio-card-dark">
-                  <div className={`absolute right-0 top-0 w-1 h-full bg-gradient-to-b ${getGradient(index)}`}></div>
+                  <div
+                    className={`absolute right-0 top-0 w-1 h-full bg-gradient-to-b ${getGradient(index)}`}
+                  ></div>
 
                   <div className="flex flex-col md:flex-row justify-between mb-4">
                     <div className="flex items-start">
@@ -216,10 +227,10 @@ export default function Education() {
                   </div>
                 </motion.div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
