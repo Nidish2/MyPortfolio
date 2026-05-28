@@ -243,41 +243,6 @@ export default function Achievements() {
             )
           })}
         </div>
-
-        <motion.div variants={itemVariants} className="mt-12">
-          <motion.div
-            className="p-8 portfolio-card portfolio-card-light dark:portfolio-card-dark text-center"
-            whileHover={{
-              y: -10,
-              scale: 1.02,
-              boxShadow: "0 25px 50px -12px rgba(46, 229, 255, 0.4)",
-              transition: { duration: 0.3 },
-            }}
-          >
-            <motion.h3
-              className="text-2xl font-bold text-gray-900 dark:text-white mb-4"
-              whileHover={{
-                scale: 1.05,
-                color: "#5e1fff",
-                textShadow: "0 0 15px rgba(94, 31, 255, 0.6)",
-                transition: { duration: 0.3 },
-              }}
-            >
-              Recognition & Excellence
-            </motion.h3>
-            <motion.p
-              className="text-lg text-gray-700 dark:text-gray-100 leading-relaxed"
-              whileHover={{
-                color: "#2ee5ff",
-                transition: { duration: 0.3 },
-              }}
-            >
-              These achievements reflect my commitment to excellence across academics, leadership, and extracurricular
-              activities. Each recognition has motivated me to continue striving for higher standards and contributing
-              positively to my community.
-            </motion.p>
-          </motion.div>
-        </motion.div>
       </motion.div>
     </div>
   )

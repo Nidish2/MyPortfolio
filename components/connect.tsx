@@ -11,6 +11,8 @@ import {
   BookOpen,
   Hexagon,
   Instagram,
+  Mail,
+  FileText,
 } from "lucide-react";
 
 interface SocialLink {
@@ -90,7 +92,7 @@ export default function Connect() {
       >
         <motion.div variants={itemVariants} className="mb-12">
           <motion.div
-            className="p-10 portfolio-card portfolio-card-light dark:portfolio-card-dark text-center"
+            className="p-6 sm:p-8 lg:p-10 portfolio-card portfolio-card-light dark:portfolio-card-dark text-center"
             whileHover={{
               y: -10,
               scale: 1.02,
@@ -100,7 +102,7 @@ export default function Connect() {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
             <motion.h3
-              className="text-3xl font-bold text-primary-light dark:text-primary-dark mb-4"
+              className="section-title mb-4 text-primary-light dark:text-primary-dark"
               whileHover={{
                 scale: 1.05,
                 color: "#5e1fff",
@@ -111,7 +113,7 @@ export default function Connect() {
               Let's Connect
             </motion.h3>
             <motion.p
-              className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto mb-8 text-lg leading-relaxed"
+              className="text-secondary-light dark:text-secondary-dark max-w-3xl mx-auto mb-8 text-base sm:text-lg leading-relaxed"
               whileHover={{
                 color: "#2ee5ff",
                 transition: { duration: 0.3 },
@@ -122,8 +124,29 @@ export default function Connect() {
               how we can work together!
             </motion.p>
 
-            {/* All social links in a grid layout - PRESERVE ALL BRAND COLORS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <motion.a
+                href="mailto:nidish2207@gmail.com"
+                whileHover={{ y: -5, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 px-5 py-3 font-bold text-white shadow-lg shadow-purple-500/20"
+              >
+                <Mail size={20} />
+                Email Nidish
+              </motion.a>
+              <motion.a
+                href="/Resume.pdf"
+                download
+                whileHover={{ y: -5, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 font-bold text-cyan-700 shadow-lg shadow-cyan-500/10 dark:text-cyan-300"
+              >
+                <FileText size={20} />
+                Download Resume
+              </motion.a>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
               {socialLinks.map((link, index) => (
                 <motion.a
                   key={index}
@@ -138,7 +161,7 @@ export default function Connect() {
                     transition: { duration: 0.3 },
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-6 rounded-xl bg-gradient-to-r ${link.color} text-white flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 font-semibold text-lg relative overflow-hidden group`}
+                  className={`min-h-16 p-4 rounded-xl bg-gradient-to-r ${link.color} text-white flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 font-semibold text-base sm:text-lg relative overflow-hidden group`}
                   style={{
                     boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
                   }}

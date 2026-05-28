@@ -1,176 +1,87 @@
 # Personal Portfolio - Nidish
 
-🚀 Live Site: [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
+Live Site: [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
 
----
+## Overview
 
-## 📌 Overview
+A personal portfolio website built with Next.js, React, and Tailwind CSS. It showcases Nidish's profile, experience, education, projects, skills, certifications, hackathons, achievements, extracurricular activities, and contact details.
 
-This is a sleek and modern personal portfolio website built using **Next.js (App Router)**, **React**, **Vite**, and **Tailwind CSS**, designed to showcase the skills, projects, and personality of **Nidish**, a passionate software developer. The portfolio is responsive, interactive, and minimalistic — providing recruiters and visitors with a smooth, enjoyable browsing experience.
+## Features
 
----
+- Hero section with typewriter-style role text
+- Profile section with photo and quick contact details
+- Work experience and education sections
+- Projects with GitHub and live demo links
+- Skills grouped by technical area
+- Certifications with document links
+- Hackathons, achievements, and extracurricular activities
+- Contact form using Web3Forms
+- Light/dark theme toggle
+- Footer with professional/social coding links
 
-## 🧠 Features
+## Tech Stack
 
-* 🎯 **Hero Section** with typewriter animation and optional 3D globe sphere
-* 🧑‍💻 **About Me** with background, personality, and career mission
-* 🧱 **Professional Goals** for short-term and long-term objectives
-* 🧩 **Projects** with live demos, GitHub links, and tech stack icons
-* 🎓 **Education** timeline with structured achievements
-* 💼 **Experience** highlights for past roles and internships
-* 🏅 **Achievements & Certifications** section
-* 🎭 **Personality Traits** for soft skills exposure
-* 🎉 **Extracurricular Activities & Hackathons** to show versatility
-* 🧪 **Skills Section** with modern visual representation
-* 📫 **Contact Section** with working **EmailJS** form
-* 🖱️ **Copy to Clipboard** for easy contact info copying
-* 🌘 **Theme Toggle** (Light/Dark mode support via `next-themes`)
-* 💬 Footer with social media and copyright
-* ⚡ Smooth transitions & framer-motion animations
-* 📱 Fully Responsive across all screen sizes
+| Category | Technologies |
+| --- | --- |
+| Frontend | React, Next.js App Router |
+| Styling | Tailwind CSS, PostCSS |
+| Animation | Framer Motion |
+| Icons | Lucide Icons |
+| Forms | Web3Forms |
+| Type Checking | TypeScript |
+| Deployment | Vercel |
 
----
-
-## ⚙️ Tech Stack
-
-| Category          | Technologies                      |
-| ----------------- | --------------------------------- |
-| **Frontend**      | React, Next.js (App Router), Vite |
-| **Styling**       | Tailwind CSS, PostCSS             |
-| **Animation**     | Framer Motion                     |
-| **Icons**         | Lucide Icons                      |
-| **Theming**       | `next-themes`                     |
-| **Forms**         | EmailJS                           |
-| **Type Checking** | TypeScript                        |
-| **Deployment**    | Vercel                            |
-
----
-
-## 📁 Folder Structure
+## Folder Structure
 
 ```bash
-├── app/                 # Next.js App Router configuration
-├── components/          # Section-based components
-│   ├── ui/              # Reusable UI components (toggle, footer, buttons...)
-│   ├── about.tsx
-│   ├── achievements.tsx
-│   ├── certificates.tsx
-│   ├── connect.tsx
-│   ├── contact.tsx
-│   ├── copy.tsx
-│   ├── education.tsx
-│   ├── experience.tsx
-│   ├── extracurricular.tsx
-│   ├── footer.tsx
-│   ├── hackathons.tsx
-│   ├── header.tsx
-│   ├── hero.tsx
-│   ├── hero-3d.tsx
-│   ├── navbar.tsx
-│   ├── personality.tsx
-│   ├── professional-goals.tsx
-│   ├── projects.tsx
-│   ├── skills.tsx
-│   ├── theme-provider.tsx
-│   ├── theme-toggle.tsx
-├── hooks/               # Custom hooks
-├── lib/                 # Utility functions
-├── public/              # Static assets
-├── styles/              # Tailwind base styles
-├── components.json      # Component mapping
-├── next.config.mjs      # Next.js config
-├── tailwind.config.ts   # Tailwind config
-├── postcss.config.mjs   # PostCSS setup
-├── package.json         # Dependencies
-├── tsconfig.json        # TypeScript config
-├── .gitignore
-└── README.md
+app/
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  about.tsx
+  achievements.tsx
+  certificates.tsx
+  contact.tsx
+  education.tsx
+  experience.tsx
+  extracurricular.tsx
+  footer.tsx
+  hackathons.tsx
+  hero.tsx
+  navbar.tsx
+  projects.tsx
+  skills.tsx
+public/
+  Resume.pdf
+  Profile.jpg
+  certificate images
 ```
 
----
-
-## ⚙️ Installation & Setup
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/<your-username>/MyPortfolio
-cd MyPortfolio
-```
-
-2. **Install dependencies**
+## Setup
 
 ```bash
 pnpm install
-```
-
-3. **Start the development server**
-
-```bash
 pnpm dev
 ```
 
-4. **Build for production**
+For production:
 
 ```bash
-pnpm build && pnpm start
+pnpm build
+pnpm start
 ```
 
-5. **Environment Variables**
-   Create `.env.local` file for EmailJS:
+Create `.env.local` for the contact form:
 
 ```env
-NEXT_PUBLIC_EMAILJS_SERVICE=your_service_id
-NEXT_PUBLIC_EMAILJS_TEMPLATE=your_template_id
-NEXT_PUBLIC_EMAILJS_KEY=your_public_key
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_access_key
 ```
 
----
-
-## 📤 Deployment
-
-* Hosted on [Vercel](https://vercel.com/)
-* Push to `main` triggers auto-deployment
-* Custom domain and SSL support by default
-
----
-
-## 💡 Future Enhancements
-
-* 🌐 Add internationalization (multi-language)
-* 📝 Blog & Case Studies section
-* 📈 Analytics with Plausible or Google Analytics
-* 🔍 SEO optimization & Open Graph metadata
-* 🌓 Enhanced system-level theme preference sync
-* 🎥 Project video walkthrough embedding
-
----
-
-## 🙌 Acknowledgments
-
-* [Lucide Icons](https://lucide.dev/)
-* [Framer Motion](https://www.framer.com/motion/)
-* [EmailJS](https://www.emailjs.com/)
-* [Next.js](https://nextjs.org/)
-* [Tailwind CSS](https://tailwindcss.com/)
-
----
-
-## 🧑‍🎓 Author
+## Author
 
 **Nidish**
-🌍 Portfolio: [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
-📫 Email: [nidish2207@gmail.com](nidish2207@gmail.com) 
-🔗 LinkedIn: [Nidish](https://www.linkedin.com/in/nidish-26929524b/)
 
----
-
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-### ⭐ If you like this project
-
-Star it ⭐ | Fork it 🍴 | Share it 📣 | Use it 🚀
+- Portfolio: [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
+- Email: [nidish2207@gmail.com](mailto:nidish2207@gmail.com)
+- LinkedIn: [Nidish](https://www.linkedin.com/in/nidishofficial/)

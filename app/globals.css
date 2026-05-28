@@ -3,6 +3,25 @@
 @tailwind utilities;
 
 :root {
+  --background: 210 40% 98%;
+  --foreground: 224 71% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71% 12%;
+  --primary: 263 90% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 187 92% 47%;
+  --secondary-foreground: 224 71% 12%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 42%;
+  --accent: 174 72% 44%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 13% 88%;
+  --input: 220 13% 88%;
+  --ring: 263 90% 56%;
   --foreground-rgb: 30, 30, 60;
   --background-start-rgb: 255, 255, 255;
   --background-mid-rgb: 248, 250, 252;
@@ -10,10 +29,33 @@
 }
 
 .dark {
+  --background: 246 40% 10%;
+  --foreground: 210 40% 98%;
+  --card: 244 35% 16%;
+  --card-foreground: 210 40% 98%;
+  --popover: 244 35% 16%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 263 90% 62%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 187 92% 58%;
+  --secondary-foreground: 244 35% 10%;
+  --muted: 245 27% 20%;
+  --muted-foreground: 215 20% 74%;
+  --accent: 174 72% 48%;
+  --accent-foreground: 244 35% 10%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 20% 28%;
+  --input: 240 20% 28%;
+  --ring: 187 92% 58%;
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 15, 12, 41;
   --background-mid-rgb: 48, 43, 99;
   --background-end-rgb: 36, 36, 62;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -27,6 +69,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+::selection {
+  background: rgba(46, 229, 255, 0.3);
 }
 
 /* Custom scrollbar */
@@ -50,6 +96,83 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+.portfolio-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.portfolio-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(46, 229, 255, 0.13), transparent 28rem),
+    radial-gradient(circle at 84% 12%, rgba(244, 63, 94, 0.1), transparent 25rem),
+    radial-gradient(circle at 52% 82%, rgba(16, 185, 129, 0.1), transparent 26rem);
+}
+
+.portfolio-section {
+  scroll-margin-top: 88px;
+  padding: 5rem 1rem;
+}
+
+.portfolio-section-muted {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(240, 249, 255, 0.54)),
+    rgba(248, 250, 252, 0.76);
+}
+
+.dark .portfolio-section-muted {
+  background:
+    linear-gradient(135deg, rgba(36, 36, 62, 0.72), rgba(15, 23, 42, 0.42)),
+    rgba(36, 36, 62, 0.38);
+}
+
+.section-kicker {
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: rgb(8, 145, 178);
+}
+
+.dark .section-kicker {
+  color: rgb(103, 232, 249);
+}
+
+.section-title {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.section-subtitle {
+  margin: -1.25rem auto 2.5rem;
+  max-width: 46rem;
+  text-align: center;
+  color: rgb(75, 85, 99);
+  line-height: 1.75;
+}
+
+.dark .section-subtitle {
+  color: rgb(209, 213, 219);
+}
+
+.surface-grid {
+  background-image:
+    linear-gradient(rgba(94, 31, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
 }
 
 /* Enhanced animations */
@@ -94,18 +217,101 @@ html {
   }
 }
 
+.hero-stage {
+  --hero-rotate-x: 0deg;
+  --hero-rotate-y: 0deg;
+  --hero-shift-x: 0px;
+  --hero-shift-y: 0px;
+  perspective: 1200px;
+}
+
+.hero-tilt {
+  transform: rotateX(var(--hero-rotate-x)) rotateY(var(--hero-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+.hero-showcase {
+  position: relative;
+  min-height: 360px;
+  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+.hero-card {
+  position: absolute;
+  inset: 34px 20px auto auto;
+  width: min(360px, 100%);
+  min-height: 270px;
+  border-radius: 24px;
+  transform-style: preserve-3d;
+}
+
+.hero-card-primary {
+  z-index: 3;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.18), 0 0 45px rgba(46, 229, 255, 0.22);
+  backdrop-filter: blur(18px);
+  transform: translateZ(80px);
+}
+
+.dark .hero-card-primary {
+  background: rgba(18, 18, 42, 0.72);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38), 0 0 55px rgba(94, 31, 255, 0.28);
+}
+
+.hero-card-back {
+  pointer-events: none;
+  border: 1px solid rgba(94, 31, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(94, 31, 255, 0.24), rgba(46, 229, 255, 0.18)),
+    rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.hero-card-back-one {
+  z-index: 2;
+  transform: translate3d(-26px, 26px, 30px) rotate(-5deg);
+}
+
+.hero-card-back-two {
+  z-index: 1;
+  transform: translate3d(28px, -24px, 0) rotate(7deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .hero-tilt,
+  .hero-showcase {
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Typography hierarchy */
 h1 {
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 h2 {
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 h3 {
   font-size: 1.875rem;
@@ -131,6 +337,22 @@ h5 {
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+}
+
+.portfolio-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.portfolio-card:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
 }
 
 /* LIGHT MODE - PERFECT AS IS */
@@ -159,6 +381,63 @@ h5 {
 
 .portfolio-card-dark:hover {
   box-shadow: 0 25px 50px -12px rgba(94, 31, 255, 0.4), 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1023px) {
+  .hero-showcase {
+    min-height: 310px;
+  }
+
+  .hero-card {
+    top: 18px;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: min(330px, calc(100vw - 3rem));
+    transform: translateX(-50%);
+  }
+
+  .hero-card-primary {
+    transform: translateX(-50%) translateZ(56px);
+  }
+
+  .hero-card-back-one {
+    transform: translateX(-50%) translate3d(-18px, 20px, 24px) rotate(-4deg);
+  }
+
+  .hero-card-back-two {
+    transform: translateX(-50%) translate3d(18px, -18px, 0) rotate(5deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .portfolio-section {
+    scroll-margin-top: 76px;
+    padding: 4rem 1rem;
+  }
+
+  .section-title {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 /* FORCE DARK MODE ON ALL CARDS */
@@ -549,6 +828,26 @@ h5 {
 /* COMPANY NAMES AND JOB TITLES */
 .dark .portfolio-card .text-secondary-light {
   color: rgb(209, 213, 219) !important;
+}
+
+/* Preserve action button and accent colors inside dark cards */
+.dark .portfolio-card .text-white,
+.dark .portfolio-card .text-white *,
+.dark .portfolio-card a.text-white,
+.dark .portfolio-card button.text-white {
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark .portfolio-card .text-cyan-300,
+.dark .portfolio-card .text-cyan-400,
+.dark .portfolio-card .text-cyan-700 {
+  color: rgb(103, 232, 249) !important;
+}
+
+.dark .portfolio-card .text-purple-400,
+.dark .portfolio-card .text-purple-600,
+.dark .portfolio-card .text-purple-700 {
+  color: rgb(196, 181, 253) !important;
 }
 
 /* PRESERVE COLORFUL HOVER EFFECTS */

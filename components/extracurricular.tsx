@@ -293,40 +293,6 @@ export default function Extracurricular() {
             )
           })}
         </div>
-
-        <motion.div variants={itemVariants} className="mt-12">
-          <motion.div
-            className="p-8 portfolio-card portfolio-card-light dark:portfolio-card-dark text-center"
-            whileHover={{
-              y: -10,
-              scale: 1.02,
-              transition: { duration: 0.3 },
-            }}
-          >
-            <motion.h3
-              className="text-2xl font-bold text-primary-light dark:text-primary-dark mb-4"
-              whileHover={{
-                scale: 1.05,
-                color: "#5e1fff",
-                textShadow: "0 0 15px rgba(94, 31, 255, 0.6)",
-                transition: { duration: 0.3 },
-              }}
-            >
-              Leadership & Service
-            </motion.h3>
-            <motion.p
-              className="text-lg text-secondary-light dark:text-secondary-dark leading-relaxed"
-              whileHover={{
-                color: "#2ee5ff",
-                transition: { duration: 0.3 },
-              }}
-            >
-              Through NCC and leadership programs, I've developed strong organizational skills, discipline, and a
-              commitment to community service. These experiences have shaped my character and enhanced my ability to
-              work effectively in team environments while taking initiative when needed.
-            </motion.p>
-          </motion.div>
-        </motion.div>
       </motion.div>
     </div>
   )

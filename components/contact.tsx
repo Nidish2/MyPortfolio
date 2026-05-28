@@ -48,6 +48,15 @@ export default function Contact() {
     setSubmitError("");
 
     try {
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      const botcheck = (
+        e.currentTarget.elements.namedItem("botcheck") as HTMLInputElement | null
+      )?.value;
+
+      if (botcheck) {
+        throw new Error("Submission blocked");
+      }
+
       if (
         !formData.name.trim() ||
         !formData.email.trim() ||
@@ -61,7 +70,10 @@ export default function Contact() {
         throw new Error("Please enter a valid email address");
       }
 
-      // Web3Forms direct API call
+      if (!accessKey) {
+        throw new Error("Contact form is not configured yet");
+      }
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -69,27 +81,28 @@ export default function Contact() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || "New Message from Portfolio",
-          message: formData.message,
+          access_key: accessKey,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || "New Message from Portfolio",
+          message: formData.message.trim(),
           from_name: "Portfolio Notification",
+          botcheck,
         }),
       });
 
       const result = await response.json();
 
-      if (result.success) {
+      if (response.ok && result.success) {
         setFormSubmitted(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
         setTimeout(() => setFormSubmitted(false), 5000);
       } else {
         throw new Error(result.message || "Failed to send message");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Submission error:", error);
-      setSubmitError(error.message || "Network error. Please try again.");
+      setSubmitError(error instanceof Error ? error.message : "Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -241,7 +254,7 @@ export default function Contact() {
                   Connect With Me
                 </motion.h4>
 
-                <div className="flex space-x-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {socialLinks.map((social, index) => (
                     <motion.div
                       key={index}
@@ -257,13 +270,15 @@ export default function Contact() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white inline-block transition-all duration-300"
+                        aria-label={social.label}
+                        className="min-h-12 px-3 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 text-white flex items-center justify-center gap-2 transition-all duration-300"
                         title={social.label}
                         whileHover={{
                           boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
                         }}
                       >
-                        <social.icon size={20} />
+                        <social.icon size={18} className="flex-shrink-0" />
+                        <span className="text-sm font-semibold leading-none">{social.label}</span>
                       </motion.a>
                     </motion.div>
                   ))}
@@ -305,7 +320,7 @@ export default function Contact() {
                     className="text-xl font-bold mb-2 text-cyan-600 dark:text-cyan-400"
                     whileHover={{ scale: 1.05 }}
                   >
-                    Message Sent Successfully! 🎉
+                    Message Sent Successfully!
                   </motion.h4>
                   <motion.p
                     className="text-gray-700 dark:text-gray-100"
@@ -318,6 +333,14 @@ export default function Contact() {
               ) : isMounted ? (
                 <form onSubmit={handleSubmit}>
                   <div className="space-y-4">
+                    <input
+                      type="checkbox"
+                      name="botcheck"
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+
                     {submitError && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}

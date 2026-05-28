@@ -4,7 +4,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Code, Database, Server, Cpu, Coffee } from "lucide-react"
+import { Code, Database, Server, Cpu, Coffee, Layers, Rocket, Workflow } from "lucide-react"
 
 interface SkillCategory {
   name: string
@@ -72,6 +72,24 @@ const skillCategories: SkillCategory[] = [
   },
 ]
 
+const skillHighlights = [
+  {
+    icon: Layers,
+    title: "Full-stack delivery",
+    description: "Builds responsive React frontends, APIs, auth-ready flows, and database-backed features.",
+  },
+  {
+    icon: Workflow,
+    title: "Problem solving",
+    description: "Uses Java DSA, clean debugging, and structured project planning for reliable execution.",
+  },
+  {
+    icon: Rocket,
+    title: "AI + cloud curiosity",
+    description: "Experiments with ML, GenAI, Docker, Kubernetes, OpenShift, and deployable product ideas.",
+  },
+]
+
 export default function Skills() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -97,8 +115,9 @@ export default function Skills() {
     <div className="container mx-auto max-w-6xl">
       <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
         <motion.div variants={itemVariants}>
+          <p className="section-kicker">Capability map</p>
           <motion.h2
-            className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
+            className="section-title bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-500"
             whileHover={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
@@ -107,9 +126,29 @@ export default function Skills() {
           >
             Skills
           </motion.h2>
+          <p className="section-subtitle">
+            A practical stack for building usable products: frontend polish, backend structure, data thinking, and deployment awareness.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <motion.div variants={containerVariants} className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {skillHighlights.map((highlight) => (
+            <motion.div
+              key={highlight.title}
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
+              className="portfolio-card portfolio-card-light dark:portfolio-card-dark p-5"
+            >
+              <div className="mb-4 inline-flex rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 p-3 text-white shadow-lg shadow-cyan-500/20">
+                <highlight.icon size={22} />
+              </div>
+              <h3 className="text-lg font-bold text-gray-950 dark:text-white">{highlight.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-200">{highlight.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
@@ -120,10 +159,10 @@ export default function Skills() {
                 transition: { duration: 0.3 },
               }}
             >
-              <motion.div className="p-6 portfolio-card portfolio-card-light dark:portfolio-card-dark">
+              <motion.div className="h-full p-6 portfolio-card portfolio-card-light dark:portfolio-card-dark">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
-                <div className="flex items-center mb-6">
+                <div className="flex items-start mb-6">
                   <motion.div
                     className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white mr-4"
                     whileHover={{
@@ -134,9 +173,9 @@ export default function Skills() {
                   >
                     <category.icon size={24} />
                   </motion.div>
-                  <div>
+                  <div className="min-w-0">
                     <motion.h3
-                      className="text-2xl font-bold text-primary-light dark:text-primary-dark"
+                      className="text-xl sm:text-2xl font-bold text-primary-light dark:text-primary-dark"
                       whileHover={{
                         x: 5,
                         color: "#5e1fff",
@@ -146,7 +185,7 @@ export default function Skills() {
                       {category.name}
                     </motion.h3>
                     <motion.span
-                      className="text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md"
+                      className="mt-2 inline-flex text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md"
                       whileHover={{
                         scale: 1.1,
                         transition: { duration: 0.2 },
@@ -170,8 +209,8 @@ export default function Skills() {
                       }}
                     >
                       <div className="mb-4">
-                        <div className="flex justify-between mb-2">
-                          <div className="flex items-center">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="flex min-w-0 flex-wrap items-center gap-2">
                             <motion.p
                               className="font-medium text-primary-light dark:text-primary-dark"
                               whileHover={{
@@ -183,7 +222,7 @@ export default function Skills() {
                             </motion.p>
                             {skill.category && (
                               <motion.span
-                                className="ml-2 text-xs bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 px-2 py-1 rounded border border-cyan-500/30"
+                                className="text-xs bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 px-2 py-1 rounded border border-cyan-500/30"
                                 whileHover={{
                                   scale: 1.1,
                                   backgroundColor: "rgba(6, 182, 212, 0.3)",
@@ -223,42 +262,6 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          variants={itemVariants}
-          whileHover={{
-            y: -10,
-            scale: 1.02,
-            transition: { duration: 0.3 },
-          }}
-          className="mt-16"
-        >
-          <motion.div className="p-8 portfolio-card portfolio-card-light dark:portfolio-card-dark text-center">
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
-
-            <motion.h3
-              className="text-2xl font-bold mb-4 text-primary-light dark:text-primary-dark"
-              whileHover={{
-                scale: 1.05,
-                color: "#5e1fff",
-                textShadow: "0 0 15px rgba(94, 31, 255, 0.6)",
-                transition: { duration: 0.3 },
-              }}
-            >
-              Always Learning
-            </motion.h3>
-            <motion.p
-              className="text-lg text-secondary-light dark:text-secondary-dark leading-relaxed"
-              whileHover={{
-                color: "#2ee5ff",
-                transition: { duration: 0.3 },
-              }}
-            >
-              I'm constantly expanding my skill set and exploring new technologies to stay at the forefront of the
-              industry. Currently focusing on advanced AI/ML and cloud-native technologies.
-            </motion.p>
-          </motion.div>
-        </motion.div>
       </motion.div>
     </div>
   )

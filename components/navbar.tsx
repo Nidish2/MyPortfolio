@@ -7,20 +7,18 @@ import { motion } from "framer-motion"
 import { Menu, X, Sun, Moon } from "lucide-react"
 
 interface NavbarProps {
-  scrollToSection: (ref: React.RefObject<HTMLDivElement>) => void
+  scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void
   refs: {
-    aboutRef: React.RefObject<HTMLDivElement>
-    experienceRef: React.RefObject<HTMLDivElement>
-    educationRef: React.RefObject<HTMLDivElement>
-    projectsRef: React.RefObject<HTMLDivElement>
-    skillsRef: React.RefObject<HTMLDivElement>
-    certificatesRef: React.RefObject<HTMLDivElement>
-    hackathonsRef: React.RefObject<HTMLDivElement>
-    achievementsRef: React.RefObject<HTMLDivElement>
-    extracurricularRef: React.RefObject<HTMLDivElement>
-    personalityRef: React.RefObject<HTMLDivElement>
-    goalsRef: React.RefObject<HTMLDivElement>
-    contactRef: React.RefObject<HTMLDivElement>
+    aboutRef: React.RefObject<HTMLDivElement | null>
+    experienceRef: React.RefObject<HTMLDivElement | null>
+    educationRef: React.RefObject<HTMLDivElement | null>
+    projectsRef: React.RefObject<HTMLDivElement | null>
+    skillsRef: React.RefObject<HTMLDivElement | null>
+    certificatesRef: React.RefObject<HTMLDivElement | null>
+    hackathonsRef: React.RefObject<HTMLDivElement | null>
+    achievementsRef: React.RefObject<HTMLDivElement | null>
+    extracurricularRef: React.RefObject<HTMLDivElement | null>
+    contactRef: React.RefObject<HTMLDivElement | null>
   }
   theme: string
   toggleTheme: () => void
@@ -88,19 +86,9 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
         setActiveSection("achievements")
       } else if (
         scrollPosition >= (refs.extracurricularRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.personalityRef.current?.offsetTop || Number.POSITIVE_INFINITY)
-      ) {
-        setActiveSection("extracurricular")
-      } else if (
-        scrollPosition >= (refs.personalityRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.goalsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
-      ) {
-        setActiveSection("personality")
-      } else if (
-        scrollPosition >= (refs.goalsRef.current?.offsetTop || 0) &&
         scrollPosition < (refs.contactRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("goals")
+        setActiveSection("extracurricular")
       } else if (scrollPosition >= (refs.contactRef.current?.offsetTop || 0)) {
         setActiveSection("contact")
       }
@@ -126,8 +114,6 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
     { name: "Hackathons", ref: refs.hackathonsRef, id: "hackathons" },
     { name: "Achievements", ref: refs.achievementsRef, id: "achievements" },
     { name: "Activities", ref: refs.extracurricularRef, id: "extracurricular" },
-    { name: "Personality", ref: refs.personalityRef, id: "personality" },
-    { name: "Goals", ref: refs.goalsRef, id: "goals" },
     { name: "Contact", ref: refs.contactRef, id: "contact" },
   ]
 
@@ -157,13 +143,22 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
             textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
           }}
           whileTap={{ scale: 0.95 }}
-          className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#5e1fff] to-[#2ee5ff] cursor-pointer transition-all duration-300 hover:animate-glow"
+          className="flex items-center gap-3 cursor-pointer transition-all duration-300"
         >
-          NIDISH
+          <span className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-cyan-400/70 shadow-lg shadow-cyan-500/20 bg-white/10">
+            <img
+              src="/Profile.jpg"
+              alt="Nidish"
+              className="h-full w-full object-cover"
+            />
+          </span>
+          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#5e1fff] to-[#2ee5ff] hover:animate-glow">
+            NIDISH
+          </span>
         </motion.button>
 
         {/* Desktop Navigation - ENHANCED WITH BEAUTIFUL STYLING */}
-        <div className="hidden lg:flex items-center space-x-2">
+        <div className="hidden xl:flex items-center space-x-2">
           {navItems.map((item, index) => (
             <motion.div
               key={item.name}
@@ -260,7 +255,7 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
         </div>
 
         {/* Mobile Navigation Toggle - Enhanced */}
-        <div className="lg:hidden flex items-center space-x-4">
+        <div className="xl:hidden flex items-center space-x-4">
           <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
             whileTap={{ scale: 0.9 }}
@@ -313,7 +308,7 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
           exit={{ opacity: 0, height: 0, y: -20 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
           className={`
-            lg:hidden backdrop-blur-xl border-t-2
+            xl:hidden backdrop-blur-xl border-t-2
             ${
               theme === "dark"
                 ? "bg-[#0f0c29]/95 border-white/10 shadow-2xl shadow-purple-500/10"

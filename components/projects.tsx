@@ -1,17 +1,21 @@
 "use client"
 
+import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { ExternalLink, Github } from "lucide-react"
+import { BarChart3, Box, ExternalLink, Github, MessageSquareText } from "lucide-react"
 
 interface Project {
   title: string
   year: string
   description: string
+  impact: string
+  focus: string
   technologies: string[]
   github: string
   live?: string
+  icon: React.ElementType
 }
 
 const projects: Project[] = [
@@ -20,6 +24,8 @@ const projects: Project[] = [
     year: "2025",
     description:
       "Text-to-3D model generation is a tool that transforms user prompts into 3D objects instantly. Built with Python's FastAPI for the backend and React with Vite for the frontend, it leverages Point-E model to create single 3D assets from simple text commands.",
+    impact: "Turns natural-language prompts into usable 3D assets through an API-driven workflow.",
+    focus: "AI product prototype",
     technologies: [
       "Python",
       "FastAPI",
@@ -29,12 +35,15 @@ const projects: Project[] = [
       "3D Modeling",
     ],
     github: "https://github.com/Nidish2/Text-to-3D",
+    icon: Box,
   },
   {
     title: "Employee Data Analytics",
     year: "2025",
     description:
       "It is a data-driven analytics platform designed to identify employee challenges and predict actionable solutions. Built with Python using libraries like Pandas for data processing, Scikit-learn for machine learning, and XGBoost, RandomForest for model training and Streamlit for the interactive frontend dashboard.",
+    impact: "Highlights workplace risk patterns and suggests data-backed actions for decision makers.",
+    focus: "ML analytics dashboard",
     technologies: [
       "Python",
       "Pandas",
@@ -44,15 +53,19 @@ const projects: Project[] = [
       "Streamlit",
     ],
     github: "https://github.com/Nidish2/Employ-Data-Analytics",
+    icon: BarChart3,
   },
   {
     title: "Real Time Chat Application - Chit-Chat",
     year: "2024",
     description:
       "Chit-chat is a real-time web application where users can communicate with each other instantly. Built using the MERN stack for the web interface and Socket.IO for real-time communication, it enables seamless interaction.",
+    impact: "Delivers real-time messaging with a production-style MERN and Socket.IO architecture.",
+    focus: "Realtime web app",
     technologies: ["MongoDB", "Express.js", "React", "Node.js", "Socket.IO"],
     github: "https://github.com/Nidish2/Chit-Chat",
     live: "https://chit-chat-real-time-app.vercel.app/",
+    icon: MessageSquareText,
   },
 ];
 
@@ -82,8 +95,9 @@ export default function Projects() {
     <div className="container mx-auto max-w-6xl">
       <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
         <motion.div variants={itemVariants}>
+          <p className="section-kicker">Selected builds</p>
           <motion.h2
-            className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
+            className="section-title bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-500"
             whileHover={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
@@ -92,9 +106,12 @@ export default function Projects() {
           >
             Projects
           </motion.h2>
+          <p className="section-subtitle">
+            Project cards are tuned to show role-fit quickly: what was built, why it matters, and which tools prove the skill.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -107,22 +124,39 @@ export default function Projects() {
                 transition: { duration: 0.3 },
               }}
             >
-              <motion.div className="p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark">
+              <motion.div
+                className={`p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark flex flex-col ${
+                  hoveredIndex === index ? "ring-2 ring-cyan-400/40" : ""
+                }`}
+              >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
-                <div className="flex justify-between items-center mb-4">
-                  <motion.h3
-                    className="text-xl font-bold text-primary-light dark:text-primary-dark"
-                    whileHover={{
-                      x: 5,
-                      color: "#5e1fff",
-                      transition: { duration: 0.2 },
-                    }}
-                  >
-                    {project.title}
-                  </motion.h3>
+                <div className="mb-5 flex items-start justify-between gap-4">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <motion.div
+                      className="rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 p-3 text-white shadow-lg shadow-cyan-500/20"
+                      whileHover={{ rotate: 10, scale: 1.08 }}
+                    >
+                      <project.icon size={22} />
+                    </motion.div>
+                    <div className="min-w-0">
+                      <motion.h3
+                        className="text-xl font-bold leading-tight text-primary-light dark:text-primary-dark"
+                        whileHover={{
+                          x: 5,
+                          color: "#5e1fff",
+                          transition: { duration: 0.2 },
+                        }}
+                      >
+                        {project.title}
+                      </motion.h3>
+                      <p className="mt-2 text-xs font-bold uppercase text-cyan-700 dark:text-cyan-300">
+                        {project.focus}
+                      </p>
+                    </div>
+                  </div>
                   <motion.span
-                    className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md text-xs font-medium"
+                    className="shrink-0 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-2 py-1 rounded-md text-xs font-medium"
                     whileHover={{
                       scale: 1.1,
                       transition: { duration: 0.2 },
@@ -130,6 +164,12 @@ export default function Projects() {
                   >
                     {project.year}
                   </motion.span>
+                </div>
+
+                <div className="mb-4 rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+                  <p className="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-100">
+                    {project.impact}
+                  </p>
                 </div>
 
                 <motion.p
@@ -160,7 +200,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="flex justify-between mt-auto">
+                <div className="mt-auto flex flex-wrap justify-between gap-3">
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <motion.a
                       href={project.github}

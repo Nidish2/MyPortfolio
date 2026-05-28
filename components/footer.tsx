@@ -5,9 +5,9 @@ import {
   Github,
   Linkedin,
   Braces,
-  Instagram,
   BookOpen,
   Hexagon,
+  Instagram,
 } from "lucide-react";
 
 export default function Footer() {
