@@ -234,8 +234,8 @@ html {
   pointer-events: none;
   z-index: 0;
   background-image: 
-    linear-gradient(rgba(46, 229, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(46, 229, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(46, 229, 255, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 229, 255, 0.11) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -247,8 +247,8 @@ html {
 
 .dark .portfolio-section-muted::before {
   background-image: 
-    linear-gradient(rgba(94, 31, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(94, 31, 255, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(94, 31, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 31, 255, 0.14) 1px, transparent 1px);
 }
 
 .portfolio-section > *,
