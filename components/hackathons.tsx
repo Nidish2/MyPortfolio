@@ -170,10 +170,9 @@ export default function Hackathons() {
                       </motion.div>
                       <div>
                         <motion.h3
-                          className="text-xl font-bold text-primary-light dark:text-primary-dark"
+                          className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
                             x: 5,
-                            color: "#5e1fff",
                             transition: { duration: 0.2 },
                           }}
                         >
@@ -192,17 +191,17 @@ export default function Hackathons() {
                               transition: { duration: 0.5 },
                             }}
                           >
-                            <Clock size={14} className="text-muted-light dark:text-muted-dark mr-1" />
+                            <Clock size={14} className="text-gray-500 dark:text-gray-400 mr-1" />
                           </motion.div>
                           <motion.span
-                            className="text-sm text-muted-light dark:text-muted-dark"
-                            whileHover={{
-                              color: "#2ee5ff",
-                              transition: { duration: 0.2 },
-                            }}
-                          >
-                            {hackathon.duration}
-                          </motion.span>
+                             className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
+                             whileHover={{
+                               x: 5,
+                               transition: { duration: 0.2 },
+                             }}
+                           >
+                             {hackathon.duration}
+                           </motion.span>
                         </motion.div>
                       </div>
                     </div>
@@ -219,24 +218,23 @@ export default function Hackathons() {
 
                   <div className="mb-4">
                     <motion.h4
-                      className="text-lg font-semibold text-primary-light dark:text-primary-dark mb-2"
+                      className="text-lg font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                       whileHover={{
                         x: 5,
-                        color: "#5e1fff",
                         transition: { duration: 0.2 },
                       }}
                     >
                       {hackathon.project}
                     </motion.h4>
-                    <motion.p
-                      className="text-sm text-secondary-light dark:text-secondary-dark leading-relaxed"
-                      whileHover={{
-                        color: "#2ee5ff",
-                        transition: { duration: 0.3 },
-                      }}
-                    >
-                      {hackathon.description}
-                    </motion.p>
+                     <motion.p
+                       className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
+                       whileHover={{
+                         x: 5,
+                         transition: { duration: 0.3 },
+                       }}
+                     >
+                       {hackathon.description}
+                     </motion.p>
                   </div>
 
                   <div className="mb-4">
@@ -268,11 +266,10 @@ export default function Hackathons() {
                       {hackathon.type.toUpperCase()}
                     </motion.span>
                     <motion.div
-                      className="text-muted-light dark:text-muted-dark"
+                      className="text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:text-amber-500"
                       whileHover={{
                         rotate: 360,
                         scale: 1.2,
-                        color: "#f59e0b",
                         transition: { duration: 0.5 },
                       }}
                     >

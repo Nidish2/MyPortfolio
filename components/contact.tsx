@@ -184,10 +184,9 @@ export default function Contact() {
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
 
               <motion.h3
-                className="text-2xl font-bold mb-6 text-gray-900 dark:text-white"
+                className="text-2xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                 whileHover={{
                   x: 5,
-                  color: "#5e1fff",
                   transition: { duration: 0.2 },
                 }}
               >
@@ -225,14 +224,14 @@ export default function Contact() {
                       </motion.div>
                       <div>
                         <motion.p
-                          className="font-bold text-gray-900 dark:text-white"
-                          whileHover={{ color: "#5e1fff" }}
+                          className="font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
+                          whileHover={{ x: 5 }}
                         >
                           {item.label}
                         </motion.p>
                         <motion.p
-                          className="text-gray-700 dark:text-gray-100"
-                          whileHover={{ color: "#2ee5ff" }}
+                          className="text-gray-700 dark:text-gray-100 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
+                          whileHover={{ x: 5 }}
                         >
                           {item.value}
                         </motion.p>
@@ -244,10 +243,9 @@ export default function Contact() {
 
               <div className="mt-10">
                 <motion.h4
-                  className="text-xl font-bold mb-4 text-gray-900 dark:text-white"
+                  className="text-xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                   whileHover={{
                     x: 5,
-                    color: "#5e1fff",
                     transition: { duration: 0.2 },
                   }}
                 >
@@ -300,10 +298,9 @@ export default function Contact() {
               <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500"></div>
 
               <motion.h3
-                className="text-2xl font-bold mb-6 text-gray-900 dark:text-white"
+                className="text-2xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                 whileHover={{
                   x: 5,
-                  color: "#2ee5ff",
                   transition: { duration: 0.2 },
                 }}
               >
@@ -323,8 +320,8 @@ export default function Contact() {
                     Message Sent Successfully!
                   </motion.h4>
                   <motion.p
-                    className="text-gray-700 dark:text-gray-100"
-                    whileHover={{ color: "#5e1fff" }}
+                    className="text-gray-700 dark:text-gray-100 transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
+                    whileHover={{ scale: 1.02 }}
                   >
                     Thanks for reaching out! I'll get back to you within 24
                     hours.
@@ -377,10 +374,9 @@ export default function Contact() {
                       >
                         <motion.label
                           htmlFor={field.name}
-                          className="block mb-2 font-medium text-gray-900 dark:text-white"
+                          className="block mb-2 font-medium text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
                             x: 5,
-                            color: "#5e1fff",
                             transition: { duration: 0.2 },
                           }}
                         >
@@ -412,10 +408,9 @@ export default function Contact() {
                     >
                       <motion.label
                         htmlFor="message"
-                        className="block mb-2 font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 font-medium text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
                           x: 5,
-                          color: "#5e1fff",
                           transition: { duration: 0.2 },
                         }}
                       >

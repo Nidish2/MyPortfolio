@@ -106,23 +106,29 @@ export default function Projects() {
           >
             Projects
           </motion.h2>
-          <p className="section-subtitle">
+          <motion.p 
+            className="section-subtitle cursor-default select-none transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300"
+            whileHover={{ x: 5, transition: { duration: 0.3 } }}
+          >
             Project cards are tuned to show role-fit quickly: what was built, why it matters, and which tools prove the skill.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{
-                y: -15,
-                scale: 1.03,
-                transition: { duration: 0.3 },
+              variants={{
+                ...itemVariants,
+                hover: {
+                  y: -15,
+                  scale: 1.03,
+                  transition: { duration: 0.3 },
+                }
               }}
+              whileHover="hover"
             >
               <motion.div
                 className={`p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark flex flex-col ${
@@ -135,24 +141,28 @@ export default function Projects() {
                   <div className="flex min-w-0 items-start gap-3">
                     <motion.div
                       className="rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 p-3 text-white shadow-lg shadow-cyan-500/20"
-                      whileHover={{ rotate: 10, scale: 1.08 }}
+                      variants={{
+                        hover: { rotate: 360, scale: 1.1, transition: { duration: 0.5 } }
+                      }}
                     >
                       <project.icon size={22} />
                     </motion.div>
                     <div className="min-w-0">
                       <motion.h3
-                        className="text-xl font-bold leading-tight text-primary-light dark:text-primary-dark"
+                        className="text-xl font-bold leading-tight text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
                           x: 5,
-                          color: "#5e1fff",
                           transition: { duration: 0.2 },
                         }}
                       >
                         {project.title}
                       </motion.h3>
-                      <p className="mt-2 text-xs font-bold uppercase text-cyan-700 dark:text-cyan-300">
+                      <motion.p 
+                        className="mt-2 text-xs font-bold uppercase text-cyan-700 dark:text-cyan-300 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-400 cursor-default"
+                        whileHover={{ x: 3, transition: { duration: 0.2 } }}
+                      >
                         {project.focus}
-                      </p>
+                      </motion.p>
                     </div>
                   </div>
                   <motion.span
@@ -167,15 +177,18 @@ export default function Projects() {
                 </div>
 
                 <div className="mb-4 rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
-                  <p className="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-100">
+                  <motion.p 
+                    className="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-100 transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
+                    whileHover={{ x: 3, transition: { duration: 0.3 } }}
+                  >
                     {project.impact}
-                  </p>
+                  </motion.p>
                 </div>
 
                 <motion.p
-                  className="text-sm mb-4 text-secondary-light dark:text-secondary-dark leading-relaxed"
+                  className="text-sm mb-4 text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                   whileHover={{
-                    color: "#2ee5ff",
+                    x: 5,
                     transition: { duration: 0.3 },
                   }}
                 >
@@ -201,52 +214,58 @@ export default function Projects() {
                 </div>
 
                 <div className="mt-auto flex flex-wrap justify-between gap-3">
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-3 py-2 text-sm border border-purple-500 text-purple-700 dark:text-purple-400 rounded-md transition-all duration-300"
-                      whileHover={{
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center px-3.5 py-2 text-sm border border-purple-500 text-purple-700 dark:text-purple-400 rounded-md transition-all duration-300 hover:shadow-lg font-semibold"
+                    whileHover="hover"
+                    whileTap={{ scale: 0.95 }}
+                    variants={{
+                      hover: {
+                        scale: 1.05,
                         backgroundColor: "#8b5cf6",
                         color: "#ffffff",
                         boxShadow: "0 8px 16px rgba(139, 92, 246, 0.3)",
+                      }
+                    }}
+                  >
+                    <motion.span
+                      variants={{
+                        hover: { rotate: 360, transition: { duration: 0.5 } }
                       }}
+                      className="mr-1.5 inline-flex"
                     >
-                      <motion.div
-                        whileHover={{
-                          rotate: 360,
-                          transition: { duration: 0.5 },
-                        }}
-                      >
-                        <Github size={16} className="mr-1" />
-                      </motion.div>
-                      GitHub
-                    </motion.a>
-                  </motion.div>
+                      <Github size={16} />
+                    </motion.span>
+                    GitHub
+                  </motion.a>
 
                   {project.live && (
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <motion.a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center px-3 py-2 text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-md transition-all duration-300"
-                        whileHover={{
+                    <motion.a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center px-3.5 py-2 text-sm bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-md transition-all duration-300 hover:shadow-lg font-semibold"
+                      whileHover="hover"
+                      whileTap={{ scale: 0.95 }}
+                      variants={{
+                        hover: {
+                          scale: 1.05,
                           boxShadow: "0 8px 16px rgba(94, 31, 255, 0.4)",
+                        }
+                      }}
+                    >
+                      <motion.span
+                        variants={{
+                          hover: { rotate: 360, transition: { duration: 0.5 } }
                         }}
+                        className="mr-1.5 inline-flex"
                       >
-                        <motion.div
-                          whileHover={{
-                            rotate: 360,
-                            transition: { duration: 0.5 },
-                          }}
-                        >
-                          <ExternalLink size={16} className="mr-1" />
-                        </motion.div>
-                        Live Demo
-                      </motion.a>
-                    </motion.div>
+                        <ExternalLink size={16} />
+                      </motion.span>
+                      Live Demo
+                    </motion.a>
                   )}
                 </div>
               </motion.div>

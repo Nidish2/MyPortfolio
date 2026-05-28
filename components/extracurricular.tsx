@@ -137,19 +137,18 @@ export default function Extracurricular() {
                       </motion.div>
                       <div>
                         <motion.h3
-                          className="text-2xl font-bold text-primary-light dark:text-primary-dark"
+                          className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
                             x: 5,
-                            color: "#5e1fff",
                             transition: { duration: 0.2 },
                           }}
                         >
                           {activity.title}
                         </motion.h3>
                         <motion.p
-                          className="text-secondary-light dark:text-secondary-dark text-lg font-medium"
+                          className="text-gray-700 dark:text-gray-200 text-lg font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                           whileHover={{
-                            color: "#2ee5ff",
+                            x: 5,
                             transition: { duration: 0.2 },
                           }}
                         >
@@ -172,10 +171,9 @@ export default function Extracurricular() {
                     {/* Description */}
                     <div>
                       <motion.h4
-                        className="text-lg font-semibold text-primary-light dark:text-primary-dark mb-4 flex items-center"
+                        className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
                           x: 5,
-                          color: "#5e1fff",
                           transition: { duration: 0.2 },
                         }}
                       >
@@ -210,9 +208,9 @@ export default function Extracurricular() {
                                 }}
                               ></motion.div>
                               <motion.p
-                                className="text-secondary-light dark:text-secondary-dark leading-relaxed"
+                                className="text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                                 whileHover={{
-                                  color: "#5e1fff",
+                                  x: 5,
                                   transition: { duration: 0.3 },
                                 }}
                               >
@@ -227,10 +225,9 @@ export default function Extracurricular() {
                     {/* Achievements */}
                     <div>
                       <motion.h4
-                        className="text-lg font-semibold text-primary-light dark:text-primary-dark mb-4 flex items-center"
+                        className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center transition-colors duration-200 hover:text-amber-500 dark:hover:text-amber-400 cursor-default"
                         whileHover={{
                           x: 5,
-                          color: "#f59e0b",
                           transition: { duration: 0.2 },
                         }}
                       >
@@ -274,9 +271,9 @@ export default function Extracurricular() {
                                 <Star size={18} className="text-yellow-400 flex-shrink-0" />
                               </motion.div>
                               <motion.p
-                                className="text-secondary-light dark:text-secondary-dark font-medium"
+                                className="text-gray-700 dark:text-gray-200 font-medium transition-colors duration-200 hover:text-amber-500 dark:hover:text-amber-400 cursor-default"
                                 whileHover={{
-                                  color: "#f59e0b",
+                                  x: 5,
                                   transition: { duration: 0.3 },
                                 }}
                               >

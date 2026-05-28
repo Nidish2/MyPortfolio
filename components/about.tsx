@@ -85,38 +85,37 @@ export default function About() {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
               <motion.p
-                className="text-lg mb-4 leading-relaxed text-primary-light dark:text-primary-dark font-medium"
+                className="text-lg mb-4 leading-relaxed text-gray-900 dark:text-white font-medium transition-colors duration-300 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                 whileHover={{
                   x: 5,
-                  color: "#5e1fff",
                   transition: { duration: 0.3 },
                 }}
               >
                 Computer Science Engineering student skilled in{" "}
                 <motion.span
-                  className="text-purple-600 dark:text-purple-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#8b5cf6" }}
+                  className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   MERN stack
                 </motion.span>
                 ,{" "}
                 <motion.span
-                  className="text-cyan-600 dark:text-cyan-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#06b6d4" }}
+                  className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   Java web tech
                 </motion.span>
                 ,{" "}
                 <motion.span
-                  className="text-purple-600 dark:text-purple-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#8b5cf6" }}
+                  className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   Data Science
                 </motion.span>
                 , and{" "}
                 <motion.span
-                  className="text-cyan-600 dark:text-cyan-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#06b6d4" }}
+                  className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   AI/ML
                 </motion.span>
@@ -124,24 +123,23 @@ export default function About() {
               </motion.p>
 
               <motion.p
-                className="text-lg mb-4 leading-relaxed text-primary-light dark:text-primary-dark font-medium"
+                className="text-lg mb-4 leading-relaxed text-gray-900 dark:text-white font-medium transition-colors duration-300 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                 whileHover={{
                   x: 5,
-                  color: "#2ee5ff",
                   transition: { duration: 0.3 },
                 }}
               >
                 Built scalable projects like{" "}
                 <motion.span
-                  className="text-purple-600 dark:text-purple-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#8b5cf6" }}
+                  className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   3D model generators
                 </motion.span>{" "}
                 and{" "}
                 <motion.span
-                  className="text-cyan-600 dark:text-cyan-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#06b6d4" }}
+                  className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   analytics dashboards
                 </motion.span>{" "}
@@ -149,31 +147,30 @@ export default function About() {
               </motion.p>
 
               <motion.p
-                className="text-lg leading-relaxed text-primary-light dark:text-primary-dark font-medium"
+                className="text-lg leading-relaxed text-gray-900 dark:text-white font-medium transition-colors duration-300 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                 whileHover={{
                   x: 5,
-                  color: "#5e1fff",
                   transition: { duration: 0.3 },
                 }}
               >
                 Strong in{" "}
                 <motion.span
-                  className="text-purple-600 dark:text-purple-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#8b5cf6" }}
+                  className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   DSA (Java)
                 </motion.span>{" "}
                 with proven leadership via{" "}
                 <motion.span
-                  className="text-cyan-600 dark:text-cyan-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#06b6d4" }}
+                  className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   NCC
                 </motion.span>{" "}
                 and{" "}
                 <motion.span
-                  className="text-purple-600 dark:text-purple-400 font-semibold"
-                  whileHover={{ scale: 1.05, color: "#8b5cf6" }}
+                  className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
                   BNMIT Super 60
                 </motion.span>
@@ -199,25 +196,25 @@ export default function About() {
                     }}
                   >
                     <motion.div
-                      className="p-4 bg-secondary-card rounded-lg border-l-4 border-purple-500 transition-all duration-300 shadow-lg backdrop-blur-md"
+                      className="p-4 bg-secondary-card rounded-lg border-l-4 border-purple-500 transition-all duration-300 shadow-lg backdrop-blur-md cursor-default"
                       whileHover={{
                         borderColor: "#06b6d4",
                         boxShadow: "0 15px 30px rgba(94, 31, 255, 0.3)",
                       }}
                     >
                       <motion.p
-                        className="font-bold text-primary-light dark:text-primary-dark"
+                        className="font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
-                          color: "#5e1fff",
+                          x: 5,
                           transition: { duration: 0.2 },
                         }}
                       >
                         {item.label}
                       </motion.p>
                       <motion.p
-                        className="text-secondary-light dark:text-secondary-dark"
+                        className="text-gray-700 dark:text-gray-200 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-400 cursor-default"
                         whileHover={{
-                          color: "#2ee5ff",
+                          x: 5,
                           transition: { duration: 0.2 },
                         }}
                       >

@@ -98,6 +98,89 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ✨ CUSTOM CURSOR GLOW TRAIL */
+.cursor-glow {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1);
+  background: radial-gradient(
+    circle,
+    rgba(94, 31, 255, 0.18) 0%,
+    rgba(46, 229, 255, 0.10) 40%,
+    transparent 70%
+  );
+  transition: opacity 0.3s ease, width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: multiply; /* Rich color multiplication on light mode backgrounds */
+  will-change: left, top, transform, width, height;
+}
+
+.dark .cursor-glow {
+  mix-blend-mode: screen; /* Vibrant additive glowing on dark mode backgrounds */
+  background: radial-gradient(
+    circle,
+    rgba(94, 31, 255, 0.18) 0%,
+    rgba(46, 229, 255, 0.10) 40%,
+    transparent 70%
+  );
+}
+
+/* Expanded glow when hovering over interactive elements */
+.cursor-glow.cursor-hover {
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(
+    circle,
+    rgba(94, 31, 255, 0.28) 0%,
+    rgba(46, 229, 255, 0.18) 45%,
+    transparent 70%
+  );
+}
+
+.dark .cursor-glow.cursor-hover {
+  background: radial-gradient(
+    circle,
+    rgba(94, 31, 255, 0.24) 0%,
+    rgba(46, 229, 255, 0.15) 45%,
+    transparent 70%
+  );
+}
+
+/* Tactile scale down on click */
+.cursor-glow.cursor-clicked {
+  transform: translate(-50%, -50%) scale(0.65);
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide cursor glow on mobile/touch */
+@media (max-width: 767px), (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* 🎨 SUBTLE BACKGROUND PATTERN ANIMATION — gentle breathing pulse */
+@keyframes pattern-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.portfolio-section::before {
+  animation: pattern-breathe 8s ease-in-out infinite;
+  transform: translateY(calc(var(--scroll-percent, 0) * -30px));
+  will-change: transform;
+}
+
+.portfolio-section-muted::before {
+  animation: pattern-breathe 10s ease-in-out infinite;
+  animation-delay: 4s;
+  transform: translateY(calc(var(--scroll-percent, 0) * -15px));
+  will-change: transform;
+}
+
 .portfolio-shell {
   position: relative;
   isolation: isolate;
@@ -118,18 +201,60 @@ html {
 .portfolio-section {
   scroll-margin-top: 88px;
   padding: 5rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(rgba(94, 31, 255, 0.22) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.dark .portfolio-section::before {
+  background-image: radial-gradient(rgba(46, 229, 255, 0.28) 1.5px, transparent 1.5px);
 }
 
 .portfolio-section-muted {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(240, 249, 255, 0.54)),
     rgba(248, 250, 252, 0.76);
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-section-muted::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(rgba(46, 229, 255, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 229, 255, 0.22) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .dark .portfolio-section-muted {
   background:
     linear-gradient(135deg, rgba(36, 36, 62, 0.72), rgba(15, 23, 42, 0.42)),
     rgba(36, 36, 62, 0.38);
+}
+
+.dark .portfolio-section-muted::before {
+  background-image: 
+    linear-gradient(rgba(94, 31, 255, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 31, 255, 0.28) 1px, transparent 1px);
+}
+
+.portfolio-section > *,
+.portfolio-section-muted > * {
+  position: relative;
+  z-index: 1;
 }
 
 .section-kicker {
@@ -256,12 +381,22 @@ html {
   box-shadow: 0 30px 80px rgba(15, 23, 42, 0.18), 0 0 45px rgba(46, 229, 255, 0.22);
   backdrop-filter: blur(18px);
   transform: translateZ(80px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-card-primary:hover {
+  transform: translateZ(100px) translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.22), 0 0 60px rgba(46, 229, 255, 0.4);
 }
 
 .dark .hero-card-primary {
   background: rgba(18, 18, 42, 0.72);
   border-color: rgba(255, 255, 255, 0.16);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38), 0 0 55px rgba(94, 31, 255, 0.28);
+}
+
+.dark .hero-card-primary:hover {
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45), 0 0 70px rgba(94, 31, 255, 0.45);
 }
 
 .hero-card-back {
@@ -367,7 +502,7 @@ h5 {
 .portfolio-card-dark {
   background: rgba(30, 30, 60, 0.6) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
@@ -399,6 +534,10 @@ h5 {
 
   .hero-card-primary {
     transform: translateX(-50%) translateZ(56px);
+  }
+
+  .hero-card-primary:hover {
+    transform: translateX(-50%) translateZ(76px) translateY(-8px) scale(1.02);
   }
 
   .hero-card-back-one {
@@ -446,7 +585,7 @@ h5 {
 .dark .portfolio-card-dark {
   background: rgba(30, 30, 60, 0.6) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* COMPREHENSIVE DARK MODE OVERRIDES */
@@ -454,17 +593,17 @@ h5 {
 .dark .bg-white\/90,
 .dark .bg-white\/95 {
   background: rgba(30, 30, 60, 0.6) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .bg-gray-50 {
   background: rgba(36, 36, 62, 0.4) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .bg-gray-100 {
   background: rgba(40, 40, 75, 0.3) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* FORM ELEMENTS - ENSURE VISIBILITY */
@@ -534,25 +673,25 @@ h5 {
   /* PRESERVE pink colors */
 }
 
-/* ONLY CHANGE NEUTRAL GRAYS FOR READABILITY */
+/* ONLY CHANGE NEUTRAL GRAYS FOR READABILITY — no !important allows hover overrides */
 .dark .text-gray-900 {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .text-gray-800 {
-  color: rgb(243, 244, 246) !important;
+  color: rgb(243, 244, 246);
 }
 
 .dark .text-gray-700 {
-  color: rgb(229, 231, 235) !important;
+  color: rgb(229, 231, 235);
 }
 
 .dark .text-gray-600 {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 .dark .text-gray-500 {
-  color: rgb(156, 163, 175) !important;
+  color: rgb(156, 163, 175);
 }
 
 /* PRESERVE SKILL BADGES AND TECH TAGS */
@@ -686,148 +825,149 @@ h5 {
 /* SPECIFIC OVERRIDES FOR STUBBORN ELEMENTS */
 .dark [class*="bg-white"] {
   background: rgba(30, 30, 60, 0.6) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark [class*="bg-gray-50"] {
   background: rgba(45, 45, 80, 0.3) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark [class*="bg-gray-100"] {
   background: rgba(40, 40, 75, 0.3) !important;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* 🎯 FINAL TEXT VISIBILITY FIXES - PERFECT READABILITY */
+/* Removed !important so Framer Motion hover color changes work in dark mode */
 
-/* FORCE WHITE TEXT ON ALL DARK CARDS */
+/* DEFAULT WHITE TEXT ON ALL DARK CARDS (no !important — allows hover overrides) */
 .dark .portfolio-card h1,
 .dark .portfolio-card h2,
 .dark .portfolio-card h3,
 .dark .portfolio-card h4,
 .dark .portfolio-card h5,
 .dark .portfolio-card h6 {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card p,
 .dark .portfolio-card span,
 .dark .portfolio-card div {
-  color: rgb(229, 231, 235) !important;
+  color: rgb(229, 231, 235);
 }
 
 /* SPECIFIC SECTION FIXES */
 
 /* ABOUT SECTION */
 .dark .about-section .text-primary-light {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .about-section .text-secondary-light {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* EXPERIENCE SECTION */
 .dark .experience-section .text-primary-light {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .experience-section .text-secondary-light {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* SKILLS SECTION - ENSURE ALL TEXT IS VISIBLE */
 .dark .portfolio-card .font-medium,
 .dark .portfolio-card .font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .text-muted-light,
 .dark .portfolio-card .text-muted-dark {
-  color: rgb(156, 163, 175) !important;
+  color: rgb(156, 163, 175);
 }
 
 /* PROJECTS SECTION */
 .dark .portfolio-card .text-xl {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .text-sm {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* CERTIFICATES SECTION */
 .dark .portfolio-card .text-xl.font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .font-medium {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* HACKATHONS SECTION */
 .dark .portfolio-card .text-lg.font-semibold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* ACHIEVEMENTS SECTION */
 .dark .portfolio-card .text-xl.font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .text-sm.font-medium {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* EXTRACURRICULAR SECTION */
 .dark .portfolio-card .text-2xl.font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .text-lg.font-medium {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* GOALS SECTION */
 .dark .portfolio-card .text-xl.font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* CONTACT SECTION */
 .dark .portfolio-card .text-2xl.font-bold {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card label {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
-/* UNIVERSAL TEXT FIXES */
+/* UNIVERSAL TEXT FIXES — no !important so hover inline styles can override */
 .dark .text-gray-900,
 .dark .text-gray-800,
 .dark .text-gray-700 {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .text-gray-600,
 .dark .text-gray-500 {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* ENSURE BULLET POINTS ARE VISIBLE */
 .dark .portfolio-card li {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* SKILL NAMES AND CATEGORIES */
 .dark .portfolio-card .font-medium {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 /* COMPANY NAMES AND JOB TITLES */
 .dark .portfolio-card .text-secondary-light {
-  color: rgb(209, 213, 219) !important;
+  color: rgb(209, 213, 219);
 }
 
 /* Preserve action button and accent colors inside dark cards */
@@ -835,22 +975,17 @@ h5 {
 .dark .portfolio-card .text-white *,
 .dark .portfolio-card a.text-white,
 .dark .portfolio-card button.text-white {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .dark .portfolio-card .text-cyan-300,
 .dark .portfolio-card .text-cyan-400,
 .dark .portfolio-card .text-cyan-700 {
-  color: rgb(103, 232, 249) !important;
+  color: rgb(103, 232, 249);
 }
 
 .dark .portfolio-card .text-purple-400,
 .dark .portfolio-card .text-purple-600,
 .dark .portfolio-card .text-purple-700 {
-  color: rgb(196, 181, 253) !important;
-}
-
-/* PRESERVE COLORFUL HOVER EFFECTS */
-.dark .portfolio-card *:hover {
-  /* Hover effects will still work with color transitions */
+  color: rgb(196, 181, 253);
 }

@@ -22,6 +22,7 @@ import Connect from "@/components/connect"
 export default function Home() {
   const [theme, setTheme] = useState("dark")
   const [isMounted, setIsMounted] = useState(false)
+  const cursorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -36,6 +37,88 @@ export default function Home() {
     localStorage.setItem("theme", newTheme)
     document.documentElement.classList.toggle("dark", newTheme === "dark")
   }
+
+  // Cursor glow tracking, clicks, hover detection, and scroll parallax bindings
+  useEffect(() => {
+    let tickingCursor = false
+    let tickingScroll = false
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!tickingCursor) {
+        window.requestAnimationFrame(() => {
+          if (cursorRef.current) {
+            cursorRef.current.style.left = `${e.clientX}px`
+            cursorRef.current.style.top = `${e.clientY}px`
+          }
+          tickingCursor = false
+        })
+        tickingCursor = true
+      }
+    }
+
+    const handleMouseDown = () => {
+      if (cursorRef.current) {
+        cursorRef.current.classList.add("cursor-clicked")
+      }
+    }
+
+    const handleMouseUp = () => {
+      if (cursorRef.current) {
+        cursorRef.current.classList.remove("cursor-clicked")
+      }
+    }
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (
+        target &&
+        (target.closest("a") ||
+          target.closest("button") ||
+          target.closest(".portfolio-card") ||
+          target.closest("[role='button']") ||
+          target.closest(".cursor-pointer") ||
+          window.getComputedStyle(target).cursor === "pointer")
+      ) {
+        if (cursorRef.current) {
+          cursorRef.current.classList.add("cursor-hover")
+        }
+      } else {
+        if (cursorRef.current) {
+          cursorRef.current.classList.remove("cursor-hover")
+        }
+      }
+    }
+
+    const handleScroll = () => {
+      if (!tickingScroll) {
+        window.requestAnimationFrame(() => {
+          const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+          const scrollPercent = scrollHeight > 0 ? window.scrollY / scrollHeight : 0
+          document.documentElement.style.setProperty("--scroll-percent", scrollPercent.toFixed(4))
+          tickingScroll = false
+        })
+        tickingScroll = true
+      }
+    }
+
+    // Bind events
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
+    window.addEventListener("mousedown", handleMouseDown, { passive: true })
+    window.addEventListener("mouseup", handleMouseUp, { passive: true })
+    window.addEventListener("mouseover", handleMouseOver, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    // Initial scroll setup
+    handleScroll()
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("mousedown", handleMouseDown)
+      window.removeEventListener("mouseup", handleMouseUp)
+      window.removeEventListener("mouseover", handleMouseOver)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   const aboutRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
@@ -64,6 +147,8 @@ export default function Home() {
     <main
       className={`portfolio-shell text-gray-800 dark:text-white min-h-screen transition-colors duration-300 ${theme === "dark" ? "dark" : ""}`}
     >
+      {/* Cursor glow trail — hidden on mobile via CSS */}
+      <div ref={cursorRef} className="cursor-glow" />
       <Navbar
         scrollToSection={scrollToSection}
         refs={{

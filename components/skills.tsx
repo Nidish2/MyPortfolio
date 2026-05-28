@@ -126,24 +126,55 @@ export default function Skills() {
           >
             Skills
           </motion.h2>
-          <p className="section-subtitle">
+          <motion.p 
+            whileHover={{ x: 5, transition: { duration: 0.3 } }}
+            className="section-subtitle cursor-default select-none transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300"
+          >
             A practical stack for building usable products: frontend polish, backend structure, data thinking, and deployment awareness.
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div variants={containerVariants} className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-3">
           {skillHighlights.map((highlight) => (
             <motion.div
               key={highlight.title}
-              variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
-              className="portfolio-card portfolio-card-light dark:portfolio-card-dark p-5"
+              variants={{
+                ...itemVariants,
+                hover: {
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: "0 20px 40px rgba(94, 31, 255, 0.15)",
+                  transition: { duration: 0.25 }
+                }
+              }}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+              className="group portfolio-card portfolio-card-light dark:portfolio-card-dark p-5 cursor-pointer"
             >
-              <div className="mb-4 inline-flex rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 p-3 text-white shadow-lg shadow-cyan-500/20">
+              <motion.div 
+                variants={{
+                  hover: { rotate: 360, scale: 1.1, transition: { duration: 0.5 } }
+                }}
+                className="mb-4 inline-flex rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 p-3 text-white shadow-lg shadow-cyan-500/20"
+              >
                 <highlight.icon size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-gray-950 dark:text-white">{highlight.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-200">{highlight.description}</p>
+              </motion.div>
+              <motion.h3 
+                variants={{
+                  hover: { x: 5 }
+                }}
+                className="text-lg font-bold text-gray-950 dark:text-white transition-colors duration-200 group-hover:text-purple-600 dark:group-hover:text-purple-400 select-none cursor-pointer"
+              >
+                {highlight.title}
+              </motion.h3>
+              <motion.p 
+                variants={{
+                  hover: { x: 5 }
+                }}
+                className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-200 transition-colors duration-200 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 select-none cursor-pointer"
+              >
+                {highlight.description}
+              </motion.p>
             </motion.div>
           ))}
         </motion.div>
@@ -175,10 +206,9 @@ export default function Skills() {
                   </motion.div>
                   <div className="min-w-0">
                     <motion.h3
-                      className="text-xl sm:text-2xl font-bold text-primary-light dark:text-primary-dark"
+                      className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                       whileHover={{
                         x: 5,
-                        color: "#5e1fff",
                         transition: { duration: 0.2 },
                       }}
                     >
@@ -212,9 +242,9 @@ export default function Skills() {
                         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                           <div className="flex min-w-0 flex-wrap items-center gap-2">
                             <motion.p
-                              className="font-medium text-primary-light dark:text-primary-dark"
+                              className="font-medium text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                               whileHover={{
-                                color: "#5e1fff",
+                                x: 5,
                                 transition: { duration: 0.2 },
                               }}
                             >
@@ -234,9 +264,9 @@ export default function Skills() {
                             )}
                           </div>
                           <motion.p
-                            className="text-muted-light dark:text-muted-dark font-medium"
+                            className="text-gray-500 dark:text-gray-400 font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                             whileHover={{
-                              color: "#2ee5ff",
+                              x: -5,
                               transition: { duration: 0.2 },
                             }}
                           >

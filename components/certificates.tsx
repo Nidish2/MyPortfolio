@@ -257,10 +257,9 @@ export default function Certificates() {
                         </motion.div>
                         <div className="flex-1">
                           <motion.h3
-                            className="text-xl font-bold text-primary-light dark:text-primary-dark mb-2 leading-tight"
+                            className="text-xl font-bold text-gray-900 dark:text-white mb-2 leading-tight transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                             whileHover={{
                               x: 5,
-                              color: "#5e1fff",
                               transition: { duration: 0.2 },
                             }}
                           >
@@ -268,9 +267,9 @@ export default function Certificates() {
                           </motion.h3>
                           <div className="flex flex-wrap items-center gap-2 mb-3">
                             <motion.p
-                              className="text-secondary-light dark:text-secondary-dark font-medium"
+                              className="text-gray-700 dark:text-gray-200 font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                               whileHover={{
-                                color: "#2ee5ff",
+                                x: 5,
                                 transition: { duration: 0.2 },
                               }}
                             >
@@ -290,9 +289,9 @@ export default function Certificates() {
                       </div>
 
                       <motion.p
-                        className="text-secondary-light dark:text-secondary-dark mb-4 leading-relaxed"
+                        className="text-gray-700 dark:text-gray-200 mb-4 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
-                          color: "#5e1fff",
+                          x: 5,
                           transition: { duration: 0.3 },
                         }}
                       >
@@ -304,10 +303,9 @@ export default function Certificates() {
                           href={certificate.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-cyan-600 dark:text-cyan-400 transition-colors w-fit"
+                          className="inline-flex items-center text-cyan-600 dark:text-cyan-400 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 w-fit"
                           whileHover={{
                             x: 5,
-                            color: "#06b6d4",
                             transition: { duration: 0.2 },
                           }}
                         >

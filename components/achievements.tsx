@@ -163,19 +163,18 @@ export default function Achievements() {
                       </motion.div>
                       <div className="flex-1">
                         <motion.h3
-                          className="text-xl font-bold text-gray-900 dark:text-white mb-1"
+                          className="text-xl font-bold text-gray-900 dark:text-white mb-1 transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
                             x: 5,
-                            color: "#5e1fff",
                             transition: { duration: 0.2 },
                           }}
                         >
                           {achievement.title}
                         </motion.h3>
                         <motion.p
-                          className="text-gray-700 dark:text-gray-100 text-sm font-medium"
+                          className="text-gray-700 dark:text-gray-100 text-sm font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                           whileHover={{
-                            color: "#2ee5ff",
+                            x: 5,
                             transition: { duration: 0.2 },
                           }}
                         >
@@ -217,9 +216,9 @@ export default function Achievements() {
                       }}
                     >
                       <motion.p
-                        className="text-gray-700 dark:text-gray-100 text-sm leading-relaxed"
+                        className="text-gray-700 dark:text-gray-100 text-sm leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
-                          color: "#5e1fff",
+                          x: 5,
                           transition: { duration: 0.3 },
                         }}
                       >

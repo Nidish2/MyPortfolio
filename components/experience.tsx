@@ -92,10 +92,9 @@ export default function Experience() {
                   <div>
                     <div className="flex items-center mb-2">
                       <motion.h3
-                        className="text-2xl font-bold text-primary-light dark:text-primary-dark"
+                        className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
                           x: 5,
-                          color: "#5e1fff",
                           transition: { duration: 0.2 },
                         }}
                       >
@@ -127,9 +126,9 @@ export default function Experience() {
                         <Briefcase className="text-purple-400 mr-2" size={18} />
                       </motion.div>
                       <motion.p
-                        className="text-secondary-light dark:text-secondary-dark font-medium"
+                        className="text-gray-700 dark:text-gray-200 font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                         whileHover={{
-                          color: "#2ee5ff",
+                          x: 5,
                           transition: { duration: 0.2 },
                         }}
                       >
@@ -179,9 +178,9 @@ export default function Experience() {
                           }}
                         ></motion.div>
                         <motion.p
-                          className="text-secondary-light dark:text-secondary-dark leading-relaxed"
+                          className="text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
-                            color: "#5e1fff",
+                            x: 5,
                             transition: { duration: 0.3 },
                           }}
                         >
