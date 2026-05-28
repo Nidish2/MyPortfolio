@@ -101,41 +101,41 @@ html {
 /* ✨ CUSTOM CURSOR GLOW TRAIL */
 .cursor-glow {
   position: fixed;
-  width: 280px;
-  height: 280px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%) scale(1);
   background: radial-gradient(
     circle,
-    rgba(94, 31, 255, 0.18) 0%,
-    rgba(46, 229, 255, 0.10) 40%,
+    rgba(94, 31, 255, 0.08) 0%,
+    rgba(46, 229, 255, 0.04) 40%,
     transparent 70%
   );
-  transition: opacity 0.3s ease, width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  mix-blend-mode: multiply; /* Rich color multiplication on light mode backgrounds */
+  transition: opacity 0.3s ease, width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: multiply; /* Extremely soft subtractive tint on light backgrounds */
   will-change: left, top, transform, width, height;
 }
 
 .dark .cursor-glow {
-  mix-blend-mode: screen; /* Vibrant additive glowing on dark mode backgrounds */
+  mix-blend-mode: screen; /* Subtly glowing additive tint on dark backgrounds */
   background: radial-gradient(
     circle,
-    rgba(94, 31, 255, 0.18) 0%,
-    rgba(46, 229, 255, 0.10) 40%,
+    rgba(94, 31, 255, 0.08) 0%,
+    rgba(46, 229, 255, 0.04) 40%,
     transparent 70%
   );
 }
 
-/* Expanded glow when hovering over interactive elements */
+/* Subtly expanded glow when hovering over interactive elements (non-bulging) */
 .cursor-glow.cursor-hover {
-  width: 440px;
-  height: 440px;
+  width: 300px;
+  height: 300px;
   background: radial-gradient(
     circle,
-    rgba(94, 31, 255, 0.28) 0%,
-    rgba(46, 229, 255, 0.18) 45%,
+    rgba(94, 31, 255, 0.12) 0%,
+    rgba(46, 229, 255, 0.07) 45%,
     transparent 70%
   );
 }
@@ -143,8 +143,8 @@ html {
 .dark .cursor-glow.cursor-hover {
   background: radial-gradient(
     circle,
-    rgba(94, 31, 255, 0.24) 0%,
-    rgba(46, 229, 255, 0.15) 45%,
+    rgba(94, 31, 255, 0.12) 0%,
+    rgba(46, 229, 255, 0.07) 45%,
     transparent 70%
   );
 }
@@ -211,12 +211,12 @@ html {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: radial-gradient(rgba(94, 31, 255, 0.22) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(94, 31, 255, 0.06) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
 }
 
 .dark .portfolio-section::before {
-  background-image: radial-gradient(rgba(46, 229, 255, 0.28) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(46, 229, 255, 0.08) 1.5px, transparent 1.5px);
 }
 
 .portfolio-section-muted {
@@ -234,8 +234,8 @@ html {
   pointer-events: none;
   z-index: 0;
   background-image: 
-    linear-gradient(rgba(46, 229, 255, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(46, 229, 255, 0.22) 1px, transparent 1px);
+    linear-gradient(rgba(46, 229, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 229, 255, 0.06) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -247,8 +247,8 @@ html {
 
 .dark .portfolio-section-muted::before {
   background-image: 
-    linear-gradient(rgba(94, 31, 255, 0.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(94, 31, 255, 0.28) 1px, transparent 1px);
+    linear-gradient(rgba(94, 31, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 31, 255, 0.08) 1px, transparent 1px);
 }
 
 .portfolio-section > *,

@@ -196,9 +196,9 @@ export default function About() {
                     }}
                   >
                     <motion.div
-                      className="p-4 bg-secondary-card rounded-lg border-l-4 border-purple-500 transition-all duration-300 shadow-lg backdrop-blur-md cursor-default"
+                      className="p-4 bg-white/95 dark:bg-slate-900/90 rounded-lg border border-gray-200 dark:border-white/10 border-l-4 border-l-purple-500 transition-all duration-300 shadow-lg backdrop-blur-md cursor-default"
                       whileHover={{
-                        borderColor: "#06b6d4",
+                        borderLeftColor: "#06b6d4",
                         boxShadow: "0 15px 30px rgba(94, 31, 255, 0.3)",
                       }}
                     >
