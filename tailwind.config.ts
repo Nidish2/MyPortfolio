@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import plugin from "tailwindcss/plugin"
 
 const config: Config = {
   darkMode: ["class"],
@@ -66,7 +67,15 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("hover", ["&:hover", "&:active"])
+      addVariant("group-hover", [
+        ":merge(.group):hover &",
+        ":merge(.group):active &",
+      ])
+    }),
+  ],
 }
 
 export default config

@@ -1,4 +1,6 @@
 "use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
+
 
 import type React from "react";
 import { useEffect, useState } from "react";
@@ -50,7 +52,9 @@ export default function Contact() {
     try {
       const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
       const botcheck = (
-        e.currentTarget.elements.namedItem("botcheck") as HTMLInputElement | null
+        e.currentTarget.elements.namedItem(
+          "botcheck",
+        ) as HTMLInputElement | null
       )?.value;
 
       if (botcheck) {
@@ -102,7 +106,11 @@ export default function Contact() {
       }
     } catch (error: unknown) {
       console.error("Submission error:", error);
-      setSubmitError(error instanceof Error ? error.message : "Network error. Please try again.");
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Network error. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -134,21 +142,6 @@ export default function Contact() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
     <div className="container mx-auto max-w-6xl">
       <motion.div
@@ -161,6 +154,11 @@ export default function Contact() {
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
             whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
@@ -180,12 +178,22 @@ export default function Contact() {
                 boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                y: -10,
+                scale: 1.02,
+                boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
+                transition: { duration: 0.3 },
+              }}
             >
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
 
               <motion.h3
                 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                 whileHover={{
+                  x: 5,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{
                   x: 5,
                   transition: { duration: 0.2 },
                 }}
@@ -205,16 +213,29 @@ export default function Contact() {
                       scale: 1.05,
                       transition: { duration: 0.2 },
                     }}
+                    whileTap={{
+                      x: 10,
+                      scale: 1.05,
+                      transition: { duration: 0.2 },
+                    }}
                   >
                     <motion.div
                       className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-[rgba(30,30,60,0.4)] border border-gray-200 dark:border-white/10 transition-all duration-300"
                       whileHover={{
                         boxShadow: "0 8px 16px rgba(94, 31, 255, 0.2)",
                       }}
+                      whileTap={{
+                        boxShadow: "0 8px 16px rgba(94, 31, 255, 0.2)",
+                      }}
                     >
                       <motion.div
                         className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white"
                         whileHover={{
+                          rotate: 360,
+                          scale: 1.1,
+                          transition: { duration: 0.5 },
+                        }}
+                        whileTap={{
                           rotate: 360,
                           scale: 1.1,
                           transition: { duration: 0.5 },
@@ -226,12 +247,14 @@ export default function Contact() {
                         <motion.p
                           className="font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{ x: 5 }}
+                          whileTap={{ x: 5 }}
                         >
                           {item.label}
                         </motion.p>
                         <motion.p
                           className="text-gray-700 dark:text-gray-100 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                           whileHover={{ x: 5 }}
+                          whileTap={{ x: 5 }}
                         >
                           {item.value}
                         </motion.p>
@@ -245,6 +268,10 @@ export default function Contact() {
                 <motion.h4
                   className="text-xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                   whileHover={{
+                    x: 5,
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap={{
                     x: 5,
                     transition: { duration: 0.2 },
                   }}
@@ -274,9 +301,14 @@ export default function Contact() {
                         whileHover={{
                           boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
                         }}
+                        whileTap={{
+                          boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
+                        }}
                       >
                         <social.icon size={18} className="flex-shrink-0" />
-                        <span className="text-sm font-semibold leading-none">{social.label}</span>
+                        <span className="text-sm font-semibold leading-none">
+                          {social.label}
+                        </span>
                       </motion.a>
                     </motion.div>
                   ))}
@@ -294,12 +326,22 @@ export default function Contact() {
                 boxShadow: "0 25px 50px -12px rgba(46, 229, 255, 0.4)",
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                y: -10,
+                scale: 1.02,
+                boxShadow: "0 25px 50px -12px rgba(46, 229, 255, 0.4)",
+                transition: { duration: 0.3 },
+              }}
             >
               <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500"></div>
 
               <motion.h3
                 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                 whileHover={{
+                  x: 5,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{
                   x: 5,
                   transition: { duration: 0.2 },
                 }}
@@ -316,12 +358,14 @@ export default function Contact() {
                   <motion.h4
                     className="text-xl font-bold mb-2 text-cyan-600 dark:text-cyan-400"
                     whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 1.05 }}
                   >
                     Message Sent Successfully!
                   </motion.h4>
                   <motion.p
                     className="text-gray-700 dark:text-gray-100 transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                     whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 1.02 }}
                   >
                     Thanks for reaching out! I'll get back to you within 24
                     hours.
@@ -379,6 +423,10 @@ export default function Contact() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           {field.label}{" "}
                           {field.name !== "subject" && (
@@ -389,7 +437,13 @@ export default function Contact() {
                           id={field.name}
                           name={field.name}
                           type={field.type}
-                          value={field.name === "name" ? formData.name : field.name === "email" ? formData.email : formData.subject}
+                          value={
+                            field.name === "name"
+                              ? formData.name
+                              : field.name === "email"
+                                ? formData.email
+                                : formData.subject
+                          }
                           onChange={handleChange}
                           required={field.name !== "subject"}
                           className="w-full p-3 rounded-md border border-gray-300 dark:border-white/20 bg-white dark:bg-[rgba(30,30,60,0.4)] text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -410,6 +464,10 @@ export default function Contact() {
                         htmlFor="message"
                         className="block mb-2 font-medium text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
                           x: 5,
                           transition: { duration: 0.2 },
                         }}
@@ -444,6 +502,10 @@ export default function Contact() {
                         disabled={isSubmitting}
                         className="w-full mt-4 p-3 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold rounded-md flex items-center justify-center transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
                         whileHover={{
+                          boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
+                          y: -2,
+                        }}
+                        whileTap={{
                           boxShadow: "0 15px 30px rgba(94, 31, 255, 0.6)",
                           y: -2,
                         }}
@@ -482,6 +544,7 @@ export default function Contact() {
                           <span className="flex items-center">
                             <motion.div
                               whileHover={{ x: 5 }}
+                              whileTap={{ x: 5 }}
                               transition={{ duration: 0.2 }}
                             >
                               <Send size={18} className="mr-2" />

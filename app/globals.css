@@ -155,12 +155,12 @@ html {
   transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hide cursor glow on mobile/touch */
-@media (max-width: 767px), (hover: none) {
+/* Hide cursor glow on mobile/touch - Removed to enable on mobile as requested */
+/* @media (max-width: 767px), (hover: none) {
   .cursor-glow {
     display: none;
   }
-}
+} */
 
 /* 🎨 SUBTLE BACKGROUND PATTERN ANIMATION — gentle breathing pulse */
 @keyframes pattern-breathe {
@@ -384,7 +384,7 @@ html {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-card-primary:hover {
+.hero-card-primary:hover, .hero-card-primary:active {
   transform: translateZ(100px) translateY(-10px) scale(1.02);
   box-shadow: 0 40px 80px rgba(15, 23, 42, 0.22), 0 0 60px rgba(46, 229, 255, 0.4);
 }
@@ -395,7 +395,7 @@ html {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38), 0 0 55px rgba(94, 31, 255, 0.28);
 }
 
-.dark .hero-card-primary:hover {
+.dark .hero-card-primary:hover, .dark .hero-card-primary:active {
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45), 0 0 70px rgba(94, 31, 255, 0.45);
 }
 
@@ -485,7 +485,7 @@ h5 {
   transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
-.portfolio-card:hover::after {
+.portfolio-card:hover::after, .portfolio-card:active::after {
   opacity: 1;
   transform: translateX(100%);
 }
@@ -506,15 +506,15 @@ h5 {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
-.portfolio-card:hover {
+.portfolio-card:hover, .portfolio-card:active {
   transform: translateY(-8px);
 }
 
-.portfolio-card-light:hover {
+.portfolio-card-light:hover, .portfolio-card-light:active {
   box-shadow: 0 25px 50px -12px rgba(94, 31, 255, 0.25), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.portfolio-card-dark:hover {
+.portfolio-card-dark:hover, .portfolio-card-dark:active {
   box-shadow: 0 25px 50px -12px rgba(94, 31, 255, 0.4), 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -536,7 +536,7 @@ h5 {
     transform: translateX(-50%) translateZ(56px);
   }
 
-  .hero-card-primary:hover {
+  .hero-card-primary:hover, .hero-card-primary:active {
     transform: translateX(-50%) translateZ(76px) translateY(-8px) scale(1.02);
   }
 
@@ -574,7 +574,7 @@ h5 {
     font-size: 2rem;
   }
 
-  .portfolio-card:hover {
+  .portfolio-card:hover, .portfolio-card:active {
     transform: translateY(-4px);
   }
 }

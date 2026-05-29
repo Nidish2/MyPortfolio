@@ -1,108 +1,123 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Menu, X, Sun, Moon } from "lucide-react"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 interface NavbarProps {
-  scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void
+  scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
   refs: {
-    aboutRef: React.RefObject<HTMLDivElement | null>
-    experienceRef: React.RefObject<HTMLDivElement | null>
-    educationRef: React.RefObject<HTMLDivElement | null>
-    projectsRef: React.RefObject<HTMLDivElement | null>
-    skillsRef: React.RefObject<HTMLDivElement | null>
-    certificatesRef: React.RefObject<HTMLDivElement | null>
-    hackathonsRef: React.RefObject<HTMLDivElement | null>
-    achievementsRef: React.RefObject<HTMLDivElement | null>
-    extracurricularRef: React.RefObject<HTMLDivElement | null>
-    contactRef: React.RefObject<HTMLDivElement | null>
-  }
-  theme: string
-  toggleTheme: () => void
+    aboutRef: React.RefObject<HTMLDivElement | null>;
+    experienceRef: React.RefObject<HTMLDivElement | null>;
+    educationRef: React.RefObject<HTMLDivElement | null>;
+    projectsRef: React.RefObject<HTMLDivElement | null>;
+    skillsRef: React.RefObject<HTMLDivElement | null>;
+    certificatesRef: React.RefObject<HTMLDivElement | null>;
+    hackathonsRef: React.RefObject<HTMLDivElement | null>;
+    achievementsRef: React.RefObject<HTMLDivElement | null>;
+    extracurricularRef: React.RefObject<HTMLDivElement | null>;
+    contactRef: React.RefObject<HTMLDivElement | null>;
+  };
+  theme: string;
+  toggleTheme: () => void;
 }
 
-export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: NavbarProps) {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState<string>("hero")
-  const [isMounted, setIsMounted] = useState(false)
+export default function Navbar({
+  scrollToSection,
+  refs,
+  theme,
+  toggleTheme,
+}: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true)
+    setIsMounted(true);
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
 
       // Determine active section based on scroll position
-      const scrollPosition = window.scrollY + 100
+      const scrollPosition = window.scrollY + 100;
 
       if (scrollPosition < window.innerHeight) {
-        setActiveSection("hero")
+        setActiveSection("hero");
       } else if (
         scrollPosition >= (refs.aboutRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.experienceRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.experienceRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("about")
+        setActiveSection("about");
       } else if (
         scrollPosition >= (refs.experienceRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.educationRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.educationRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("experience")
+        setActiveSection("experience");
       } else if (
         scrollPosition >= (refs.educationRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.projectsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.projectsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("education")
+        setActiveSection("education");
       } else if (
         scrollPosition >= (refs.projectsRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.skillsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.skillsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("projects")
+        setActiveSection("projects");
       } else if (
         scrollPosition >= (refs.skillsRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.certificatesRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.certificatesRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("skills")
+        setActiveSection("skills");
       } else if (
         scrollPosition >= (refs.certificatesRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.hackathonsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.hackathonsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("certificates")
+        setActiveSection("certificates");
       } else if (
         scrollPosition >= (refs.hackathonsRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.achievementsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.achievementsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("hackathons")
+        setActiveSection("hackathons");
       } else if (
         scrollPosition >= (refs.achievementsRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.extracurricularRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.extracurricularRef.current?.offsetTop ||
+            Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("achievements")
+        setActiveSection("achievements");
       } else if (
         scrollPosition >= (refs.extracurricularRef.current?.offsetTop || 0) &&
-        scrollPosition < (refs.contactRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition <
+          (refs.contactRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
-        setActiveSection("extracurricular")
+        setActiveSection("extracurricular");
       } else if (scrollPosition >= (refs.contactRef.current?.offsetTop || 0)) {
-        setActiveSection("contact")
+        setActiveSection("contact");
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [refs])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [refs]);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const navItems = [
     { name: "About", ref: refs.aboutRef, id: "about" },
@@ -115,7 +130,7 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
     { name: "Achievements", ref: refs.achievementsRef, id: "achievements" },
     { name: "Activities", ref: refs.extracurricularRef, id: "extracurricular" },
     { name: "Contact", ref: refs.contactRef, id: "contact" },
-  ]
+  ];
 
   return (
     <motion.nav
@@ -173,7 +188,9 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
                     y: -3,
                     scale: 1.05,
                     textShadow:
-                      theme === "dark" ? "0 4px 12px rgba(94, 31, 255, 0.6)" : "0 4px 12px rgba(94, 31, 255, 0.4)",
+                      theme === "dark"
+                        ? "0 4px 12px rgba(94, 31, 255, 0.6)"
+                        : "0 4px 12px rgba(94, 31, 255, 0.4)",
                   }}
                   whileTap={{ scale: 0.95 }}
                   className={`
@@ -200,13 +217,18 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
                     }}
                     transition={{
                       duration: 2,
-                      repeat: activeSection === item.id ? Number.POSITIVE_INFINITY : 0,
+                      repeat:
+                        activeSection === item.id
+                          ? Number.POSITIVE_INFINITY
+                          : 0,
                       ease: "linear",
                     }}
                   />
 
                   {/* Text with enhanced styling */}
-                  <span className="relative z-10 tracking-wide">{item.name}</span>
+                  <span className="relative z-10 tracking-wide">
+                    {item.name}
+                  </span>
 
                   {/* Active indicator */}
                   {activeSection === item.id && (
@@ -214,7 +236,11 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
                       layoutId="activeTab"
                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
                 </motion.button>
@@ -227,7 +253,10 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
             whileHover={{
               scale: 1.15,
               rotate: 180,
-              boxShadow: theme === "dark" ? "0 8px 25px rgba(255, 193, 7, 0.4)" : "0 8px 25px rgba(59, 130, 246, 0.4)",
+              boxShadow:
+                theme === "dark"
+                  ? "0 8px 25px rgba(255, 193, 7, 0.4)"
+                  : "0 8px 25px rgba(59, 130, 246, 0.4)",
             }}
             whileTap={{ scale: 0.9 }}
             onClick={toggleTheme}
@@ -292,7 +321,10 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
                 }
               `}
             >
-              <motion.div animate={{ rotate: isMenuOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+              <motion.div
+                animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.div>
             </motion.button>
@@ -324,8 +356,8 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
                 onClick={() => {
-                  scrollToSection(item.ref)
-                  setIsMenuOpen(false)
+                  scrollToSection(item.ref);
+                  setIsMenuOpen(false);
                 }}
                 whileHover={{ x: 8, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -350,5 +382,5 @@ export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: Na
         </motion.div>
       )}
     </motion.nav>
-  )
+  );
 }

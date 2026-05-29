@@ -1,4 +1,6 @@
 "use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
+
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -46,21 +48,6 @@ export default function Education() {
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
-  };
-
   const getIcon = (type: string) => {
     switch (type) {
       case "engineering":
@@ -99,6 +86,11 @@ export default function Education() {
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
             }}
+            whileTap={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
           >
             Education
           </motion.h2>
@@ -112,6 +104,11 @@ export default function Education() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{
+                  scale: 1.02,
+                  y: -10,
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{
                   scale: 1.02,
                   y: -10,
                   transition: { duration: 0.3 },
@@ -131,6 +128,11 @@ export default function Education() {
                           rotate: 360,
                           transition: { duration: 0.5 },
                         }}
+                        whileTap={{
+                          scale: 1.1,
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
                       >
                         <IconComponent size={24} />
                       </motion.div>
@@ -141,12 +143,20 @@ export default function Education() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           {edu.degree}
                         </motion.h3>
                         <motion.p
                           className="text-gray-700 dark:text-gray-200 text-lg font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                           whileHover={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
+                          whileTap={{
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
@@ -161,9 +171,17 @@ export default function Education() {
                         scale: 1.05,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        scale: 1.05,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <motion.div
                         whileHover={{
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
+                        whileTap={{
                           rotate: 360,
                           transition: { duration: 0.5 },
                         }}
@@ -188,10 +206,18 @@ export default function Education() {
                           x: 5,
                           transition: { duration: 0.2 },
                         }}
+                        whileTap={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         <motion.p
                           className="text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
+                            x: 5,
+                            transition: { duration: 0.3 },
+                          }}
+                          whileTap={{
                             x: 5,
                             transition: { duration: 0.3 },
                           }}
@@ -208,12 +234,20 @@ export default function Education() {
                         scale: 1.05,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        scale: 1.05,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <span
                         className={`bg-gradient-to-r ${getGradient(index)} text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center`}
                       >
                         <motion.div
                           whileHover={{
+                            rotate: 360,
+                            transition: { duration: 0.5 },
+                          }}
+                          whileTap={{
                             rotate: 360,
                             transition: { duration: 0.5 },
                           }}

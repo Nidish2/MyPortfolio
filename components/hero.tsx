@@ -88,11 +88,11 @@ export default function Hero() {
 
   const iconVariants = {
     initial: { rotate: 0 },
-    hover: { 
-      rotate: 360, 
+    hover: {
+      rotate: 360,
       scale: 1.1,
-      transition: { duration: 0.5, ease: "easeInOut" as const }
-    }
+      transition: { duration: 0.5, ease: "easeInOut" as const },
+    },
   };
 
   return (
@@ -139,7 +139,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-              whileHover={{ 
+              whileHover={{
+                scale: 1.02,
+                textShadow: "0 0 25px rgba(46, 229, 255, 0.6)",
+              }}
+              whileTap={{
                 scale: 1.02,
                 textShadow: "0 0 25px rgba(46, 229, 255, 0.6)",
               }}
@@ -165,6 +169,7 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
               whileHover={{ x: 5, transition: { duration: 0.3 } }}
+              whileTap={{ x: 5, transition: { duration: 0.3 } }}
               className="mx-auto mb-7 max-w-2xl text-base leading-8 text-gray-700 dark:text-gray-200 sm:text-lg lg:mx-0 cursor-default select-none transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300"
             >
               Computer Science engineer building full-stack products with React,
@@ -181,19 +186,20 @@ export default function Hero() {
                 <motion.div
                   key={metric.label}
                   whileHover="hover"
+                  whileTap="hover"
                   className="group rounded-xl border border-white/50 bg-white/70 px-3 py-3 text-center shadow-lg shadow-cyan-500/10 backdrop-blur-md dark:border-white/10 dark:bg-white/10 cursor-pointer"
                 >
-                  <motion.p 
+                  <motion.p
                     variants={{
-                      hover: { scale: 1.05 }
+                      hover: { scale: 1.05 },
                     }}
                     className="text-xl font-extrabold text-gray-950 dark:text-white cursor-pointer select-none transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400"
                   >
                     {metric.value}
                   </motion.p>
-                  <motion.p 
+                  <motion.p
                     variants={{
-                      hover: { x: 3 }
+                      hover: { x: 3 },
                     }}
                     className="mt-1 text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer select-none transition-colors duration-300 group-hover:text-cyan-500 dark:group-hover:text-cyan-300"
                   >
@@ -224,31 +230,37 @@ export default function Hero() {
               </motion.button>
               <motion.a
                 whileHover="hover"
-                whileTap={{ scale: 0.95 }}
+                whileTap="hover"
                 variants={{
-                  hover: { scale: 1.05 }
+                  hover: { scale: 1.05 },
                 }}
                 href="/Resume.pdf"
                 download
                 className="flex w-full items-center justify-center rounded-full border-2 border-[#5e1fff] bg-white/30 px-6 py-3.5 font-bold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-[#5e1fff]/10 hover:shadow-lg dark:bg-transparent sm:w-auto text-sm shrink-0"
               >
-                <motion.span variants={iconVariants} className="mr-2 inline-flex">
+                <motion.span
+                  variants={iconVariants}
+                  className="mr-2 inline-flex"
+                >
                   <Download size={18} />
                 </motion.span>
                 Download Resume
               </motion.a>
               <motion.a
                 whileHover="hover"
-                whileTap={{ scale: 0.95 }}
+                whileTap="hover"
                 variants={{
-                  hover: { scale: 1.05 }
+                  hover: { scale: 1.05 },
                 }}
                 href="https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center rounded-full border-2 border-[#2ee5ff] bg-white/30 px-6 py-3.5 font-bold text-cyan-700 backdrop-blur-sm transition-all duration-300 hover:bg-[#2ee5ff]/10 hover:shadow-lg hover:shadow-[#2ee5ff]/20 dark:bg-transparent dark:text-[#2ee5ff] sm:w-auto text-sm shrink-0"
               >
-                <motion.span variants={iconVariants} className="mr-2 inline-flex">
+                <motion.span
+                  variants={iconVariants}
+                  className="mr-2 inline-flex"
+                >
                   <BadgeCheck size={18} />
                 </motion.span>
                 View Documents
@@ -268,7 +280,6 @@ export default function Hero() {
             <div className="hero-card hero-card-back hero-card-back-one"></div>
 
             <div className="hero-card hero-card-primary">
-
               {/* Pulsing Active Status */}
               <div className="absolute top-6 right-6 flex items-center gap-2 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                 <span className="relative flex h-2 w-2">
@@ -298,7 +309,16 @@ export default function Hero() {
                 {["React", "FastAPI", "Java DSA", "Docker"].map((skill) => (
                   <motion.span
                     key={skill}
-                    whileHover={{ scale: 1.08, y: -2, boxShadow: "0 4px 12px rgba(46, 229, 255, 0.2)" }}
+                    whileHover={{
+                      scale: 1.08,
+                      y: -2,
+                      boxShadow: "0 4px 12px rgba(46, 229, 255, 0.2)",
+                    }}
+                    whileTap={{
+                      scale: 1.08,
+                      y: -2,
+                      boxShadow: "0 4px 12px rgba(46, 229, 255, 0.2)",
+                    }}
                     className="rounded-xl border border-white/20 bg-white/70 px-4 py-3 text-center text-sm font-bold text-gray-800 shadow-sm dark:bg-white/10 dark:text-gray-100 cursor-default transition-shadow"
                   >
                     {skill}
@@ -308,7 +328,8 @@ export default function Hero() {
 
               <div className="mt-7 rounded-2xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 p-4">
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                   Building practical products across full-stack web, data, and automation.
+                  Building practical products across full-stack web, data, and
+                  automation.
                 </p>
               </div>
             </div>

@@ -1,18 +1,20 @@
-"use client"
+"use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
-import type React from "react"
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Award, Medal, Castle, Trophy, Star } from "lucide-react"
+import type React from "react";
+
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Award, Medal, Castle, Trophy, Star } from "lucide-react";
 
 interface Achievement {
-  title: string
-  organization: string
-  year: string
-  icon: React.ElementType
-  description?: string
-  category: "academic" | "ncc" | "sports" | "competition"
+  title: string;
+  organization: string;
+  year: string;
+  icon: React.ElementType;
+  description?: string;
+  category: "academic" | "ncc" | "sports" | "competition";
 }
 
 const achievements: Achievement[] = [
@@ -30,7 +32,8 @@ const achievements: Achievement[] = [
     organization: "National Cadet Corps",
     year: "2023, 2025",
     icon: Medal,
-    description: "Recognized for exceptional skills in military training exercises and outdoor survival techniques.",
+    description:
+      "Recognized for exceptional skills in military training exercises and outdoor survival techniques.",
     category: "ncc",
   },
   {
@@ -38,7 +41,8 @@ const achievements: Achievement[] = [
     organization: "National Students's Union of India",
     year: "2022",
     icon: Award,
-    description: "Recognized for outstanding academic performance and contributions to student activities.",
+    description:
+      "Recognized for outstanding academic performance and contributions to student activities.",
     category: "academic",
   },
   {
@@ -46,7 +50,8 @@ const achievements: Achievement[] = [
     organization: "Adarsha Seva Sangha",
     year: "2022",
     icon: Star,
-    description: "Honored for exceptional academic achievements and community service.",
+    description:
+      "Honored for exceptional academic achievements and community service.",
     category: "academic",
   },
   {
@@ -58,66 +63,61 @@ const achievements: Achievement[] = [
       "Participated in district-level chess competitions, demonstrating strategic thinking and competitive spirit.",
     category: "sports",
   },
-]
+];
 
 export default function Achievements() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
+  });
 
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "academic":
-        return "from-blue-500 to-purple-500"
+        return "from-blue-500 to-purple-500";
       case "ncc":
-        return "from-green-500 to-teal-500"
+        return "from-green-500 to-teal-500";
       case "sports":
-        return "from-orange-500 to-red-500"
+        return "from-orange-500 to-red-500";
       case "competition":
-        return "from-yellow-500 to-orange-500"
+        return "from-yellow-500 to-orange-500";
       default:
-        return "from-purple-500 to-cyan-500"
+        return "from-purple-500 to-cyan-500";
     }
-  }
+  };
 
   const getCategoryBadge = (category: string) => {
     switch (category) {
       case "academic":
-        return "Academic"
+        return "Academic";
       case "ncc":
-        return "NCC"
+        return "NCC";
       case "sports":
-        return "Sports"
+        return "Sports";
       case "competition":
-        return "Competition"
+        return "Competition";
       default:
-        return "Achievement"
+        return "Achievement";
     }
-  }
+  };
 
   return (
     <div className="container mx-auto max-w-6xl">
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        ref={ref}
+      >
         <motion.div variants={itemVariants}>
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
             whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
@@ -129,7 +129,7 @@ export default function Achievements() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {achievements.map((achievement, index) => {
-            const colorClass = getCategoryColor(achievement.category)
+            const colorClass = getCategoryColor(achievement.category);
 
             return (
               <motion.div
@@ -140,20 +140,35 @@ export default function Achievements() {
                   scale: 1.03,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  y: -15,
+                  scale: 1.03,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <motion.div
                   className="p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark"
                   whileHover={{
                     boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
                   }}
+                  whileTap={{
+                    boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
+                  }}
                 >
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${colorClass}`}></div>
+                  <div
+                    className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${colorClass}`}
+                  ></div>
 
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start">
                       <motion.div
                         className={`p-3 rounded-full bg-gradient-to-r ${colorClass} text-white mr-4 mt-1`}
                         whileHover={{
+                          scale: 1.1,
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
+                        whileTap={{
                           scale: 1.1,
                           rotate: 360,
                           transition: { duration: 0.5 },
@@ -168,12 +183,20 @@ export default function Achievements() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           {achievement.title}
                         </motion.h3>
                         <motion.p
                           className="text-gray-700 dark:text-gray-100 text-sm font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                           whileHover={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
+                          whileTap={{
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
@@ -189,12 +212,21 @@ export default function Achievements() {
                           scale: 1.1,
                           transition: { duration: 0.2 },
                         }}
+                        whileTap={{
+                          scale: 1.1,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         {achievement.year}
                       </motion.span>
                       <motion.span
                         className="text-xs bg-gray-100 dark:bg-[rgba(30,30,60,0.4)] text-gray-700 dark:text-gray-100 px-2 py-1 rounded-full border border-gray-200 dark:border-white/10"
                         whileHover={{
+                          scale: 1.1,
+                          backgroundColor: "rgba(94, 31, 255, 0.2)",
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
                           scale: 1.1,
                           backgroundColor: "rgba(94, 31, 255, 0.2)",
                           transition: { duration: 0.2 },
@@ -214,10 +246,18 @@ export default function Achievements() {
                         x: 5,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        x: 5,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <motion.p
                         className="text-gray-700 dark:text-gray-100 text-sm leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
+                          x: 5,
+                          transition: { duration: 0.3 },
+                        }}
+                        whileTap={{
                           x: 5,
                           transition: { duration: 0.3 },
                         }}
@@ -234,15 +274,20 @@ export default function Achievements() {
                       scale: 1.1,
                       transition: { duration: 0.3 },
                     }}
+                    whileTap={{
+                      opacity: 0.3,
+                      scale: 1.1,
+                      transition: { duration: 0.3 },
+                    }}
                   >
                     <achievement.icon size={40} />
                   </motion.div>
                 </motion.div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

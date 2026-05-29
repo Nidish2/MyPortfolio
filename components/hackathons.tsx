@@ -1,17 +1,19 @@
-"use client"
+"use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Code, Clock, Trophy, Users, Zap, Brain } from "lucide-react"
+
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Code, Clock, Trophy, Users, Zap, Brain } from "lucide-react";
 
 interface Hackathon {
-  name: string
-  duration: string
-  project: string
-  description: string
-  technologies: string[]
-  type: "ai" | "web" | "cloud" | "voice" | "coding"
-  year: string
+  name: string;
+  duration: string;
+  project: string;
+  description: string;
+  technologies: string[];
+  type: "ai" | "web" | "cloud" | "voice" | "coding";
+  year: string;
 }
 
 const hackathons: Hackathon[] = [
@@ -41,7 +43,12 @@ const hackathons: Hackathon[] = [
     project: "Real-time Construction Monitoring via Drone Imagery",
     description:
       "Developed a comprehensive solution for monitoring construction progress using drone imagery analysis, computer vision, and real-time data processing for project management.",
-    technologies: ["Computer Vision", "Drone Technology", "Python", "Image Processing"],
+    technologies: [
+      "Computer Vision",
+      "Drone Technology",
+      "Python",
+      "Image Processing",
+    ],
     type: "ai",
     year: "2024",
   },
@@ -65,70 +72,65 @@ const hackathons: Hackathon[] = [
     type: "voice",
     year: "2024",
   },
-]
+];
 
 export default function Hackathons() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
+  });
 
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "ai":
-        return Brain
+        return Brain;
       case "web":
-        return Code
+        return Code;
       case "cloud":
-        return Zap
+        return Zap;
       case "voice":
-        return Users
+        return Users;
       case "coding":
-        return Trophy
+        return Trophy;
       default:
-        return Code
+        return Code;
     }
-  }
+  };
 
   const getTypeColor = (type: string) => {
     switch (type) {
       case "ai":
-        return "from-purple-500 to-pink-500"
+        return "from-purple-500 to-pink-500";
       case "web":
-        return "from-blue-500 to-cyan-500"
+        return "from-blue-500 to-cyan-500";
       case "cloud":
-        return "from-orange-500 to-red-500"
+        return "from-orange-500 to-red-500";
       case "voice":
-        return "from-green-500 to-teal-500"
+        return "from-green-500 to-teal-500";
       case "coding":
-        return "from-yellow-500 to-orange-500"
+        return "from-yellow-500 to-orange-500";
       default:
-        return "from-purple-500 to-cyan-500"
+        return "from-purple-500 to-cyan-500";
     }
-  }
+  };
 
   return (
     <div className="container mx-auto max-w-6xl">
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        ref={ref}
+      >
         <motion.div variants={itemVariants}>
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
             whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
@@ -140,8 +142,8 @@ export default function Hackathons() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {hackathons.map((hackathon, index) => {
-            const IconComponent = getTypeIcon(hackathon.type)
-            const colorClass = getTypeColor(hackathon.type)
+            const IconComponent = getTypeIcon(hackathon.type);
+            const colorClass = getTypeColor(hackathon.type);
 
             return (
               <motion.div
@@ -152,15 +154,27 @@ export default function Hackathons() {
                   scale: 1.03,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  y: -15,
+                  scale: 1.03,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <motion.div className="p-6 h-full portfolio-card portfolio-card-light dark:portfolio-card-dark">
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${colorClass}`}></div>
+                  <div
+                    className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${colorClass}`}
+                  ></div>
 
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center">
                       <motion.div
                         className={`p-2 rounded-full bg-gradient-to-r ${colorClass} text-white mr-3`}
                         whileHover={{
+                          scale: 1.1,
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
+                        whileTap={{
                           scale: 1.1,
                           rotate: 360,
                           transition: { duration: 0.5 },
@@ -175,6 +189,10 @@ export default function Hackathons() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           {hackathon.name}
                         </motion.h3>
@@ -184,30 +202,49 @@ export default function Hackathons() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           <motion.div
                             whileHover={{
                               rotate: 360,
                               transition: { duration: 0.5 },
                             }}
+                            whileTap={{
+                              rotate: 360,
+                              transition: { duration: 0.5 },
+                            }}
                           >
-                            <Clock size={14} className="text-gray-500 dark:text-gray-400 mr-1" />
+                            <Clock
+                              size={14}
+                              className="text-gray-500 dark:text-gray-400 mr-1"
+                            />
                           </motion.div>
                           <motion.span
-                             className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
-                             whileHover={{
-                               x: 5,
-                               transition: { duration: 0.2 },
-                             }}
-                           >
-                             {hackathon.duration}
-                           </motion.span>
+                            className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
+                            whileHover={{
+                              x: 5,
+                              transition: { duration: 0.2 },
+                            }}
+                            whileTap={{
+                              x: 5,
+                              transition: { duration: 0.2 },
+                            }}
+                          >
+                            {hackathon.duration}
+                          </motion.span>
                         </motion.div>
                       </div>
                     </div>
                     <motion.span
                       className={`bg-gradient-to-r ${colorClass} text-white px-2 py-1 rounded-md text-xs font-medium`}
                       whileHover={{
+                        scale: 1.1,
+                        transition: { duration: 0.2 },
+                      }}
+                      whileTap={{
                         scale: 1.1,
                         transition: { duration: 0.2 },
                       }}
@@ -223,18 +260,26 @@ export default function Hackathons() {
                         x: 5,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        x: 5,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       {hackathon.project}
                     </motion.h4>
-                     <motion.p
-                       className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
-                       whileHover={{
-                         x: 5,
-                         transition: { duration: 0.3 },
-                       }}
-                     >
-                       {hackathon.description}
-                     </motion.p>
+                    <motion.p
+                      className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
+                      whileHover={{
+                        x: 5,
+                        transition: { duration: 0.3 },
+                      }}
+                      whileTap={{
+                        x: 5,
+                        transition: { duration: 0.3 },
+                      }}
+                    >
+                      {hackathon.description}
+                    </motion.p>
                   </div>
 
                   <div className="mb-4">
@@ -244,6 +289,11 @@ export default function Hackathons() {
                           key={techIndex}
                           className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-md border border-gray-200 dark:border-gray-600"
                           whileHover={{
+                            scale: 1.1,
+                            backgroundColor: "rgba(94, 31, 255, 0.2)",
+                            transition: { duration: 0.2 },
+                          }}
+                          whileTap={{
                             scale: 1.1,
                             backgroundColor: "rgba(94, 31, 255, 0.2)",
                             transition: { duration: 0.2 },
@@ -262,6 +312,10 @@ export default function Hackathons() {
                         scale: 1.1,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        scale: 1.1,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       {hackathon.type.toUpperCase()}
                     </motion.span>
@@ -272,16 +326,21 @@ export default function Hackathons() {
                         scale: 1.2,
                         transition: { duration: 0.5 },
                       }}
+                      whileTap={{
+                        rotate: 360,
+                        scale: 1.2,
+                        transition: { duration: 0.5 },
+                      }}
                     >
                       <Trophy size={16} />
                     </motion.div>
                   </div>
                 </motion.div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

@@ -1,15 +1,17 @@
-"use client"
+"use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Briefcase, Calendar } from "lucide-react"
+
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Briefcase, Calendar } from "lucide-react";
 
 interface ExperienceItem {
-  title: string
-  company: string
-  period: string
-  description: string[]
-  type: "internship" | "fulltime"
+  title: string;
+  company: string;
+  period: string;
+  description: string[];
+  type: "internship" | "fulltime";
 }
 
 const experiences: ExperienceItem[] = [
@@ -35,36 +37,31 @@ const experiences: ExperienceItem[] = [
       "Gained hands-on DevOps experience in cloud-native environments.",
     ],
   },
-]
+];
 
 export default function Experience() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
-  }
+  });
 
   return (
     <div className="container mx-auto max-w-6xl experience-section">
-      <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={containerVariants} ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        ref={ref}
+      >
         <motion.div variants={itemVariants}>
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
             whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
@@ -84,6 +81,11 @@ export default function Experience() {
                 y: -10,
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                scale: 1.02,
+                y: -10,
+                transition: { duration: 0.3 },
+              }}
             >
               <motion.div className="p-8 portfolio-card portfolio-card-light dark:portfolio-card-dark">
                 <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500"></div>
@@ -97,12 +99,20 @@ export default function Experience() {
                           x: 5,
                           transition: { duration: 0.2 },
                         }}
+                        whileTap={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         {exp.title}
                       </motion.h3>
                       <motion.span
                         className="ml-3 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-3 py-1 rounded-md text-xs font-medium"
                         whileHover={{
+                          scale: 1.1,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
                           scale: 1.1,
                           transition: { duration: 0.2 },
                         }}
@@ -116,9 +126,17 @@ export default function Experience() {
                         x: 5,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        x: 5,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <motion.div
                         whileHover={{
+                          rotate: 360,
+                          transition: { duration: 0.5 },
+                        }}
+                        whileTap={{
                           rotate: 360,
                           transition: { duration: 0.5 },
                         }}
@@ -128,6 +146,10 @@ export default function Experience() {
                       <motion.p
                         className="text-gray-700 dark:text-gray-200 font-medium transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
                         whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
                           x: 5,
                           transition: { duration: 0.2 },
                         }}
@@ -142,9 +164,17 @@ export default function Experience() {
                       scale: 1.05,
                       transition: { duration: 0.2 },
                     }}
+                    whileTap={{
+                      scale: 1.05,
+                      transition: { duration: 0.2 },
+                    }}
                   >
                     <motion.div
                       whileHover={{
+                        rotate: 360,
+                        transition: { duration: 0.5 },
+                      }}
+                      whileTap={{
                         rotate: 360,
                         transition: { duration: 0.5 },
                       }}
@@ -168,6 +198,10 @@ export default function Experience() {
                         x: 10,
                         transition: { duration: 0.2 },
                       }}
+                      whileTap={{
+                        x: 10,
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <div className="flex items-start space-x-3">
                         <motion.div
@@ -176,10 +210,18 @@ export default function Experience() {
                             scale: 1.5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            scale: 1.5,
+                            transition: { duration: 0.2 },
+                          }}
                         ></motion.div>
                         <motion.p
                           className="text-gray-700 dark:text-gray-200 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                           whileHover={{
+                            x: 5,
+                            transition: { duration: 0.3 },
+                          }}
+                          whileTap={{
                             x: 5,
                             transition: { duration: 0.3 },
                           }}
@@ -196,5 +238,5 @@ export default function Experience() {
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

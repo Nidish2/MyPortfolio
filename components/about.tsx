@@ -1,4 +1,6 @@
 "use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
+
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -8,21 +10,6 @@ export default function About() {
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
 
   return (
     <div className="container mx-auto max-w-6xl about-section">
@@ -36,6 +23,11 @@ export default function About() {
           <motion.h2
             className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-cyan-500"
             whileHover={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{
               scale: 1.05,
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
@@ -58,12 +50,22 @@ export default function About() {
                 boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.6)",
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                scale: 1.05,
+                rotate: 5,
+                boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.6)",
+                transition: { duration: 0.3 },
+              }}
             >
               <motion.img
                 src="Profile.jpg"
                 alt="Nidish"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                 whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{
                   scale: 1.1,
                   transition: { duration: 0.3 },
                 }}
@@ -81,6 +83,12 @@ export default function About() {
                 boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                y: -10,
+                scale: 1.02,
+                boxShadow: "0 25px 50px -12px rgba(94, 31, 255, 0.4)",
+                transition: { duration: 0.3 },
+              }}
             >
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
@@ -90,11 +98,16 @@ export default function About() {
                   x: 5,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  x: 5,
+                  transition: { duration: 0.3 },
+                }}
               >
                 Computer Science Engineering student skilled in{" "}
                 <motion.span
                   className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   MERN stack
                 </motion.span>
@@ -102,6 +115,7 @@ export default function About() {
                 <motion.span
                   className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   Java web tech
                 </motion.span>
@@ -109,6 +123,7 @@ export default function About() {
                 <motion.span
                   className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   Data Science
                 </motion.span>
@@ -116,6 +131,7 @@ export default function About() {
                 <motion.span
                   className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   AI/ML
                 </motion.span>
@@ -128,11 +144,16 @@ export default function About() {
                   x: 5,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  x: 5,
+                  transition: { duration: 0.3 },
+                }}
               >
                 Built scalable projects like{" "}
                 <motion.span
                   className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   3D model generators
                 </motion.span>{" "}
@@ -140,6 +161,7 @@ export default function About() {
                 <motion.span
                   className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   analytics dashboards
                 </motion.span>{" "}
@@ -152,11 +174,16 @@ export default function About() {
                   x: 5,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  x: 5,
+                  transition: { duration: 0.3 },
+                }}
               >
                 Strong in{" "}
                 <motion.span
                   className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   DSA (Java)
                 </motion.span>{" "}
@@ -164,6 +191,7 @@ export default function About() {
                 <motion.span
                   className="text-cyan-600 dark:text-cyan-400 font-semibold transition-colors duration-300 hover:text-cyan-700 dark:hover:text-cyan-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   NCC
                 </motion.span>{" "}
@@ -171,6 +199,7 @@ export default function About() {
                 <motion.span
                   className="text-purple-600 dark:text-purple-400 font-semibold transition-colors duration-300 hover:text-purple-700 dark:hover:text-purple-300 inline-block cursor-default"
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 1.05 }}
                 >
                   BNMIT Super 60
                 </motion.span>
@@ -194,10 +223,19 @@ export default function About() {
                       scale: 1.05,
                       transition: { duration: 0.3 },
                     }}
+                    whileTap={{
+                      y: -8,
+                      scale: 1.05,
+                      transition: { duration: 0.3 },
+                    }}
                   >
                     <motion.div
                       className="p-4 bg-white/95 dark:bg-slate-900/90 rounded-lg border border-gray-200 dark:border-white/10 border-l-4 border-l-purple-500 transition-all duration-300 shadow-lg backdrop-blur-md cursor-default"
                       whileHover={{
+                        borderLeftColor: "#06b6d4",
+                        boxShadow: "0 15px 30px rgba(94, 31, 255, 0.3)",
+                      }}
+                      whileTap={{
                         borderLeftColor: "#06b6d4",
                         boxShadow: "0 15px 30px rgba(94, 31, 255, 0.3)",
                       }}
@@ -208,12 +246,20 @@ export default function About() {
                           x: 5,
                           transition: { duration: 0.2 },
                         }}
+                        whileTap={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         {item.label}
                       </motion.p>
                       <motion.p
                         className="text-gray-700 dark:text-gray-200 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-400 cursor-default"
                         whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
                           x: 5,
                           transition: { duration: 0.2 },
                         }}

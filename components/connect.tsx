@@ -1,4 +1,6 @@
 "use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
+
 
 import type React from "react";
 
@@ -67,21 +69,6 @@ export default function Connect() {
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   const iconVariants = {
     initial: { rotate: 0 },
     hover: {
@@ -107,12 +94,22 @@ export default function Connect() {
               scale: 1.02,
               transition: { duration: 0.3 },
             }}
+            whileTap={{
+              y: -10,
+              scale: 1.02,
+              transition: { duration: 0.3 },
+            }}
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
 
             <motion.h3
               className="section-title mb-4 text-gray-900 dark:text-white transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
               whileHover={{
+                scale: 1.05,
+                textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{
                 scale: 1.05,
                 textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
                 transition: { duration: 0.3 },
@@ -125,6 +122,9 @@ export default function Connect() {
               whileHover={{
                 transition: { duration: 0.3 },
               }}
+              whileTap={{
+                transition: { duration: 0.3 },
+              }}
             >
               I'm currently open to new opportunities, collaborations, and
               interesting projects. If you have something in mind, let's discuss
@@ -135,7 +135,7 @@ export default function Connect() {
               <motion.a
                 href="mailto:nidish2207@gmail.com"
                 whileHover="hover"
-                whileTap={{ scale: 0.98 }}
+                whileTap="hover"
                 variants={{
                   hover: {
                     y: -5,
@@ -154,7 +154,7 @@ export default function Connect() {
                 href="/Resume.pdf"
                 download
                 whileHover="hover"
-                whileTap={{ scale: 0.98 }}
+                whileTap="hover"
                 variants={{
                   hover: {
                     y: -5,
@@ -189,7 +189,7 @@ export default function Connect() {
                     },
                   }}
                   whileHover="hover"
-                  whileTap={{ scale: 0.95 }}
+                  whileTap="hover"
                   className={`min-h-16 p-4 rounded-xl bg-gradient-to-r ${link.color} text-white flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 font-semibold text-base sm:text-lg relative overflow-hidden group`}
                   style={{
                     boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
@@ -202,6 +202,10 @@ export default function Connect() {
                   <motion.span
                     className="relative z-10"
                     whileHover={{
+                      x: 5,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{
                       x: 5,
                       transition: { duration: 0.2 },
                     }}

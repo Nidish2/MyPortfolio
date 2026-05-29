@@ -1,4 +1,6 @@
 "use client";
+import { containerVariants, itemVariants } from "@/lib/animations";
+
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -114,21 +116,6 @@ export default function Certificates() {
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "redhat":
@@ -175,13 +162,17 @@ export default function Certificates() {
               textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
               transition: { duration: 0.3 },
             }}
+            whileTap={{
+              scale: 1.05,
+              textShadow: "0 0 20px rgba(94, 31, 255, 0.8)",
+              transition: { duration: 0.3 },
+            }}
           >
             Certifications
           </motion.h2>
         </motion.div>
 
         <motion.div variants={itemVariants} className="text-center mb-12">
-
           {/* Google Drive Archive Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -217,6 +208,11 @@ export default function Certificates() {
                   scale: 1.02,
                   transition: { duration: 0.3 },
                 }}
+                whileTap={{
+                  y: -10,
+                  scale: 1.02,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <motion.div className="overflow-hidden portfolio-card portfolio-card-light dark:portfolio-card-dark">
                   <div className="flex flex-col md:flex-row">
@@ -225,6 +221,10 @@ export default function Certificates() {
                       <motion.div
                         className="relative group w-full max-w-sm"
                         whileHover={{
+                          scale: 1.05,
+                          transition: { duration: 0.3 },
+                        }}
+                        whileTap={{
                           scale: 1.05,
                           transition: { duration: 0.3 },
                         }}
@@ -252,6 +252,11 @@ export default function Certificates() {
                             rotate: 360,
                             transition: { duration: 0.5 },
                           }}
+                          whileTap={{
+                            scale: 1.1,
+                            rotate: 360,
+                            transition: { duration: 0.5 },
+                          }}
                         >
                           <IconComponent size={20} />
                         </motion.div>
@@ -259,6 +264,10 @@ export default function Certificates() {
                           <motion.h3
                             className="text-xl font-bold text-gray-900 dark:text-white mb-2 leading-tight transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                             whileHover={{
+                              x: 5,
+                              transition: { duration: 0.2 },
+                            }}
+                            whileTap={{
                               x: 5,
                               transition: { duration: 0.2 },
                             }}
@@ -272,12 +281,20 @@ export default function Certificates() {
                                 x: 5,
                                 transition: { duration: 0.2 },
                               }}
+                              whileTap={{
+                                x: 5,
+                                transition: { duration: 0.2 },
+                              }}
                             >
                               {certificate.issuer}
                             </motion.p>
                             <motion.span
                               className={`bg-gradient-to-r ${colorClass} text-white px-2 py-1 rounded-md text-xs font-medium`}
                               whileHover={{
+                                scale: 1.1,
+                                transition: { duration: 0.2 },
+                              }}
+                              whileTap={{
                                 scale: 1.1,
                                 transition: { duration: 0.2 },
                               }}
@@ -291,6 +308,10 @@ export default function Certificates() {
                       <motion.p
                         className="text-gray-700 dark:text-gray-200 mb-4 leading-relaxed transition-colors duration-200 hover:text-purple-600 dark:hover:text-purple-400 cursor-default"
                         whileHover={{
+                          x: 5,
+                          transition: { duration: 0.3 },
+                        }}
+                        whileTap={{
                           x: 5,
                           transition: { duration: 0.3 },
                         }}
@@ -308,10 +329,18 @@ export default function Certificates() {
                             x: 5,
                             transition: { duration: 0.2 },
                           }}
+                          whileTap={{
+                            x: 5,
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           View Certificate{" "}
                           <motion.div
                             whileHover={{
+                              rotate: 360,
+                              transition: { duration: 0.5 },
+                            }}
+                            whileTap={{
                               rotate: 360,
                               transition: { duration: 0.5 },
                             }}
