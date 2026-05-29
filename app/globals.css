@@ -620,58 +620,15 @@ h5 {
 }
 
 /* PRESERVE ALL COLORFUL ELEMENTS */
-.dark .bg-gradient-to-r {
-  /* NEVER override gradients - they should stay colorful */
-}
 
 /* PRESERVE ALL BRAND AND ACCENT COLORS */
-.dark .text-purple-600,
-.dark .text-purple-500,
-.dark .text-purple-400 {
-  /* PRESERVE purple colors */
-}
 
-.dark .text-cyan-600,
-.dark .text-cyan-500,
-.dark .text-cyan-400 {
-  /* PRESERVE cyan colors */
-}
 
-.dark .text-blue-600,
-.dark .text-blue-500,
-.dark .text-blue-400 {
-  /* PRESERVE blue colors */
-}
 
-.dark .text-green-600,
-.dark .text-green-500,
-.dark .text-green-400 {
-  /* PRESERVE green colors */
-}
 
-.dark .text-yellow-600,
-.dark .text-yellow-500,
-.dark .text-yellow-400 {
-  /* PRESERVE yellow colors */
-}
 
-.dark .text-red-600,
-.dark .text-red-500,
-.dark .text-red-400 {
-  /* PRESERVE red colors */
-}
 
-.dark .text-orange-600,
-.dark .text-orange-500,
-.dark .text-orange-400 {
-  /* PRESERVE orange colors */
-}
 
-.dark .text-pink-600,
-.dark .text-pink-500,
-.dark .text-pink-400 {
-  /* PRESERVE pink colors */
-}
 
 /* ONLY CHANGE NEUTRAL GRAYS FOR READABILITY — no !important allows hover overrides */
 .dark .text-gray-900 {
@@ -816,11 +773,6 @@ h5 {
 }
 
 /* ENSURE ALL CARDS GET DARK STYLING */
-.dark .p-6,
-.dark .p-8,
-.dark .p-4 {
-  /* Don't override padding, but ensure parent containers apply dark mode */
-}
 
 /* SPECIFIC OVERRIDES FOR STUBBORN ELEMENTS */
 .dark [class*="bg-white"] {

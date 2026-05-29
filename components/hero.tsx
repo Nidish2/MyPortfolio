@@ -68,7 +68,7 @@ export default function Hero() {
     if (!isMounted) return;
 
     const typeSpeed = isDeleting ? 50 : 100;
-    const word = HERO_WORDS[currentWordIndex];
+    const word = HERO_WORDS.at(currentWordIndex) ?? HERO_WORDS[0];
 
     const timer = setTimeout(() => {
       if (!isDeleting && currentText === word) {

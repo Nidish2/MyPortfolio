@@ -389,7 +389,7 @@ export default function Contact() {
                           id={field.name}
                           name={field.name}
                           type={field.type}
-                          value={formData[field.name as keyof typeof formData]}
+                          value={field.name === "name" ? formData.name : field.name === "email" ? formData.email : formData.subject}
                           onChange={handleChange}
                           required={field.name !== "subject"}
                           className="w-full p-3 rounded-md border border-gray-300 dark:border-white/20 bg-white dark:bg-[rgba(30,30,60,0.4)] text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"

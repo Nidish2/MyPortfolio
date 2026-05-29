@@ -80,7 +80,7 @@ export default function Education() {
       "from-cyan-500 to-blue-500",
       "from-blue-500 to-purple-500",
     ];
-    return gradients[index % gradients.length];
+    return gradients.at(index % gradients.length) ?? gradients[0];
   };
 
   return (

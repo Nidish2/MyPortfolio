@@ -84,11 +84,11 @@ export default function Connect() {
 
   const iconVariants = {
     initial: { rotate: 0 },
-    hover: { 
-      rotate: 360, 
+    hover: {
+      rotate: 360,
       scale: 1.1,
-      transition: { duration: 0.5, ease: "easeInOut" as const }
-    }
+      transition: { duration: 0.5, ease: "easeInOut" as const },
+    },
   };
 
   return (
@@ -131,15 +131,19 @@ export default function Connect() {
               how we can work together!
             </motion.p>
 
-            <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-4xl mx-auto w-full">
               <motion.a
                 href="mailto:nidish2207@gmail.com"
                 whileHover="hover"
                 whileTap={{ scale: 0.98 }}
                 variants={{
-                  hover: { y: -5, scale: 1.02, boxShadow: "0 12px 24px rgba(139, 92, 246, 0.35)" }
+                  hover: {
+                    y: -5,
+                    scale: 1.02,
+                    boxShadow: "0 12px 24px rgba(139, 92, 246, 0.35)",
+                  },
                 }}
-                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 px-5 py-3 font-bold text-white shadow-lg shadow-purple-500/20"
+                className="min-h-16 flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-purple-500/20 transition-all duration-300 sm:text-lg w-full"
               >
                 <motion.span variants={iconVariants} className="inline-flex">
                   <Mail size={20} />
@@ -152,9 +156,13 @@ export default function Connect() {
                 whileHover="hover"
                 whileTap={{ scale: 0.98 }}
                 variants={{
-                  hover: { y: -5, scale: 1.02, boxShadow: "0 12px 24px rgba(6, 182, 212, 0.2)" }
+                  hover: {
+                    y: -5,
+                    scale: 1.02,
+                    boxShadow: "0 12px 24px rgba(6, 182, 212, 0.2)",
+                  },
                 }}
-                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-5 py-3 font-bold text-cyan-700 shadow-lg shadow-cyan-500/10 dark:text-cyan-300"
+                className="min-h-16 flex items-center justify-center gap-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-6 py-4 text-base font-bold text-cyan-700 shadow-lg shadow-cyan-500/10 transition-all duration-300 dark:text-cyan-300 sm:text-lg w-full"
               >
                 <motion.span variants={iconVariants} className="inline-flex">
                   <FileText size={20} />
@@ -178,7 +186,7 @@ export default function Connect() {
                       rotate: 2,
                       boxShadow: "0 15px 30px rgba(0, 0, 0, 0.25)",
                       transition: { duration: 0.3 },
-                    }
+                    },
                   }}
                   whileHover="hover"
                   whileTap={{ scale: 0.95 }}
@@ -188,10 +196,7 @@ export default function Connect() {
                   }}
                 >
                   <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                  <motion.div
-                    variants={iconVariants}
-                    className="relative z-10"
-                  >
+                  <motion.div variants={iconVariants} className="relative z-10">
                     <link.icon size={24} />
                   </motion.div>
                   <motion.span
