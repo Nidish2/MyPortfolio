@@ -829,6 +829,18 @@ h5 {
   color: rgb(209, 213, 219);
 }
 
+.experience-section .exp-chip {
+  color: #fff !important;
+}
+
+.experience-section .exp-tech-chip {
+  color: rgb(31, 41, 55);
+}
+
+.dark .experience-section .exp-tech-chip {
+  color: rgb(229, 231, 235) !important;
+}
+
 /* SKILLS SECTION - ENSURE ALL TEXT IS VISIBLE */
 .dark .portfolio-card .font-medium,
 .dark .portfolio-card .font-bold {
