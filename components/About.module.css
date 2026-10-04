@@ -1,0 +1,15 @@
+.root :global(.text-primary-light) {
+  color: rgb(17, 24, 39);
+}
+
+.root :global(.text-secondary-light) {
+  color: rgb(55, 65, 81);
+}
+
+:global(.dark) .root :global(.text-primary-light) {
+  color: rgb(255, 255, 255);
+}
+
+:global(.dark) .root :global(.text-secondary-light) {
+  color: rgb(209, 213, 219);
+}

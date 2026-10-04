@@ -1,93 +1,116 @@
-<h1 align="center">
-  Nidish's Personal Portfolio
-</h1>
+# Nidish Portfolio
 
-<p align="center">
-  A highly responsive, animated, and modern portfolio built to showcase experience, projects, skills, and achievements.
-  <br>
-  <strong><a href="https://i-am-nidish.vercel.app/" target="_blank">View Live Website</a></strong>
-</p>
+Live URL: [https://i-am-nidish.vercel.app](https://i-am-nidish.vercel.app)
 
----
-
-## Overview
-
-This is my personal portfolio website, meticulously crafted using **Next.js**, **React**, and **Tailwind CSS**. It is designed to be highly responsive and visually appealing with micro-animations powered by **Framer Motion**. It effectively presents my technical profile, software engineering projects, work experience, education, and extracurricular activities.
-
-## Key Features
-
-- **Interactive Hero Section:** 3D tilt effects, typewriter animations, and particle backgrounds.
-- **Fully Responsive Design:** Carefully tailored layouts that adapt seamlessly from mobile devices to ultrawide monitors.
-- **Dark & Light Modes:** Built-in seamless theme switching with customized palettes for both viewing experiences.
-- **Comprehensive Showcases:** Dedicated sections for Projects, Certifications, Hackathons, Skills, and Experience.
-- **Working Contact Form:** Fully functional "Get in Touch" form integrated with Web3Forms.
-- **Framer Motion Animations:** Smooth page loads, scroll-reveals, and micro-interactions on hover.
+A personal portfolio built with Next.js, React, TypeScript, Tailwind CSS, and
+Framer Motion. It presents experience, projects, skills, certificates,
+achievements, and contact details.
 
 ## Tech Stack
 
-| Category | Technologies Used |
-| :--- | :--- |
-| **Framework** | Next.js (App Router), React 19 |
-| **Styling** | Tailwind CSS, PostCSS |
-| **Animation** | Framer Motion |
-| **Icons** | Lucide React |
-| **Form Backend** | Web3Forms |
-| **Deployment** | Vercel |
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS & CSS Modules
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Code Quality**: Biome & ESLint
+- **Testing**: Vitest & V8 Coverage
 
-## Getting Started
+## Requirements
 
-Follow these steps to run the portfolio locally on your machine.
+- Node.js 24 LTS (preferred), or Node.js 22.23.3 or newer within the maintained
+  22 LTS line
+- pnpm 10.9.0 or newer
 
-### Prerequisites
-Make sure you have Node.js and `pnpm` installed.
+Use the version declared in `.nvmrc` when using a Node version manager.
 
-### Installation
+## Setup
 
-1. **Clone the repository:**
-   ```bash
-   git clone <your-repo-url>
-   cd portfolio
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pnpm install
-   ```
-
-3. **Set up Environment Variables:**
-   Create a `.env.local` file in the root directory for the contact form to work:
-   ```env
-   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_web3forms_access_key
-   ```
-   *(You can get a free key from [Web3Forms](https://web3forms.com/))*
-
-4. **Run the development server:**
-   ```bash
-   pnpm dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Folder Structure
-
-```text
-portfolio/
-├── app/                  # Next.js App Router (layout, page, globals.css)
-├── components/           # Reusable UI Sections (Hero, Projects, Skills, etc.)
-├── public/               # Static assets (Images, Resume.pdf)
-├── tailwind.config.ts    # Tailwind CSS Configuration
-└── package.json          # Dependencies & Scripts
+```bash
+pnpm install
+Copy-Item .env.example .env.local
+pnpm dev
 ```
 
-## Known IDE Warnings (False Positives)
+Open `http://localhost:3000`.
 
-If you are using a strict IDE setup (like SonarLint or i18n-ally in VS Code), you may see around ~44 warnings. **These are strictly IDE-specific warnings and not actual code bugs:**
+## Environment variables
 
-- **`JSX element not internationalized`:** The IDE is suggesting wrapping every piece of text in a translation package like `i18next`. Since this is an English-only personal portfolio, translation overhead is unnecessary. These can be safely ignored.
-- **`Unknown at rule @tailwind`:** This is a standard warning for PostCSS/Tailwind files if your IDE's CSS language server isn't specifically configured for Tailwind. It does not affect the build or styles.
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Yes, for contact submission | Public Web3Forms browser access key |
 
-## Author
+Do not add private credentials to `NEXT_PUBLIC_*` variables. Public portfolio
+links, image paths, certificate links, and the résumé path belong in typed
+content/configuration modules, not environment files.
 
-**Nidish**
-- **Website:** [i-am-nidish.vercel.app](https://i-am-nidish.vercel.app/)
-- **LinkedIn:** [linkedin.com/in/nidishofficial](https://www.linkedin.com/in/nidishofficial/)
-- **Email:** [nidish2207@gmail.com](mailto:nidish2207@gmail.com)
+## Commands
+
+```bash
+pnpm dev           # Start local development
+pnpm build         # Create a production build
+pnpm start         # Run the production server
+pnpm lint          # Run ESLint correctness checks
+pnpm biome:check   # Run Biome formatting/import/lint checks
+pnpm biome:fix     # Apply Biome safe fixes
+pnpm format        # Format supported source files with Biome
+pnpm format:check  # Check formatting without changes
+pnpm typecheck     # Run TypeScript without emitting files
+pnpm test          # Run Vitest test suite
+pnpm test:coverage # Run test suite with V8 coverage report
+pnpm check         # Run lint, Biome, TypeScript, test, and production build
+```
+
+## Project structure
+
+```text
+app/          Next.js route, root layout, and global styles
+components/   Portfolio sections, layout components, and reusable UI
+content/      Typed static content collections and public configuration
+lib/          Shared utilities, contact validation, and motion configuration
+public/       Public images and downloadable résumé
+docs/         Architecture, development, deployment, security, and performance notes
+tests/        Unit, link, and logic test suites
+```
+
+Static portfolio data lives in `content/`,
+server-first page rendering, and isolated client-side interactions. See
+[`docs/architecture.md`](docs/architecture.md), [`docs/development.md`](docs/development.md),
+and [`AGENTS.md`](AGENTS.md) for the working conventions. See
+[`docs/security.md`](docs/security.md) for public configuration, dependency, and
+browser-security rules.
+
+## Change safety
+
+Preserve existing visible behavior unless a change explicitly requests a design
+or product change. Keep dependency upgrades, content edits, rendering changes,
+and CSS refactors in separate pull requests. Before release, verify responsive
+layouts, navigation, theme switching, external links, résumé download, and
+contact-form states.
+
+## Verification
+
+Before release, run `pnpm check`, then follow the
+[manual browser checklist](docs/development.md#manual-browser-checklist).
+For Core Web Vitals and bundle-impact work, use the repeatable procedure in
+[docs/performance.md](docs/performance.md) and record the before/after result.
+
+## Troubleshooting
+
+- **Node/pnpm version mismatch**: Verify your active environment with `node -v` and `pnpm -v`. Match the versions in `package.json` (`node >=22.23.3`, `pnpm >=10.9.0`).
+- **Contact form error on submit**: Ensure `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` is defined in `.env.local` or your hosting provider's environment settings.
+- **Port 3000 collision**: Run `pnpm dev -- -p 3001` to start on an alternative port.
+- **Biome or Lint errors**: Run `pnpm biome:fix` to automatically format and resolve organized imports.
+
+## Security reporting & update policy
+
+Please report security issues directly to **nidish2207@gmail.com**. See [`docs/security.md`](docs/security.md) for full browser security policy, CSP guidelines, and dependency audit rules.
+
+## Deployment
+
+The project is designed for a standard Next.js deployment such as Vercel. Add
+the environment variable in the deployment provider before enabling the contact
+form. Run `pnpm check` against the production Node LTS runtime before deploying.
+See [`docs/deployment.md`](docs/deployment.md) for full deployment details.
+

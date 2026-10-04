@@ -1,69 +1,22 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
-
-import type React from "react";
 
 import { motion } from "framer-motion";
+import { Award, Castle, Medal, Star, Trophy } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { Award, Medal, Castle, Trophy, Star } from "lucide-react";
+import {
+  type AchievementCategory,
+  type AchievementIconName,
+  achievements,
+} from "@/content/achievements";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
-interface Achievement {
-  title: string;
-  organization: string;
-  year: string;
-  icon: React.ElementType;
-  description?: string;
-  category: "academic" | "ncc" | "sports" | "competition";
-}
-
-const achievements: Achievement[] = [
-  {
-    title: "Group Song - Gold Medal",
-    organization: "National Cadet Corps",
-    year: "2023, 2025",
-    icon: Trophy,
-    description:
-      "Awarded gold medals for outstanding performance in NCC cultural competitions, demonstrating teamwork and artistic excellence.",
-    category: "ncc",
-  },
-  {
-    title: "Tent Pitching - Gold Medal",
-    organization: "National Cadet Corps",
-    year: "2023, 2025",
-    icon: Medal,
-    description:
-      "Recognized for exceptional skills in military training exercises and outdoor survival techniques.",
-    category: "ncc",
-  },
-  {
-    title: "Award of Excellence in PUC",
-    organization: "National Students's Union of India",
-    year: "2022",
-    icon: Award,
-    description:
-      "Recognized for outstanding academic performance and contributions to student activities.",
-    category: "academic",
-  },
-  {
-    title: "Award of Excellence in PUC",
-    organization: "Adarsha Seva Sangha",
-    year: "2022",
-    icon: Star,
-    description:
-      "Honored for exceptional academic achievements and community service.",
-    category: "academic",
-  },
-  {
-    title: "Chess District Level Participation",
-    organization: "District Chess Association",
-    year: "2017, 2019",
-    icon: Castle,
-    description:
-      "Participated in district-level chess competitions, demonstrating strategic thinking and competitive spirit.",
-    category: "sports",
-  },
-];
+const achievementIcons: Record<AchievementIconName, typeof Award> = {
+  award: Award,
+  castle: Castle,
+  medal: Medal,
+  star: Star,
+  trophy: Trophy,
+};
 
 export default function Achievements() {
   const [ref, inView] = useInView({
@@ -71,7 +24,7 @@ export default function Achievements() {
     threshold: 0.1,
   });
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (category: AchievementCategory) => {
     switch (category) {
       case "academic":
         return "from-blue-500 to-purple-500";
@@ -83,21 +36,6 @@ export default function Achievements() {
         return "from-yellow-500 to-orange-500";
       default:
         return "from-purple-500 to-cyan-500";
-    }
-  };
-
-  const getCategoryBadge = (category: string) => {
-    switch (category) {
-      case "academic":
-        return "Academic";
-      case "ncc":
-        return "NCC";
-      case "sports":
-        return "Sports";
-      case "competition":
-        return "Competition";
-      default:
-        return "Achievement";
     }
   };
 
@@ -128,12 +66,13 @@ export default function Achievements() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {achievements.map((achievement, index) => {
+          {achievements.map((achievement) => {
             const colorClass = getCategoryColor(achievement.category);
+            const Icon = achievementIcons[achievement.icon];
 
             return (
               <motion.div
-                key={index}
+                key={`${achievement.title}-${achievement.organization}`}
                 variants={itemVariants}
                 whileHover={{
                   y: -15,
@@ -174,7 +113,7 @@ export default function Achievements() {
                           transition: { duration: 0.5 },
                         }}
                       >
-                        <achievement.icon size={24} />
+                        <Icon size={24} />
                       </motion.div>
                       <div className="flex-1">
                         <motion.h3
@@ -232,7 +171,7 @@ export default function Achievements() {
                           transition: { duration: 0.2 },
                         }}
                       >
-                        {getCategoryBadge(achievement.category)}
+                        {achievement.badge}
                       </motion.span>
                     </div>
                   </div>
@@ -280,7 +219,7 @@ export default function Achievements() {
                       transition: { duration: 0.3 },
                     }}
                   >
-                    <achievement.icon size={40} />
+                    <Icon size={40} />
                   </motion.div>
                 </motion.div>
               </motion.div>

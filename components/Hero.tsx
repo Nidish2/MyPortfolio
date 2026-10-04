@@ -1,28 +1,18 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Download, BadgeCheck } from "lucide-react";
-
-const HERO_WORDS = [
-  "Web Developer",
-  "Problem Solver",
-  "CS Engineer",
-  "MERN Stack Developer",
-];
-
-const HERO_METRICS = [
-  { value: "3+", label: "Full-stack projects" },
-  { value: "5", label: "Hackathons" },
-  { value: "8+", label: "Certifications" },
-];
+import { BadgeCheck, ChevronDown, Download } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { heroMetrics, heroWords } from "@/content/hero";
+import { siteConfig } from "@/content/site";
+import styles from "./Hero.module.css";
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const particles = useMemo(
     () =>
@@ -35,10 +25,6 @@ export default function Hero() {
       })),
     [],
   );
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const element = heroRef.current;
@@ -65,26 +51,22 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    if (!isMounted) return;
-
     const typeSpeed = isDeleting ? 50 : 100;
-    const word = HERO_WORDS.at(currentWordIndex) ?? HERO_WORDS[0];
+    const word = heroWords.at(currentWordIndex) ?? heroWords[0];
 
     const timer = setTimeout(() => {
       if (!isDeleting && currentText === word) {
         setTimeout(() => setIsDeleting(true), 1000);
       } else if (isDeleting && currentText === "") {
         setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % HERO_WORDS.length);
+        setCurrentWordIndex((prev) => (prev + 1) % heroWords.length);
       } else {
-        setCurrentText((prev) =>
-          isDeleting ? prev.slice(0, -1) : word.slice(0, prev.length + 1),
-        );
+        setCurrentText((prev) => (isDeleting ? prev.slice(0, -1) : word.slice(0, prev.length + 1)));
       }
     }, typeSpeed);
 
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentWordIndex, isMounted]);
+  }, [currentText, isDeleting, currentWordIndex]);
 
   const iconVariants = {
     initial: { rotate: 0 },
@@ -100,11 +82,11 @@ export default function Hero() {
       ref={heroRef}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointerTilt}
-      className="hero-stage relative min-h-[100svh] w-full overflow-hidden bg-background transition-colors duration-500"
+      className={`${styles.stage} relative min-h-[100svh] w-full overflow-hidden bg-background transition-colors duration-500`}
     >
       {/* Background - Adapts perfectly to light/dark mode */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10 dark:from-[#0f0c29] dark:via-[#302b63] dark:to-[#24243e] transition-colors duration-500"></div>
-      <div className="surface-grid absolute inset-0 opacity-70"></div>
+      <div className={`${styles.surfaceGrid} absolute inset-0 opacity-70`}></div>
 
       {/* Animated background particles */}
       <div className="absolute inset-0">
@@ -124,10 +106,10 @@ export default function Hero() {
 
       <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-4 py-24 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="hero-tilt grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10"
+          transition={{ duration: 0.2 }}
+          className={`${styles.tilt} grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10`}
         >
           <div className="text-center lg:text-left">
             <div className="mb-5 inline-flex max-w-full items-center gap-3 rounded-full border border-cyan-400/30 bg-white/70 px-4 py-2 text-sm font-semibold text-gray-700 shadow-lg shadow-cyan-500/10 backdrop-blur-md dark:bg-white/10 dark:text-gray-100">
@@ -136,9 +118,9 @@ export default function Hero() {
             </div>
 
             <motion.h1
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.2 }}
               whileHover={{
                 scale: 1.02,
                 textShadow: "0 0 25px rgba(46, 229, 255, 0.6)",
@@ -153,27 +135,25 @@ export default function Hero() {
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="mx-auto mb-5 h-8 max-w-2xl text-xl text-foreground md:text-2xl lg:mx-0"
+              transition={{ duration: 0.2 }}
+              className="mx-auto mb-5 min-h-[2.25rem] md:min-h-[2.5rem] max-w-2xl text-xl text-foreground md:text-2xl lg:mx-0 flex items-center justify-center lg:justify-start"
             >
               <span>{currentText}</span>
-              <span className="animate-pulse text-[#5e1fff] dark:text-[#2ee5ff]">
-                |
-              </span>
+              <span className="animate-pulse text-[#5e1fff] dark:text-[#2ee5ff]">|</span>
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
+              transition={{ duration: 0.2 }}
               whileHover={{ x: 5, transition: { duration: 0.3 } }}
               whileTap={{ x: 5, transition: { duration: 0.3 } }}
               className="mx-auto mb-7 max-w-2xl text-base leading-8 text-gray-700 dark:text-gray-200 sm:text-lg lg:mx-0 cursor-default select-none transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300"
             >
-              Computer Science engineer building full-stack products with React,
-              FastAPI, Java DSA, cloud-native tools, and practical AI/ML ideas.
+              Computer Science engineer building full-stack products with React, FastAPI, Java DSA,
+              cloud-native tools, and practical AI/ML ideas.
             </motion.p>
 
             <motion.div
@@ -182,7 +162,7 @@ export default function Hero() {
               transition={{ delay: 1.05, duration: 0.7 }}
               className="mx-auto mb-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 lg:mx-0"
             >
-              {HERO_METRICS.map((metric) => (
+              {heroMetrics.map((metric) => (
                 <motion.div
                   key={metric.label}
                   whileHover="hover"
@@ -234,14 +214,11 @@ export default function Hero() {
                 variants={{
                   hover: { scale: 1.05 },
                 }}
-                href="/Resume.pdf"
+                href={siteConfig.resumePath}
                 download
                 className="flex w-full items-center justify-center rounded-full border-2 border-[#5e1fff] bg-white/30 px-6 py-3.5 font-bold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-[#5e1fff]/10 hover:shadow-lg dark:bg-transparent sm:w-auto text-sm shrink-0"
               >
-                <motion.span
-                  variants={iconVariants}
-                  className="mr-2 inline-flex"
-                >
+                <motion.span variants={iconVariants} className="mr-2 inline-flex">
                   <Download size={18} />
                 </motion.span>
                 Download Resume
@@ -252,15 +229,12 @@ export default function Hero() {
                 variants={{
                   hover: { scale: 1.05 },
                 }}
-                href="https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing"
+                href={siteConfig.documentsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center rounded-full border-2 border-[#2ee5ff] bg-white/30 px-6 py-3.5 font-bold text-cyan-700 backdrop-blur-sm transition-all duration-300 hover:bg-[#2ee5ff]/10 hover:shadow-lg hover:shadow-[#2ee5ff]/20 dark:bg-transparent dark:text-[#2ee5ff] sm:w-auto text-sm shrink-0"
               >
-                <motion.span
-                  variants={iconVariants}
-                  className="mr-2 inline-flex"
-                >
+                <motion.span variants={iconVariants} className="mr-2 inline-flex">
                   <BadgeCheck size={18} />
                 </motion.span>
                 View Documents
@@ -272,14 +246,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30, rotateY: -12 }}
             animate={{ opacity: 1, y: 0, rotateY: 0 }}
             transition={{ delay: 0.9, duration: 0.9 }}
-            className="hero-showcase mx-auto block w-full max-w-[390px] lg:max-w-none"
+            className={`${styles.showcase} mx-auto block w-full max-w-[390px] lg:max-w-none`}
             aria-hidden="true"
           >
             {/* Render back cards first in DOM to ensure correct 2D paint layering */}
-            <div className="hero-card hero-card-back hero-card-back-two"></div>
-            <div className="hero-card hero-card-back hero-card-back-one"></div>
+            <div className={`${styles.card} ${styles.cardBack} ${styles.cardBackTwo}`}></div>
+            <div className={`${styles.card} ${styles.cardBack} ${styles.cardBackOne}`}></div>
 
-            <div className="hero-card hero-card-primary">
+            <div className={`${styles.card} ${styles.cardPrimary}`}>
               {/* Pulsing Active Status */}
               <div className="absolute top-6 right-6 flex items-center gap-2 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                 <span className="relative flex h-2 w-2">
@@ -290,18 +264,20 @@ export default function Hero() {
               </div>
 
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src="/Profile.jpg"
                   alt=""
+                  width={56}
+                  height={56}
+                  priority
+                  loading="eager"
                   className="h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-300/70"
                 />
                 <div>
                   <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-300">
                     Portfolio Snapshot
                   </p>
-                  <p className="text-2xl font-bold text-gray-950 dark:text-white">
-                    MERN + AI/ML
-                  </p>
+                  <p className="text-2xl font-bold text-gray-950 dark:text-white">MERN + AI/ML</p>
                 </div>
               </div>
 
@@ -328,8 +304,7 @@ export default function Hero() {
 
               <div className="mt-7 rounded-2xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 p-4">
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                  Building practical products across full-stack web, data, and
-                  automation.
+                  Building practical products across full-stack web, data, and automation.
                 </p>
               </div>
             </div>

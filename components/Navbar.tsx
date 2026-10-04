@@ -1,10 +1,10 @@
 "use client";
 
-import type React from "react";
-
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import Image from "next/image";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 interface NavbarProps {
   scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
@@ -24,19 +24,12 @@ interface NavbarProps {
   toggleTheme: () => void;
 }
 
-export default function Navbar({
-  scrollToSection,
-  refs,
-  theme,
-  toggleTheme,
-}: NavbarProps) {
+export default function Navbar({ scrollToSection, refs, theme, toggleTheme }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("hero");
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setIsScrolled(true);
@@ -51,57 +44,47 @@ export default function Navbar({
         setActiveSection("hero");
       } else if (
         scrollPosition >= (refs.aboutRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.experienceRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.experienceRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("about");
       } else if (
         scrollPosition >= (refs.experienceRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.educationRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.educationRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("experience");
       } else if (
         scrollPosition >= (refs.educationRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.projectsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.projectsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("education");
       } else if (
         scrollPosition >= (refs.projectsRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.skillsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.skillsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("projects");
       } else if (
         scrollPosition >= (refs.skillsRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.certificatesRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.certificatesRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("skills");
       } else if (
         scrollPosition >= (refs.certificatesRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.hackathonsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.hackathonsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("certificates");
       } else if (
         scrollPosition >= (refs.hackathonsRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.achievementsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.achievementsRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("hackathons");
       } else if (
         scrollPosition >= (refs.achievementsRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.extracurricularRef.current?.offsetTop ||
-            Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.extracurricularRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("achievements");
       } else if (
         scrollPosition >= (refs.extracurricularRef.current?.offsetTop || 0) &&
-        scrollPosition <
-          (refs.contactRef.current?.offsetTop || Number.POSITIVE_INFINITY)
+        scrollPosition < (refs.contactRef.current?.offsetTop || Number.POSITIVE_INFINITY)
       ) {
         setActiveSection("extracurricular");
       } else if (scrollPosition >= (refs.contactRef.current?.offsetTop || 0)) {
@@ -161,9 +144,13 @@ export default function Navbar({
           className="flex items-center gap-3 cursor-pointer transition-all duration-300"
         >
           <span className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-cyan-400/70 shadow-lg shadow-cyan-500/20 bg-white/10">
-            <img
+            <Image
               src="/Profile.jpg"
               alt="Nidish"
+              width={40}
+              height={40}
+              priority
+              loading="eager"
               className="h-full w-full object-cover"
             />
           </span>
@@ -181,19 +168,18 @@ export default function Navbar({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
             >
-              {isMounted && (
-                <motion.button
-                  onClick={() => scrollToSection(item.ref)}
-                  whileHover={{
-                    y: -3,
-                    scale: 1.05,
-                    textShadow:
-                      theme === "dark"
-                        ? "0 4px 12px rgba(94, 31, 255, 0.6)"
-                        : "0 4px 12px rgba(94, 31, 255, 0.4)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`
+              <motion.button
+                onClick={() => scrollToSection(item.ref)}
+                whileHover={{
+                  y: -3,
+                  scale: 1.05,
+                  textShadow:
+                    theme === "dark"
+                      ? "0 4px 12px rgba(94, 31, 255, 0.6)"
+                      : "0 4px 12px rgba(94, 31, 255, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className={`
                     px-4 py-2.5 rounded-xl transition-all duration-300 text-sm font-bold relative overflow-hidden group
                     ${
                       activeSection === item.id
@@ -207,44 +193,38 @@ export default function Navbar({
                             : "text-white drop-shadow-lg hover:text-[#5e1fff] hover:bg-white/20 hover:shadow-lg hover:shadow-purple-500/30 border border-white/20 hover:border-purple-500/40 backdrop-blur-sm"
                     }
                   `}
-                >
-                  {/* Animated background effect */}
+              >
+                {/* Animated background effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={false}
+                  animate={{
+                    x: activeSection === item.id ? ["-100%", "100%"] : 0,
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: activeSection === item.id ? Number.POSITIVE_INFINITY : 0,
+                    ease: "linear",
+                  }}
+                />
+
+                {/* Text with enhanced styling */}
+                <span className="relative z-10 tracking-wide">{item.name}</span>
+
+                {/* Active indicator */}
+                {activeSection === item.id && (
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500"
                     initial={false}
-                    animate={{
-                      x: activeSection === item.id ? ["-100%", "100%"] : 0,
-                    }}
                     transition={{
-                      duration: 2,
-                      repeat:
-                        activeSection === item.id
-                          ? Number.POSITIVE_INFINITY
-                          : 0,
-                      ease: "linear",
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
                     }}
                   />
-
-                  {/* Text with enhanced styling */}
-                  <span className="relative z-10 tracking-wide">
-                    {item.name}
-                  </span>
-
-                  {/* Active indicator */}
-                  {activeSection === item.id && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500"
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </motion.button>
-              )}
+                )}
+              </motion.button>
             </motion.div>
           ))}
 
@@ -306,13 +286,12 @@ export default function Navbar({
             )}
           </motion.button>
 
-          {isMounted && (
-            <motion.button
-              onClick={toggleMenu}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle menu"
-              className={`
+          <motion.button
+            onClick={toggleMenu}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle menu"
+            className={`
                 p-2.5 rounded-full backdrop-blur-lg border-2 transition-all duration-300
                 ${
                   theme === "dark"
@@ -320,15 +299,11 @@ export default function Navbar({
                     : "bg-purple-500/20 border-purple-500/30 text-purple-600 hover:border-purple-500/50 shadow-lg shadow-purple-500/20"
                 }
               `}
-            >
-              <motion.div
-                animate={{ rotate: isMenuOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </motion.div>
-            </motion.button>
-          )}
+          >
+            <motion.div animate={{ rotate: isMenuOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </motion.div>
+          </motion.button>
         </div>
       </div>
 

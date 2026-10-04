@@ -1,0 +1,135 @@
+.surfaceGrid {
+  background-image:
+    linear-gradient(rgba(94, 31, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
+}
+
+.stage {
+  --hero-rotate-x: 0deg;
+  --hero-rotate-y: 0deg;
+  --hero-shift-x: 0px;
+  --hero-shift-y: 0px;
+  perspective: 1200px;
+}
+
+.tilt {
+  transform: rotateX(var(--hero-rotate-x)) rotateY(var(--hero-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+.showcase {
+  position: relative;
+  min-height: 360px;
+  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+.card {
+  position: absolute;
+  inset: 34px 20px auto auto;
+  width: min(360px, 100%);
+  min-height: 270px;
+  border-radius: 24px;
+  transform-style: preserve-3d;
+}
+
+.cardPrimary {
+  z-index: 3;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 30px 80px rgba(15, 23, 42, 0.18),
+    0 0 45px rgba(46, 229, 255, 0.22);
+  backdrop-filter: blur(18px);
+  transform: translateZ(80px);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardPrimary:hover,
+.cardPrimary:active {
+  transform: translateZ(100px) translateY(-10px) scale(1.02);
+  box-shadow:
+    0 40px 80px rgba(15, 23, 42, 0.22),
+    0 0 60px rgba(46, 229, 255, 0.4);
+}
+
+:global(.dark) .cardPrimary {
+  background: rgba(18, 18, 42, 0.72);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.38),
+    0 0 55px rgba(94, 31, 255, 0.28);
+}
+
+:global(.dark) .cardPrimary:hover,
+:global(.dark) .cardPrimary:active {
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.45),
+    0 0 70px rgba(94, 31, 255, 0.45);
+}
+
+.cardBack {
+  pointer-events: none;
+  border: 1px solid rgba(94, 31, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(94, 31, 255, 0.24), rgba(46, 229, 255, 0.18)),
+    rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.cardBackOne {
+  z-index: 2;
+  transform: translate3d(-26px, 26px, 30px) rotate(-5deg);
+}
+
+.cardBackTwo {
+  z-index: 1;
+  transform: translate3d(28px, -24px, 0) rotate(7deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt,
+  .showcase {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .showcase {
+    min-height: 310px;
+  }
+
+  .card {
+    top: 18px;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: min(330px, calc(100vw - 3rem));
+    transform: translateX(-50%);
+  }
+
+  .cardPrimary {
+    transform: translateX(-50%) translateZ(56px);
+  }
+
+  .cardPrimary:hover,
+  .cardPrimary:active {
+    transform: translateX(-50%) translateZ(76px) translateY(-8px) scale(1.02);
+  }
+
+  .cardBackOne {
+    transform: translateX(-50%) translate3d(-18px, 20px, 24px) rotate(-4deg);
+  }
+
+  .cardBackTwo {
+    transform: translateX(-50%) translate3d(18px, -18px, 0) rotate(5deg);
+  }
+}

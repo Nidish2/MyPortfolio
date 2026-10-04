@@ -1,0 +1,11 @@
+:global(.dark) .form :global(input),
+:global(.dark) .form :global(textarea) {
+  background: rgba(30, 30, 60, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+:global(.dark) .form :global(input::placeholder),
+:global(.dark) .form :global(textarea::placeholder) {
+  color: rgba(255, 255, 255, 0.6) !important;
+}

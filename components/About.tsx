@@ -1,9 +1,11 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useInView } from "react-intersection-observer";
+import { siteConfig } from "@/content/site";
+import { containerVariants, itemVariants } from "@/lib/animations";
+import styles from "./About.module.css";
 
 export default function About() {
   const [ref, inView] = useInView({
@@ -12,7 +14,7 @@ export default function About() {
   });
 
   return (
-    <div className="container mx-auto max-w-6xl about-section">
+    <div className={`container mx-auto max-w-6xl ${styles.root}`}>
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
@@ -38,10 +40,7 @@ export default function About() {
         </motion.div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-          <motion.div
-            variants={itemVariants}
-            className="w-full md:w-1/3 relative group"
-          >
+          <motion.div variants={itemVariants} className="w-full md:w-1/3 relative group">
             <motion.div
               className="relative z-10 rounded-full overflow-hidden border-4 border-purple-500 shadow-xl shadow-purple-500/30 transition-all duration-500 group-hover:shadow-cyan-500/30 group-hover:border-cyan-500 w-[200px] h-[200px] md:w-[300px] md:h-[300px] mx-auto"
               whileHover={{
@@ -57,18 +56,14 @@ export default function About() {
                 transition: { duration: 0.3 },
               }}
             >
-              <motion.img
-                src="Profile.jpg"
+              <Image
+                src="/Profile.jpg"
                 alt="Nidish"
+                width={300}
+                height={300}
+                priority
+                loading="eager"
                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                whileHover={{
-                  scale: 1.1,
-                  transition: { duration: 0.3 },
-                }}
-                whileTap={{
-                  scale: 1.1,
-                  transition: { duration: 0.3 },
-                }}
               />
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 w-[200px] h-[200px] md:w-[300px] md:h-[300px] mx-auto"></div>
@@ -210,13 +205,13 @@ export default function About() {
             <motion.div variants={containerVariants} className="mt-8">
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 {[
-                  { label: "Location", value: "Bangalore, India" },
-                  { label: "Email", value: "nidish2207@gmail.com" },
-                  { label: "Phone", value: "+91 8904316325" },
+                  { label: "Location", value: siteConfig.location },
+                  { label: "Email", value: siteConfig.email },
+                  { label: "Phone", value: siteConfig.phone },
                   { label: "GitHub", value: "Nidish22" },
-                ].map((item, index) => (
+                ].map((item) => (
                   <motion.div
-                    key={index}
+                    key={item.label}
                     variants={itemVariants}
                     whileHover={{
                       y: -8,

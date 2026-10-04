@@ -1,46 +1,10 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
 
 import { motion } from "framer-motion";
+import { Award, Calendar, GraduationCap } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { GraduationCap, Calendar, Award } from "lucide-react";
-
-interface EducationItem {
-  degree: string;
-  institution: string;
-  period: string;
-  details: string;
-  score: string;
-  type: "engineering" | "puc" | "sslc";
-}
-
-const educationItems: EducationItem[] = [
-  {
-    degree: "Bachelor's of Engineering",
-    institution: "B N M Institute Of Technology",
-    period: "2022 - 2026",
-    details: "Computer Science and Engineering",
-    score: "CGPA: 9.08 / 10",
-    type: "engineering",
-  },
-  {
-    degree: "Pre University - Biology (PCMB)",
-    institution: "Alva's Pre University College",
-    period: "2020 - 2022",
-    details: "Physics, Chemistry, Math, Biology",
-    score: "Percentage: 95%",
-    type: "puc",
-  },
-  {
-    degree: "SSLC",
-    institution: "Alva's English Medium High School",
-    period: "2019 - 2020",
-    details: "Secondary School Leaving Certificate",
-    score: "Percentage: 91.04%",
-    type: "sslc",
-  },
-];
+import { type EducationType, educationItems } from "@/content/education";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
 export default function Education() {
   const [ref, inView] = useInView({
@@ -48,7 +12,7 @@ export default function Education() {
     threshold: 0.1,
   });
 
-  const getIcon = (type: string) => {
+  const getIcon = (type: EducationType) => {
     switch (type) {
       case "engineering":
         return GraduationCap;
@@ -101,7 +65,7 @@ export default function Education() {
             const IconComponent = getIcon(edu.type);
             return (
               <motion.div
-                key={index}
+                key={edu.degree}
                 variants={itemVariants}
                 whileHover={{
                   scale: 1.02,

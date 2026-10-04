@@ -1,20 +1,13 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
-
-import type React from "react";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Github, Instagram, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Github,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { siteConfig } from "@/content/site";
+import { containerVariants, itemVariants } from "@/lib/animations";
+import { submitContactMessage } from "@/lib/contact";
+import styles from "./Contact.module.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -31,15 +24,7 @@ export default function Contact() {
     threshold: 0.1,
   });
 
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -51,94 +36,55 @@ export default function Contact() {
 
     try {
       const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-      const botcheck = (
-        e.currentTarget.elements.namedItem(
-          "botcheck",
-        ) as HTMLInputElement | null
-      )?.value;
+      const botcheck = (e.currentTarget.elements.namedItem("botcheck") as HTMLInputElement | null)
+        ?.value;
 
-      if (botcheck) {
-        throw new Error("Submission blocked");
-      }
-
-      if (
-        !formData.name.trim() ||
-        !formData.email.trim() ||
-        !formData.message.trim()
-      ) {
-        throw new Error("Please fill in all required fields");
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email.trim())) {
-        throw new Error("Please enter a valid email address");
-      }
-
-      if (!accessKey) {
-        throw new Error("Contact form is not configured yet");
-      }
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          subject: formData.subject.trim() || "New Message from Portfolio",
-          message: formData.message.trim(),
-          from_name: "Portfolio Notification",
+      await submitContactMessage(
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
           botcheck,
-        }),
-      });
+          accessKey,
+        },
+        siteConfig.forms.submitUrl,
+      );
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        setFormSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setFormSubmitted(false), 5000);
-      } else {
-        throw new Error(result.message || "Failed to send message");
-      }
+      setFormSubmitted(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setFormSubmitted(false), 5000);
     } catch (error: unknown) {
       console.error("Submission error:", error);
-      setSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Network error. Please try again.",
-      );
+      setSubmitError(error instanceof Error ? error.message : "Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "nidish2207@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+91 8904316325" },
-    { icon: MapPin, label: "Location", value: "Bangalore, India" },
+    { icon: Mail, label: "Email", value: siteConfig.email },
+    { icon: Phone, label: "Phone", value: siteConfig.phone },
+    { icon: MapPin, label: "Location", value: siteConfig.location },
   ];
 
   // Upgraded Connect With Me Section
   const socialLinks = [
-    { icon: Github, label: "GitHub", url: "https://github.com/Nidish2" },
+    { icon: Github, label: "GitHub", url: siteConfig.social.github },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      url: "https://www.linkedin.com/in/nidishofficial/",
+      url: siteConfig.social.linkedin,
     },
     {
       icon: Instagram,
       label: "Instagram",
-      url: "https://www.instagram.com/_1_am_nidish/",
+      url: siteConfig.social.instagram,
     },
     {
       icon: Mail,
       label: "Direct Email",
-      url: "mailto:nidish2207@gmail.com",
+      url: `mailto:${siteConfig.email}`,
     },
   ];
 
@@ -204,7 +150,7 @@ export default function Contact() {
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <motion.div
-                    key={index}
+                    key={item.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.5 }}
@@ -280,9 +226,9 @@ export default function Contact() {
                 </motion.h4>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {socialLinks.map((social, index) => (
+                  {socialLinks.map((social) => (
                     <motion.div
-                      key={index}
+                      key={social.label}
                       whileHover={{
                         y: -8,
                         scale: 1.2,
@@ -306,9 +252,7 @@ export default function Contact() {
                         }}
                       >
                         <social.icon size={18} className="flex-shrink-0" />
-                        <span className="text-sm font-semibold leading-none">
-                          {social.label}
-                        </span>
+                        <span className="text-sm font-semibold leading-none">{social.label}</span>
                       </motion.a>
                     </motion.div>
                   ))}
@@ -367,12 +311,11 @@ export default function Contact() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 1.02 }}
                   >
-                    Thanks for reaching out! I'll get back to you within 24
-                    hours.
+                    Thanks for reaching out! I&apos;ll get back to you within 24 hours.
                   </motion.p>
                 </motion.div>
-              ) : isMounted ? (
-                <form onSubmit={handleSubmit}>
+              ) : (
+                <form className={styles.form} onSubmit={handleSubmit}>
                   <div className="space-y-4">
                     <input
                       type="checkbox"
@@ -390,6 +333,7 @@ export default function Contact() {
                       >
                         <div className="flex items-center">
                           <svg
+                            aria-hidden="true"
                             className="w-5 h-5 mr-2 flex-shrink-0"
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -429,9 +373,7 @@ export default function Contact() {
                           }}
                         >
                           {field.label}{" "}
-                          {field.name !== "subject" && (
-                            <span className="text-red-500">*</span>
-                          )}
+                          {field.name !== "subject" && <span className="text-red-500">*</span>}
                         </motion.label>
                         <motion.input
                           id={field.name}
@@ -556,21 +498,6 @@ export default function Contact() {
                     </motion.div>
                   </div>
                 </form>
-              ) : (
-                <div className="p-6 rounded-lg border border-gray-200 text-center">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="inline-block"
-                  >
-                    <div className="w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full"></div>
-                  </motion.div>
-                  <p className="text-gray-600 mt-2">Loading form...</p>
-                </div>
               )}
             </motion.div>
           </motion.div>

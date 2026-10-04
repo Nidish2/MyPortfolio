@@ -1,11 +1,12 @@
-import type { Config } from "tailwindcss"
-import plugin from "tailwindcss/plugin"
+import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./content/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -68,14 +69,11 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(function ({ addVariant }) {
-      addVariant("hover", ["&:hover", "&:active"])
-      addVariant("group-hover", [
-        ":merge(.group):hover &",
-        ":merge(.group):active &",
-      ])
+    plugin(({ addVariant }) => {
+      addVariant("hover", ["&:hover", "&:active"]);
+      addVariant("group-hover", [":merge(.group):hover &", ":merge(.group):active &"]);
     }),
   ],
-}
+};
 
-export default config
+export default config;

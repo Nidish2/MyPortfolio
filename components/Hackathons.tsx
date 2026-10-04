@@ -1,78 +1,10 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
 
 import { motion } from "framer-motion";
+import { Brain, Clock, Code, Trophy, Users, Zap } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { Code, Clock, Trophy, Users, Zap, Brain } from "lucide-react";
-
-interface Hackathon {
-  name: string;
-  duration: string;
-  project: string;
-  description: string;
-  technologies: string[];
-  type: "ai" | "web" | "cloud" | "voice" | "coding";
-  year: string;
-}
-
-const hackathons: Hackathon[] = [
-  {
-    name: "IBM Hackathon",
-    duration: "48 hours",
-    project: "Climate Change Analysis and Mitigation",
-    description:
-      "Developed an AI-powered solution for climate change analysis using Agentic AI and RAG (Retrieval-Augmented Generation) to provide actionable insights for environmental mitigation strategies.",
-    technologies: ["Agentic AI", "RAG", "Python", "Machine Learning"],
-    type: "ai",
-    year: "2024",
-  },
-  {
-    name: "Hackwell 5.0",
-    duration: "48 hours",
-    project: "AI Agent for Task Allocation",
-    description:
-      "Built an intelligent task allocation system using AWS SageMaker for machine learning model deployment, with Python backend and React frontend for seamless user experience.",
-    technologies: ["AWS SageMaker", "Python", "React", "Machine Learning"],
-    type: "cloud",
-    year: "2024",
-  },
-  {
-    name: "SIH 2024 - Nirman",
-    duration: "36 hours",
-    project: "Real-time Construction Monitoring via Drone Imagery",
-    description:
-      "Developed a comprehensive solution for monitoring construction progress using drone imagery analysis, computer vision, and real-time data processing for project management.",
-    technologies: [
-      "Computer Vision",
-      "Drone Technology",
-      "Python",
-      "Image Processing",
-    ],
-    type: "ai",
-    year: "2024",
-  },
-  {
-    name: "HackOn with Amazon - Season 4",
-    duration: "24 hours",
-    project: "Timed Coding Challenges",
-    description:
-      "Participated in competitive programming challenges focusing on algorithmic problem-solving, data structures, and optimization techniques under time constraints.",
-    technologies: ["Algorithms", "Data Structures", "Java", "Problem Solving"],
-    type: "coding",
-    year: "2024",
-  },
-  {
-    name: "Hackman V7",
-    duration: "24 hours",
-    project: "Voice Assistance System",
-    description:
-      "Created an intelligent voice assistant using speech recognition, natural language processing, and text-to-speech technologies with Flask web framework integration.",
-    technologies: ["SpeechRecognition", "PyAudio", "pyttsx3", "Flask", "NLP"],
-    type: "voice",
-    year: "2024",
-  },
-];
+import { type HackathonType, hackathons } from "@/content/hackathons";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
 export default function Hackathons() {
   const [ref, inView] = useInView({
@@ -80,7 +12,7 @@ export default function Hackathons() {
     threshold: 0.1,
   });
 
-  const getTypeIcon = (type: string) => {
+  const getTypeIcon = (type: HackathonType) => {
     switch (type) {
       case "ai":
         return Brain;
@@ -97,7 +29,7 @@ export default function Hackathons() {
     }
   };
 
-  const getTypeColor = (type: string) => {
+  const getTypeColor = (type: HackathonType) => {
     switch (type) {
       case "ai":
         return "from-purple-500 to-pink-500";
@@ -141,13 +73,13 @@ export default function Hackathons() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {hackathons.map((hackathon, index) => {
+          {hackathons.map((hackathon) => {
             const IconComponent = getTypeIcon(hackathon.type);
             const colorClass = getTypeColor(hackathon.type);
 
             return (
               <motion.div
-                key={index}
+                key={hackathon.name}
                 variants={itemVariants}
                 whileHover={{
                   y: -15,
@@ -217,10 +149,7 @@ export default function Hackathons() {
                               transition: { duration: 0.5 },
                             }}
                           >
-                            <Clock
-                              size={14}
-                              className="text-gray-500 dark:text-gray-400 mr-1"
-                            />
+                            <Clock size={14} className="text-gray-500 dark:text-gray-400 mr-1" />
                           </motion.div>
                           <motion.span
                             className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
@@ -284,9 +213,9 @@ export default function Hackathons() {
 
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2">
-                      {hackathon.technologies.map((tech, techIndex) => (
+                      {hackathon.technologies.map((tech) => (
                         <motion.span
-                          key={techIndex}
+                          key={tech}
                           className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-md border border-gray-200 dark:border-gray-600"
                           whileHover={{
                             scale: 1.1,

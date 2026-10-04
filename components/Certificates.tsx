@@ -1,114 +1,12 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
 
 import { motion } from "framer-motion";
+import { Award, Code, ExternalLink, FolderOpen, Shield, Trophy } from "lucide-react";
+import Image from "next/image";
 import { useInView } from "react-intersection-observer";
-import {
-  Award,
-  ExternalLink,
-  Shield,
-  Code,
-  Trophy,
-  FolderOpen,
-} from "lucide-react";
-
-interface Certificate {
-  title: string;
-  issuer: string;
-  date: string;
-  description: string;
-  image: string;
-  link?: string;
-  category: "redhat" | "programming" | "ai" | "ncc" | "general";
-}
-
-const certificates: Certificate[] = [
-  {
-    title:
-      "Red Hat OpenShift Administration I: Operating a Production Cluster (DO180)",
-    issuer: "Red Hat",
-    date: "2024",
-    description:
-      "Professional certification in OpenShift container platform administration and production cluster operations.",
-    image: "/red_hat.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "redhat",
-  },
-  {
-    title: "Red Hat System Administration I & II (RH124, RH134)",
-    issuer: "Red Hat",
-    date: "2024",
-    description:
-      "Comprehensive system administration certification covering Linux fundamentals and advanced administration.",
-    image: "/red_hat.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "redhat",
-  },
-  {
-    title:
-      "Java Servlet Basics and JSP 101, Introduction to Spring Framework 101",
-    issuer: "Simplilearn",
-    date: "2024",
-    description:
-      "Java web development certification covering servlets, JSP, and Spring framework fundamentals.",
-    image: "/Simplilearn.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "programming",
-  },
-  {
-    title:
-      "Java Programming, SQL(Basic and Intermediate) and Problem Solving Skill Certificate",
-    issuer: "HackerRank",
-    date: "2024",
-    description:
-      "Verified Java programming skills through comprehensive coding assessments and challenges.",
-    image: "/HK.jpg?height=300&width=400",
-    link: "https://www.hackerrank.com/certificates/d6f761d0ae01",
-    category: "programming",
-  },
-  {
-    title: "The Complete Prompt Engineering for AI Bootcamp",
-    issuer: "Udemy",
-    date: "2025",
-    description:
-      "Advanced certification in AI prompt engineering techniques and best practices for generative AI.",
-    image: "/udemy.jpg?height=300&width=400",
-    link: "https://www.udemy.com/certificate/UC-c7907ee5-8320-4fe2-9f40-de1e2c79bcca/",
-    category: "ai",
-  },
-  {
-    title:
-      "Artificial Intelligence: Types of AI, Explore Machine Learning using Python",
-    issuer: "Springboard",
-    date: "2024",
-    description:
-      "Comprehensive AI and machine learning certification with hands-on Python implementation.",
-    image: "/SB.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "ai",
-  },
-  {
-    title: "Java Programming, Advanced SQL, Front End Development",
-    issuer: "Great Learning",
-    date: "2024",
-    description:
-      "Multiple certifications covering Java programming, advanced SQL techniques, and frontend development.",
-    image: "/GL.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "general",
-  },
-  {
-    title: "National Cadet Corps (NCC) - 'B' and 'C' Certificates",
-    issuer: "National Cadet Corps",
-    date: "2023-2025",
-    description:
-      "Military training and leadership development certificates with gold medals in cultural activities.",
-    image: "/NCC.jpg?height=300&width=400",
-    link: "https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing",
-    category: "ncc",
-  },
-];
+import { type CertificateCategory, certificates } from "@/content/certificates";
+import { siteConfig } from "@/content/site";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
 export default function Certificates() {
   const [ref, inView] = useInView({
@@ -116,7 +14,7 @@ export default function Certificates() {
     threshold: 0.1,
   });
 
-  const getCategoryIcon = (category: string) => {
+  const getCategoryIcon = (category: CertificateCategory) => {
     switch (category) {
       case "redhat":
         return Shield;
@@ -131,7 +29,7 @@ export default function Certificates() {
     }
   };
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (category: CertificateCategory) => {
     switch (category) {
       case "redhat":
         return "from-red-500 to-red-700";
@@ -181,7 +79,7 @@ export default function Certificates() {
             className="flex justify-center"
           >
             <motion.a
-              href="https://drive.google.com/drive/folders/1I6YTXnzbc1MPkk-26qYi4SEGaqARRfan?usp=sharing"
+              href={siteConfig.documentsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500/60 transition-all duration-300 font-bold shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.3)]"
@@ -195,13 +93,13 @@ export default function Certificates() {
         </motion.div>
 
         <div className="space-y-8">
-          {certificates.map((certificate, index) => {
+          {certificates.map((certificate) => {
             const IconComponent = getCategoryIcon(certificate.category);
             const colorClass = getCategoryColor(certificate.category);
 
             return (
               <motion.div
-                key={index}
+                key={certificate.title}
                 variants={itemVariants}
                 whileHover={{
                   y: -10,
@@ -233,9 +131,12 @@ export default function Certificates() {
                           className={`absolute -inset-1 bg-gradient-to-r ${colorClass} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000`}
                         ></div>
                         <div className="relative">
-                          <img
-                            src={certificate.image || "/placeholder.svg"}
+                          <Image
+                            src={certificate.image}
                             alt={certificate.title}
+                            width={400}
+                            height={300}
+                            sizes="(max-width: 767px) 100vw, 33vw"
                             className="rounded-lg w-full h-auto object-cover"
                           />
                         </div>

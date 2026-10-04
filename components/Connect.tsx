@@ -1,67 +1,29 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
-
-import type React from "react";
 
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import {
-  Github,
-  Linkedin,
-  Braces,
   BookOpen,
+  Braces,
+  FileText,
+  Github,
   Hexagon,
   Instagram,
+  Linkedin,
   Mail,
-  FileText,
 } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import { siteConfig } from "@/content/site";
+import { type SocialIconName, socialLinks } from "@/content/social";
+import { containerVariants, itemVariants } from "@/lib/animations";
 
-interface SocialLink {
-  name: string;
-  icon: React.ComponentType<{ size?: string | number }>;
-  url: string;
-  color: string;
-}
-
-const socialLinks: SocialLink[] = [
-  {
-    name: "GitHub",
-    icon: Github,
-    url: "https://github.com/Nidish2",
-    color: "from-gray-700 to-gray-900",
-  },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    url: "https://www.linkedin.com/in/nidishofficial/",
-    color: "from-blue-500 to-blue-700",
-  },
-  {
-    name: "LeetCode",
-    icon: Braces,
-    url: "https://leetcode.com/u/nidish2207/",
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    name: "GeeksforGeeks",
-    icon: BookOpen,
-    url: "https://www.geeksforgeeks.org/profile/nidishpf3z",
-    color: "from-teal-600 to-emerald-800",
-  },
-  {
-    name: "HackerRank",
-    icon: Hexagon,
-    url: "https://www.hackerrank.com/profile/nidish2207",
-    color: "from-lime-400 to-green-600",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    url: "https://www.instagram.com/_1_am_nidish/",
-    color: "from-pink-500 to-purple-600",
-  },
-];
+const socialIcons: Record<SocialIconName, typeof Github> = {
+  github: Github,
+  linkedin: Linkedin,
+  leetcode: Braces,
+  geeksForGeeks: BookOpen,
+  hackerRank: Hexagon,
+  instagram: Instagram,
+};
 
 export default function Connect() {
   const [ref, inView] = useInView({
@@ -115,7 +77,7 @@ export default function Connect() {
                 transition: { duration: 0.3 },
               }}
             >
-              Let's Connect
+              Let&apos;s Connect
             </motion.h3>
             <motion.p
               className="text-gray-700 dark:text-gray-200 max-w-3xl mx-auto mb-8 text-base sm:text-lg leading-relaxed transition-colors duration-200 hover:text-cyan-500 dark:hover:text-cyan-300 cursor-default"
@@ -126,14 +88,13 @@ export default function Connect() {
                 transition: { duration: 0.3 },
               }}
             >
-              I'm currently open to new opportunities, collaborations, and
-              interesting projects. If you have something in mind, let's discuss
-              how we can work together!
+              I&apos;m currently open to new opportunities, collaborations, and interesting
+              projects. If you have something in mind, let&apos;s discuss how we can work together!
             </motion.p>
 
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-4xl mx-auto w-full">
               <motion.a
-                href="mailto:nidish2207@gmail.com"
+                href={`mailto:${siteConfig.email}`}
                 whileHover="hover"
                 whileTap="hover"
                 variants={{
@@ -151,7 +112,7 @@ export default function Connect() {
                 Email Nidish
               </motion.a>
               <motion.a
-                href="/Resume.pdf"
+                href={siteConfig.resumePath}
                 download
                 whileHover="hover"
                 whileTap="hover"
@@ -172,48 +133,54 @@ export default function Connect() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={{
-                    ...itemVariants,
-                    hover: {
-                      y: -8,
-                      scale: 1.05,
-                      rotate: 2,
-                      boxShadow: "0 15px 30px rgba(0, 0, 0, 0.25)",
-                      transition: { duration: 0.3 },
-                    },
-                  }}
-                  whileHover="hover"
-                  whileTap="hover"
-                  className={`min-h-16 p-4 rounded-xl bg-gradient-to-r ${link.color} text-white flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 font-semibold text-base sm:text-lg relative overflow-hidden group`}
-                  style={{
-                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
-                  }}
-                >
-                  <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                  <motion.div variants={iconVariants} className="relative z-10">
-                    <link.icon size={24} />
-                  </motion.div>
-                  <motion.span
-                    className="relative z-10"
-                    whileHover={{
-                      x: 5,
-                      transition: { duration: 0.2 },
-                    }}
-                    whileTap={{
-                      x: 5,
-                      transition: { duration: 0.2 },
-                    }}
-                  >
-                    {link.name}
-                  </motion.span>
-                </motion.a>
-              ))}
+              {socialLinks.map((link) =>
+                (() => {
+                  const Icon = socialIcons[link.icon];
+
+                  return (
+                    <motion.a
+                      key={link.name}
+                      href={siteConfig.social[link.socialKey]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variants={{
+                        ...itemVariants,
+                        hover: {
+                          y: -8,
+                          scale: 1.05,
+                          rotate: 2,
+                          boxShadow: "0 15px 30px rgba(0, 0, 0, 0.25)",
+                          transition: { duration: 0.3 },
+                        },
+                      }}
+                      whileHover="hover"
+                      whileTap="hover"
+                      className={`min-h-16 p-4 rounded-xl bg-gradient-to-r ${link.color} text-white flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 font-semibold text-base sm:text-lg relative overflow-hidden group`}
+                      style={{
+                        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                      <motion.div variants={iconVariants} className="relative z-10">
+                        <Icon size={24} />
+                      </motion.div>
+                      <motion.span
+                        className="relative z-10"
+                        whileHover={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                        whileTap={{
+                          x: 5,
+                          transition: { duration: 0.2 },
+                        }}
+                      >
+                        {link.name}
+                      </motion.span>
+                    </motion.a>
+                  );
+                })(),
+              )}
             </div>
           </motion.div>
         </motion.div>

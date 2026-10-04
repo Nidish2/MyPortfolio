@@ -1,63 +1,16 @@
 "use client";
-import { containerVariants, itemVariants } from "@/lib/animations";
-
-
-import type React from "react";
 
 import { motion } from "framer-motion";
+import { Shield, Star, Target, Trophy, Users } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { Shield, Trophy, Users, Target, Star } from "lucide-react";
+import { type ActivityIconName, type ActivityType, activities } from "@/content/extracurricular";
+import { containerVariants, itemVariants } from "@/lib/animations";
+import styles from "./Extracurricular.module.css";
 
-interface Activity {
-  title: string;
-  organization: string;
-  duration: string;
-  description: string[];
-  achievements: string[];
-  type: "ncc" | "leadership";
-  icon: React.ElementType;
-}
-
-const activities: Activity[] = [
-  {
-    title: "NCC Cadet",
-    organization: "National Cadet Corps",
-    duration: "3 Years | B & C Certificate Holder",
-    description: [
-      "Attended two CATC Camps (2023 and 2025) and one Army Attachment Camp - ATT (2023)",
-      "Led social awareness drives and community service programs",
-      "Developed leadership skills through military training and discipline",
-      "Participated in cultural activities and competitive events",
-    ],
-    achievements: [
-      "Gold Medal in Group Song (2023, 2025)",
-      "Gold Medal in Tent Pitching (2023, 2025)",
-      "B Certificate (2023)",
-      "C Certificate (2025)",
-    ],
-    type: "ncc",
-    icon: Shield,
-  },
-  {
-    title: "Super 60 Program",
-    organization: "BNMIT",
-    duration: "1 Year (Ongoing)",
-    description: [
-      "Selected through 4-stage screening process for leadership and technical excellence",
-      "Intensive training in Data Structures and Algorithms using Java",
-      "Strategic thinking and problem-solving workshops",
-      "Communication and presentation skills development",
-    ],
-    achievements: [
-      "Selected from 1000+ applicants",
-      "Advanced DSA proficiency",
-      "Leadership development",
-      "Strategic thinking certification",
-    ],
-    type: "leadership",
-    icon: Target,
-  },
-];
+const activityIcons: Record<ActivityIconName, typeof Shield> = {
+  shield: Shield,
+  target: Target,
+};
 
 export default function Extracurricular() {
   const [ref, inView] = useInView({
@@ -65,7 +18,7 @@ export default function Extracurricular() {
     threshold: 0.1,
   });
 
-  const getGradient = (type: string) => {
+  const getGradient = (type: ActivityType) => {
     switch (type) {
       case "ncc":
         return "from-green-500 to-teal-500";
@@ -103,13 +56,13 @@ export default function Extracurricular() {
         </motion.div>
 
         <div className="space-y-10">
-          {activities.map((activity, index) => {
-            const IconComponent = activity.icon;
+          {activities.map((activity) => {
+            const IconComponent = activityIcons[activity.icon];
             const gradientClass = getGradient(activity.type);
 
             return (
               <motion.div
-                key={index}
+                key={activity.title}
                 variants={itemVariants}
                 whileHover={{
                   scale: 1.02,
@@ -219,7 +172,7 @@ export default function Extracurricular() {
                       <div className="space-y-3">
                         {activity.description.map((item, idx) => (
                           <motion.div
-                            key={idx}
+                            key={item}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 * idx, duration: 0.5 }}
@@ -293,7 +246,7 @@ export default function Extracurricular() {
                       <div className="space-y-3">
                         {activity.achievements.map((achievement, idx) => (
                           <motion.div
-                            key={idx}
+                            key={achievement}
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 * idx, duration: 0.5 }}
@@ -309,7 +262,7 @@ export default function Extracurricular() {
                             }}
                           >
                             <motion.div
-                              className="achievement-card flex items-center space-x-3 p-4 rounded-lg transition-all duration-300"
+                              className={`${styles.achievementCard} flex items-center space-x-3 p-4 rounded-lg transition-all duration-300`}
                               whileHover={{
                                 borderColor: "#f59e0b",
                                 boxShadow: "0 8px 16px rgba(245, 158, 11, 0.2)",
@@ -331,10 +284,7 @@ export default function Extracurricular() {
                                   transition: { duration: 0.5 },
                                 }}
                               >
-                                <Star
-                                  size={18}
-                                  className="text-yellow-400 flex-shrink-0"
-                                />
+                                <Star size={18} className="text-yellow-400 flex-shrink-0" />
                               </motion.div>
                               <motion.p
                                 className="text-gray-700 dark:text-gray-200 font-medium transition-colors duration-200 hover:text-amber-500 dark:hover:text-amber-400 cursor-default"
